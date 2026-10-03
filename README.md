@@ -19,7 +19,7 @@ O Mappia propõe uma plataforma web para registrar e acompanhar problemas do bai
 
 ## Protótipo
 
-[Abrir o protótipo no Figma](https://www.figma.com/design/IY3T4Dv7QenJZWPRxngnf3).
+[Abrir o protótipo no Figma]([https://www.figma.com/design/IY3T4Dv7QenJZWPRxngnf3](https://www.figma.com/design/sXNaua5CmhShdvoC4J4upn/Mappia-%7C-Telas-principais-do-MVP?m=auto&t=AuF7KIQDwedPlTp5-6)).
 
 ## Equipe e contexto acadêmico
 
