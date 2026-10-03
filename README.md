@@ -19,7 +19,22 @@ O Mappia propõe uma plataforma web para registrar e acompanhar problemas do bai
 
 ## Protótipo
 
-[Abrir o protótipo no Figma]([https://www.figma.com/design/IY3T4Dv7QenJZWPRxngnf3](https://www.figma.com/design/sXNaua5CmhShdvoC4J4upn/Mappia-%7C-Telas-principais-do-MVP?m=auto&t=AuF7KIQDwedPlTp5-6)).
+### Visualizar as telas
+
+![Telas do Mappia organizadas por jornada](docs/design/telas-organizadas.png)
+
+- [Abrir a imagem em tamanho completo](docs/design/telas-organizadas.png)
+- [Navegar pelo protótipo no Figma](https://www.figma.com/proto/sXNaua5CmhShdvoC4J4upn/Mappia?node-id=2031-152&page-id=0%3A1&starting-point-node-id=2031%3A152&scaling=scale-down)
+
+A jornada principal segue da esquerda para a direita: início e mapa, descrição do problema, localização e foto, revisão, confirmação com protocolo e acompanhamento. Abaixo estão as telas de apoio: detalhe da ocorrência, filtros, criação de conta e entrada.
+
+As telas representam um protótipo em desenvolvimento. O envio de relatos, a localização, o anexo de fotos e a criação de conta são demonstrações; não há atendimento público integrado.
+
+### Colaborar no design
+
+[Abrir o arquivo editável no Figma](https://www.figma.com/design/sXNaua5CmhShdvoC4J4upn/Mappia?node-id=2045-121)
+
+A edição depende de um convite com permissão **Pode editar** enviado ao e-mail do colaborador no Figma. Este link não concede edição automaticamente. O GitHub apresenta a prévia e a documentação; as telas são editadas no arquivo original do Figma.
 
 ## Equipe e contexto acadêmico
 
