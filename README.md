@@ -26,7 +26,14 @@ O Mappia propõe uma plataforma web para registrar e acompanhar problemas do bai
 - [Abrir a imagem em tamanho completo](docs/design/telas-organizadas.png)
 - [Navegar pelo protótipo no Figma](https://www.figma.com/proto/sXNaua5CmhShdvoC4J4upn/Mappia?node-id=2031-152&page-id=0%3A1&starting-point-node-id=2031%3A152&scaling=scale-down)
 
-A jornada principal segue da esquerda para a direita: início e mapa, descrição do problema, localização e foto, revisão, confirmação com protocolo e acompanhamento. Abaixo estão as telas de apoio: detalhe da ocorrência, filtros, criação de conta e entrada.
+A jornada principal segue da esquerda para a direita: início e mapa → problema e descrição → local e foto → dados pessoais → revisão → confirmação com protocolo → acompanhamento. O formulário tem quatro etapas, com opção de voltar em cada uma.
+
+As três telas inferiores são ramos da jornada: o detalhe da ocorrência fica abaixo do mapa; a criação de conta, abaixo da confirmação; e a entrada, abaixo do acompanhamento. Criar conta e entrar levam ao histórico. Continuar sem conta leva à consulta por protocolo, sem apresentar uma nova confirmação de envio.
+
+- [Jornada completa e conexões entre as telas](docs/design/JORNADA.md)
+- [Telas individuais do protótipo](docs/design/telas)
+
+Prévia atualizada em **15/10/2026**. A tela inicial concentra os elementos ilustrativos; as telas internas usam fundos neutros, títulos sem destaque por palavra e ações azuis discretas.
 
 As telas representam um protótipo em desenvolvimento. O envio de relatos, a localização, o anexo de fotos e a criação de conta são demonstrações; não há atendimento público integrado.
 
