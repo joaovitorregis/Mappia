@@ -1,49 +1,37 @@
 # Mappia
 
-Projeto de extensão em fase de planejamento e protótipo.
+O Mappia é um projeto de extensão voltado ao registro e acompanhamento de problemas urbanos. A proposta permite consultar ocorrências no mapa, relatar um problema e acompanhar seu andamento por protocolo.
 
-O Mappia propõe uma plataforma web para registrar e acompanhar problemas do bairro, com envio de ocorrências sem cadastro obrigatório, consulta por protocolo e moderação antes da publicação no mapa.
-
-## Funcionalidades previstas
-
-- Registro de ocorrências com categoria, localização e foto opcional.
-- Protocolo para acompanhamento sem conta e cadastro opcional após o envio.
-- Mapa público, filtros e indicadores das ocorrências validadas.
-- Área de moderação com controle de acesso e atualização de estados.
-- Evoluções para comércio local, doações, voluntariado e alertas comunitários.
-
-## Documentação
-
-- [PRD](docs/prd/PRD_Mappia.pdf)
-- [Product Backlog](docs/product-backlog/Product_Backlog_Mappia.pdf)
+O projeto está em fase de prototipação. Este repositório reúne os requisitos, o backlog e as telas navegáveis no Figma.
 
 ## Protótipo
 
-### Visualizar as telas
-
 ![Telas do Mappia organizadas por jornada](docs/design/telas-organizadas.png)
 
-- [Abrir a imagem em tamanho completo](docs/design/telas-organizadas.png)
-- [Navegar pelo protótipo no Figma](https://www.figma.com/proto/sXNaua5CmhShdvoC4J4upn/Mappia?node-id=2031-152&page-id=0%3A1&starting-point-node-id=2031%3A152&scaling=scale-down)
+- [Protótipo navegável](https://www.figma.com/proto/sXNaua5CmhShdvoC4J4upn/Mappia?node-id=2031-152&page-id=0%3A1&starting-point-node-id=2031%3A152&scaling=scale-down)
+- [Arquivo de design](https://www.figma.com/design/sXNaua5CmhShdvoC4J4upn/Mappia?node-id=2045-121)
+- [Visão geral das telas](docs/design/telas-organizadas.png)
 
-A jornada principal segue da esquerda para a direita: início e mapa → problema e descrição → local e foto → dados pessoais → revisão → confirmação com protocolo → acompanhamento. O formulário tem quatro etapas, com opção de voltar em cada uma.
+O formulário organiza o relato em quatro etapas: descrição do problema, local e foto, dados pessoais e revisão. Após o envio, o morador recebe um protocolo. A conta é opcional e permite reunir os relatos em um histórico.
 
-As três telas inferiores são ramos da jornada: o detalhe da ocorrência fica abaixo do mapa; a criação de conta, abaixo da confirmação; e a entrada, abaixo do acompanhamento. Criar conta e entrar levam ao histórico. Continuar sem conta leva à consulta por protocolo, sem apresentar uma nova confirmação de envio.
+As interações do Figma demonstram o fluxo de uso. O protótipo não está conectado a serviços de envio, autenticação ou atendimento.
 
-- [Jornada completa e conexões entre as telas](docs/design/JORNADA.md)
-- [Telas individuais do protótipo](docs/design/telas)
+## Escopo do MVP
 
-Prévia atualizada em **15/10/2026**. A tela inicial concentra os elementos ilustrativos; as telas internas usam fundos neutros, títulos sem destaque por palavra e ações azuis discretas.
+- Registro de ocorrências com categoria, descrição, localização e foto opcional.
+- Identificação do autor em uma etapa própria do formulário.
+- Acompanhamento por protocolo e histórico para moradores com conta.
+- Mapa público com ocorrências validadas e filtros por categoria.
+- Área de moderação e atualização do estado das ocorrências.
 
-As telas representam um protótipo em desenvolvimento. O envio de relatos, a localização, o anexo de fotos e a criação de conta são demonstrações; não há atendimento público integrado.
+## Documentação
 
-### Colaborar no design
+- [Requisitos do produto](docs/prd/PRD_Mappia.md) · [PDF](docs/prd/PRD_Mappia.pdf)
+- [Product Backlog](docs/product-backlog/Product_Backlog_Mappia.md) · [PDF](docs/product-backlog/Product_Backlog_Mappia.pdf)
+- [Jornada do usuário](docs/design/JORNADA.md)
+- [Telas do protótipo](docs/design/telas)
 
-[Abrir o arquivo editável no Figma](https://www.figma.com/design/sXNaua5CmhShdvoC4J4upn/Mappia?node-id=2045-121)
-
-A edição depende de um convite com permissão **Pode editar** enviado ao e-mail do colaborador no Figma. Este link não concede edição automaticamente. O GitHub apresenta a prévia e a documentação; as telas são editadas no arquivo original do Figma.
-
-## Equipe e contexto acadêmico
+## Equipe
 
 Projeto de quatro estudantes de Ciência da Computação da UNINASSAU Campina Grande, na disciplina Atividades Práticas Interdisciplinares de Extensão I.
 
