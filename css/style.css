@@ -1,0 +1,24 @@
+/* Ícones do Bootstrap Icons (somente os usados no projeto) */
+@font-face {
+  font-family: 'bootstrap-icons';
+  src: url(data:font/woff2;base64,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) format('woff2');
+}
+.bi { display: inline-block; font-family: 'bootstrap-icons' !important; font-style: normal; font-weight: normal; font-variant: normal; line-height: 1; vertical-align: -.125em; -webkit-font-smoothing: antialiased; }
+.bi-person::before { content: "\f4e1"; }
+.bi-geo-alt-fill::before { content: "\f3e7"; }
+.bi-plus-circle::before { content: "\f4fa"; }
+.bi-arrow-right::before { content: "\f138"; }
+.bi-grid-fill::before { content: "\f3fb"; }
+.bi-cone-striped::before { content: "\f2d2"; }
+.bi-trash::before { content: "\f5de"; }
+.bi-sliders::before { content: "\f56b"; }
+.bi-crosshair::before { content: "\f769"; }
+.bi-camera::before { content: "\f220"; }
+.bi-send::before { content: "\f6c0"; }
+.bi-droplet::before { content: "\f30d"; }
+.bi-lightbulb::before { content: "\f46b"; }
+.bi-search::before { content: "\f52a"; }
+.bi-clock::before { content: "\f293"; }
+.bi-tools::before { content: "\f5db"; }
+.bi-check-circle-fill::before { content: "\f26a"; }
+.bi-chevron-right::before { content: "\f285"; }

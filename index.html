@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mappia – Início</title>
+
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Css ja linkado para icones com bootstrap  -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <main class="app">
+
+    <!--cabeça do site-->
+    <header class="topbar">
+      <a href="index.html" class="logo" aria-label="Mappia, página inicial">mappia<span>.</span></a>
+
+      <button type="button" class="btn-entrar" id="btn-entrar">
+        <!--class do bootstrap-->
+        <i class="bi bi-person icone" aria-hidden="true"></i>
+        Entrar
+      </button>
+    </header>
+
+    <!--barra de navegação-->
+    <nav class="tabs" aria-label="Seções do aplicativo">
+      <a href="index.html" class="tab active" aria-current="page">Mapa</a>
+      <a href="relatar.html" class="tab">Relatar</a>
+      <a href="acompanhar.html" class="tab">Acompanhar</a>
+    </nav>
+
+    <!--meio da tela-->
+    <section class="hero">
+      <p class="local">
+        <i class="bi bi-geo-alt-fill icone" aria-hidden="true"></i>
+        <span id="cidade">Campina Grande</span>
+      </p>
+
+      <h1 class="titulo">Seu bairro,<br>mais <span class="destaque">visível.</span></h1>
+
+      <p class="subtitulo">Viu algo que precisa de atenção? Conte aqui.</p>
+
+      <a href="relatar.html" class="btn-primary" id="btn-relatar">
+        <span class="btn-conteudo">
+          <i class="bi bi-plus-circle icone" aria-hidden="true"></i>
+          Relatar um problema
+        </span>
+        <i class="bi bi-arrow-right icone" aria-hidden="true"></i>
+      </a>
+    </section>
+
+    <!--parte de filtros do mapa-->
+    <section class="filtros" aria-label="Filtrar problemas no mapa">
+      <button type="button" class="chip active" data-filtro="todas">
+        <i class="bi bi-grid-fill icone" aria-hidden="true"></i>
+        Todas
+      </button>
+
+      <button type="button" class="chip" data-filtro="buracos">
+        <i class="bi bi-cone-striped icone" aria-hidden="true"></i>
+        Buracos
+      </button>
+
+      <button type="button" class="chip" data-filtro="lixo">
+        <i class="bi bi-trash icone" aria-hidden="true"></i>
+        Lixo
+      </button>
+
+      <button type="button" class="chip" id="btn-filtros">
+        <i class="bi bi-sliders icone" aria-hidden="true"></i>
+        Filtros
+      </button>
+    </section>
+
+    <!--parte onde vai ficar o mapa-->
+    <section class="mapa-container" aria-label="Mapa de problemas do bairro">
+      <!-- O mapa será inserido aqui pelo JavaScript -->
+      <div id="mapa" class="mapa"></div>
+
+      <!-- Controles do mapa -->
+      <button type="button" class="btn-localizacao" id="btn-localizacao" aria-label="Minha localização">
+        <i class="bi bi-crosshair icone" aria-hidden="true"></i>
+      </button>
+
+      <div class="zoom">
+        <button type="button" id="zoom-mais" aria-label="Aproximar">+</button>
+        <button type="button" id="zoom-menos" aria-label="Afastar">−</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JS -->
+  <script src="js/script.js"></script>
+</body>
+</html>
+   

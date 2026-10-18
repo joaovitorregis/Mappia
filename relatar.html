@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mappia – Relatar um problema</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+  <main class="app">
+
+    <header class="topbar">
+      <a href="index.html" class="logo" aria-label="Mappia, página inicial">mappia<span>.</span></a>
+
+      <button type="button" class="btn-entrar" id="btn-entrar">
+        <i class="bi bi-person icone" aria-hidden="true"></i>
+        Entrar
+      </button>
+    </header>
+
+    <nav class="tabs" aria-label="Seções do aplicativo">
+      <a href="index.html" class="tab">Mapa</a>
+      <a href="relatar.html" class="tab active" aria-current="page">Relatar</a>
+      <a href="acompanhar.html" class="tab">Acompanhar</a>
+    </nav>
+
+    <section class="hero">
+      <h1 class="titulo">Relatar um <span class="destaque">problema.</span></h1>
+      <p class="subtitulo">Conte o que você viu. Leva menos de um minuto.</p>
+    </section>
+
+    <form class="form-relato" id="form-relato">
+
+      <fieldset class="campo">
+        <legend>Qual é o problema?</legend>
+
+        <div class="filtros">
+          <label class="chip">
+            <input type="radio" name="tipo" value="buracos" required>
+            <i class="bi bi-cone-striped icone" aria-hidden="true"></i>
+            Buraco
+          </label>
+
+          <label class="chip">
+            <input type="radio" name="tipo" value="lixo">
+            <i class="bi bi-trash icone" aria-hidden="true"></i>
+            Lixo
+          </label>
+
+          <label class="chip">
+            <input type="radio" name="tipo" value="vazamento">
+            <i class="bi bi-droplet icone" aria-hidden="true"></i>
+            Vazamento
+          </label>
+
+          <label class="chip">
+            <input type="radio" name="tipo" value="iluminacao">
+            <i class="bi bi-lightbulb icone" aria-hidden="true"></i>
+            Iluminação
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="campo">
+        <label for="endereco">Onde fica?</label>
+        <div class="campo-com-botao">
+          <input type="text" id="endereco" name="endereco" placeholder="Rua, número ou ponto de referência" required>
+          <button type="button" class="btn-localizacao" id="btn-usar-localizacao" aria-label="Usar minha localização">
+            <i class="bi bi-crosshair icone" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="campo">
+        <label for="descricao">O que está acontecendo?</label>
+        <textarea id="descricao" name="descricao" rows="4" placeholder="Descreva o problema com detalhes" required></textarea>
+      </div>
+
+      <div class="campo">
+        <label for="foto" class="upload">
+          <i class="bi bi-camera icone" aria-hidden="true"></i>
+          <span id="nome-foto">Adicionar uma foto (opcional)</span>
+        </label>
+        <input type="file" id="foto" name="foto" accept="image/*">
+      </div>
+
+      <button type="submit" class="btn-primary" id="btn-enviar">
+        <span class="btn-conteudo">
+          <i class="bi bi-send icone" aria-hidden="true"></i>
+          Enviar relato
+        </span>
+        <i class="bi bi-arrow-right icone" aria-hidden="true"></i>
+      </button>
+
+    </form>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
