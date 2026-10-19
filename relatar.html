@@ -1,109 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mappia – Relatar um problema</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=3">
-
+  <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/figma.css?v=4">
 </head>
-
-<body class="site-mappia pagina-relatar">
-  <main class="app">
-
-    <header class="topbar">
-      <a href="index.html?v=3" class="logo" aria-label="Mappia, página inicial">mappia<span>.</span></a>
-
-      <button type="button" class="btn-entrar" id="btn-entrar" disabled title="Entrada em desenvolvimento">
-        <i class="bi bi-person icone" aria-hidden="true"></i>
-        Entrar
-      </button>
+<body class="figma-page figma-relatar">
+  <main class="figma-app">
+    <header class="figma-header">
+      <a class="figma-logo" href="index.html?v=4" aria-label="Mappia, página inicial">mappia<span>.</span></a>
+      <button class="figma-login" type="button" data-conta><img src="assets/figma/relatar-imgEntrarIconeDeUsuario.svg" alt="" width="13" height="15">Entrar</button>
     </header>
-
-    <nav class="tabs" aria-label="Seções do aplicativo">
-      <a href="index.html?v=3" class="tab">Mapa</a>
-      <a href="relatar.html?v=3" class="tab active" aria-current="page">Relatar</a>
-      <a href="acompanhar.html?v=3" class="tab">Acompanhar</a>
+    <nav class="figma-tabs" aria-label="Seções do aplicativo">
+      <a href="index.html?v=4">Mapa</a>
+      <a href="relatar.html?v=4" class="active" aria-current="page">Relatar</a>
+      <a href="acompanhar.html?v=4">Acompanhar</a>
     </nav>
-
-    <section class="hero">
-      <h1 class="titulo">Relatar um <span class="destaque">problema.</span></h1>
-      <p class="subtitulo">Conte o que você viu e indique onde o problema está.</p>
-    </section>
-
-    <form class="form-relato" id="form-relato" aria-describedby="aviso-demo">
-      <p class="aviso-demo" id="aviso-demo">Demonstração: este formulário ainda não envia nem salva relatos.</p>
-
-      <fieldset class="campo">
-        <legend>Qual é o problema?</legend>
-
-        <div class="filtros">
-          <label class="chip">
-            <input type="radio" name="tipo" value="buracos" required>
-            <i class="bi bi-cone-striped icone" aria-hidden="true"></i>
-            Buraco
-          </label>
-
-          <label class="chip">
-            <input type="radio" name="tipo" value="lixo">
-            <i class="bi bi-trash icone" aria-hidden="true"></i>
-            Lixo
-          </label>
-
-          <label class="chip">
-            <input type="radio" name="tipo" value="vazamento">
-            <i class="bi bi-droplet icone" aria-hidden="true"></i>
-            Vazamento
-          </label>
-
-          <label class="chip">
-            <input type="radio" name="tipo" value="iluminacao">
-            <i class="bi bi-lightbulb icone" aria-hidden="true"></i>
-            Iluminação
-          </label>
-        </div>
-      </fieldset>
-
-      <div class="campo">
-        <label for="endereco">Onde fica?</label>
-        <div class="campo-com-botao">
-          <input type="text" id="endereco" name="endereco" autocomplete="street-address" placeholder="Rua, número ou ponto de referência" required>
-          <button type="button" class="btn-localizacao" id="btn-usar-localizacao" disabled title="Localização em desenvolvimento" aria-label="Usar minha localização">
-            <i class="bi bi-crosshair icone" aria-hidden="true"></i>
-          </button>
-        </div>
-      </div>
-
-      <div class="campo">
-        <label for="descricao">O que está acontecendo?</label>
-        <textarea id="descricao" name="descricao" rows="4" placeholder="Descreva o problema com detalhes" required></textarea>
-      </div>
-
-      <div class="campo">
-        <label for="foto" class="upload">
-          <i class="bi bi-camera icone" aria-hidden="true"></i>
-          <span id="nome-foto">Adicionar uma foto (opcional)</span>
-        </label>
-        <input type="file" id="foto" name="foto" accept="image/*">
-      </div>
-
-      <button type="submit" class="btn-primary" id="btn-enviar">
-        <span class="btn-conteudo">
-          <i class="bi bi-send icone" aria-hidden="true"></i>
-          Enviar relato
-        </span>
-        <i class="bi bi-arrow-right icone" aria-hidden="true"></i>
-      </button>
-
-      <p class="mensagem-form" id="mensagem-form" role="status" hidden></p>
-    </form>
-
+<form id="relato-etapas" novalidate>
+<section class="report-step" data-step="1"><header class="step-intro"><p class="eyebrow">1 DE 4 · PROBLEMA</p><h1 tabindex="-1">O que aconteceu?</h1><p class="intro-copy">Escolha o tipo de problema.</p></header><ol class="progress" aria-label="Etapas do relato"><li class="current" aria-current="step"><span class="sr-only">Etapa 1 de 4</span></li><li class=""><span class="sr-only">Etapa 2 de 4</span></li><li class=""><span class="sr-only">Etapa 3 de 4</span></li><li class=""><span class="sr-only">Etapa 4 de 4</span></li></ol><div class="step-content"><fieldset class="categories"><legend class="sr-only">Escolha o tipo de problema</legend><label class="category"><input type="radio" name="tipo" value="Buracos na rua" checked><img src="assets/figma/relatar-imgIconeRoad.svg" alt="" width="22" height="22"><span>Buracos na rua</span><img src="assets/figma/relatar-imgIconeArrow.svg" alt="" width="16" height="16" class="category-arrow"><img src="assets/figma/relatar-imgIconeCheck.svg" alt="" width="16" height="16" class="category-check"></label><label class="category"><input type="radio" name="tipo" value="Iluminação pública"><img src="assets/figma/relatar-imgIconeLamp.svg" alt="" width="22" height="22"><span>Iluminação pública</span><img src="assets/figma/relatar-imgIconeArrow.svg" alt="" width="16" height="16" class="category-arrow"><img src="assets/figma/relatar-imgIconeCheck.svg" alt="" width="16" height="16" class="category-check"></label><label class="category"><input type="radio" name="tipo" value="Lixo e descarte irregular"><img src="assets/figma/relatar-imgIconeTrash.svg" alt="" width="22" height="22"><span>Lixo e descarte irregular</span><img src="assets/figma/relatar-imgIconeArrow.svg" alt="" width="16" height="16" class="category-arrow"><img src="assets/figma/relatar-imgIconeCheck.svg" alt="" width="16" height="16" class="category-check"></label><label class="category"><input type="radio" name="tipo" value="Vazamentos e esgoto a céu aberto"><img src="assets/figma/relatar-imgIconeWater.svg" alt="" width="22" height="22"><span>Vazamentos e esgoto a céu aberto</span><img src="assets/figma/relatar-imgIconeArrow.svg" alt="" width="16" height="16" class="category-arrow"><img src="assets/figma/relatar-imgIconeCheck.svg" alt="" width="16" height="16" class="category-check"></label><label class="category"><input type="radio" name="tipo" value="Alagamentos"><img src="assets/figma/relatar-imgIconeFlood.svg" alt="" width="22" height="22"><span>Alagamentos</span><img src="assets/figma/relatar-imgIconeArrow.svg" alt="" width="16" height="16" class="category-arrow"><img src="assets/figma/relatar-imgIconeCheck.svg" alt="" width="16" height="16" class="category-check"></label><label class="category"><input type="radio" name="tipo" value="Outro problema"><img src="assets/figma/relatar-imgIconePlus.svg" alt="" width="22" height="22"><span>Outro problema</span><img src="assets/figma/relatar-imgIconeArrow.svg" alt="" width="16" height="16" class="category-arrow"><img src="assets/figma/relatar-imgIconeCheck.svg" alt="" width="16" height="16" class="category-check"></label></fieldset><div class="description-field"><label for="descricao">Descreva em poucas palavras</label><textarea id="descricao" name="descricao" rows="2" placeholder="Ex.: Buraco perto da esquina da minha rua." required></textarea></div></div><div class="step-actions"><a class="secondary" href="index.html?v=4">← Voltar</a><button class="primary" type="button" data-next>Continuar</button></div></section><section class="report-step" data-step="2" hidden><header class="step-intro"><p class="eyebrow">2 DE 4 · LOCAL E FOTO</p><h1 tabindex="-1">Onde fica o problema?</h1><p class="intro-copy">Marque o pino e acrescente uma referência.</p></header><ol class="progress" aria-label="Etapas do relato"><li class="done"><span class="sr-only">Etapa 1 de 4</span></li><li class="current" aria-current="step"><span class="sr-only">Etapa 2 de 4</span></li><li class=""><span class="sr-only">Etapa 3 de 4</span></li><li class=""><span class="sr-only">Etapa 4 de 4</span></li></ol><div class="step-content location-content"><button class="location-button" type="button" data-local-demo>Usar minha localização</button><div class="location-map" role="img" aria-label="Mapa ilustrativo de Campina Grande; localização ainda não interativa"><img src="assets/figma/local-imgCartografiaDetalheDoLocal.svg" alt="" class="map-art"><span class="location-pin"><img src="assets/figma/local-imgIconePino.svg" alt="" ></span></div><div class="address-field"><label for="endereco">Endereço e ponto de referência</label><div class="input-icon"><img src="assets/figma/local-imgCampoIconePin.svg" alt="" ><input id="endereco" name="endereco" autocomplete="street-address" placeholder="Ex.: em frente ao mercado" required></div></div><label class="photo-upload" for="foto"><img src="assets/figma/local-imgIconeCamera.svg" alt="" ><span id="foto-nome">Adicionar uma foto</span><input type="file" id="foto" name="foto" accept="image/*" aria-label="Adicionar uma foto opcional"></label></div><div class="step-actions"><button class="secondary" type="button" data-back>← Voltar</button><button class="primary" type="button" data-next>Continuar</button></div></section><section class="report-step" data-step="3" hidden><header class="step-intro"><p class="eyebrow">3 DE 4 · DADOS PESSOAIS</p><h1 tabindex="-1">Quem está relatando?</h1><p class="intro-copy">Preencha seus dados para identificação e contato.</p></header><ol class="progress" aria-label="Etapas do relato"><li class="done"><span class="sr-only">Etapa 1 de 4</span></li><li class="done"><span class="sr-only">Etapa 2 de 4</span></li><li class="current" aria-current="step"><span class="sr-only">Etapa 3 de 4</span></li><li class=""><span class="sr-only">Etapa 4 de 4</span></li></ol><div class="step-content personal-content"><div class="personal-field"><label for="nome">Nome completo</label><div class="input-icon"><img src="assets/figma/dados-imgCampoIconePerson.svg" alt="" ><input type="text" id="nome" name="nome" placeholder="Seu nome completo" autocomplete="name" required></div></div><div class="personal-field"><label for="cpf">CPF</label><div class="input-icon"><img src="assets/figma/dados-imgCampoIconeId.svg" alt="" ><input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" autocomplete="off" inputmode="numeric" required></div></div><div class="personal-field"><label for="telefone">Telefone</label><div class="input-icon"><img src="assets/figma/dados-imgCampoIconePhone.svg" alt="" ><input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" autocomplete="tel" required></div></div><div class="personal-field"><label for="email">E-mail</label><div class="input-icon"><img src="assets/figma/dados-imgCampoIconeMail.svg" alt="" ><input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" autocomplete="email" required></div></div><p class="personal-note">Esses dados identificam seu relato e permitem o retorno da equipe.</p></div><div class="step-actions"><button class="secondary" type="button" data-back>← Voltar</button><button class="primary" type="button" data-next>Continuar</button></div></section><section class="report-step review-step" data-step="4" hidden><header class="step-intro"><p class="eyebrow">4 DE 4 · REVISÃO</p><h1 tabindex="-1">Está tudo certo?</h1><p class="intro-copy">Confira as informações antes de enviar.</p></header><ol class="progress" aria-label="Etapas do relato"><li class="done"><span class="sr-only">Etapa 1 de 4</span></li><li class="done"><span class="sr-only">Etapa 2 de 4</span></li><li class="done"><span class="sr-only">Etapa 3 de 4</span></li><li class="current" aria-current="step"><span class="sr-only">Etapa 4 de 4</span></li></ol><div class="step-content review-content">
+<dl class="review-list"><div><dt>TIPO DE PROBLEMA</dt><dd data-review="tipo"></dd></div><div><dt>DESCRIÇÃO</dt><dd data-review="descricao"></dd></div><div><dt>LOCAL E REFERÊNCIA</dt><dd data-review="endereco"></dd><dd class="review-photo" id="review-photo">Sem foto</dd></div></dl>
+<button class="text-button" type="button" data-edit="1">Editar informações</button>
+<div class="review-personal"><h2>DADOS PESSOAIS</h2><p>Nome, CPF, telefone e e-mail</p><button class="text-button" type="button" data-edit="3">Editar dados pessoais</button></div>
+<div class="security-demo" title="Elemento visual; verificação antiabuso ainda não integrada"><img src="assets/figma/revisao-imgIconeCheck.svg" alt="" ><span>Verificação de segurança</span></div></div><div class="step-actions"><button class="secondary" type="button" data-back>← Voltar</button><button class="primary" type="button" id="enviar-demo">Enviar relato</button></div></section></form>
   </main>
-
-  <script src="js/script.js?v=3"></script>
+  <p class="demo-note">Protótipo demonstrativo. Nenhum dado é enviado ou salvo.</p>
+  <dialog id="aviso-dialog"><h2>Protótipo demonstrativo</h2><p id="aviso-texto"></p><form method="dialog"><button class="primary">Entendi</button></form></dialog>
+  <script src="js/figma.js?v=4"></script>
 </body>
 </html>

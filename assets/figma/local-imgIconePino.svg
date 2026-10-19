@@ -1,0 +1,19 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="21.193" height="24" viewBox="0 0 21.193 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="&#195;&#141;cone / pino">
+<path id="Vector" d="M16.0083 10C16.0083 16 9.77025 22 9.77025 22C9.77025 22 3.53216 16 3.53216 10C3.53216 7.87827 4.18939 5.84344 5.35926 4.34315C6.52913 2.84285 8.11581 2 9.77025 2C11.4247 2 13.0114 2.84285 14.1812 4.34315C15.3511 5.84344 16.0083 7.87827 16.0083 10Z" fill="#DD3E3A"/>
+<g id="Vector_2" filter="url(#filter0_d_0_7)">
+<path d="M10.2867 13C11.5786 13 12.6259 11.6569 12.6259 10C12.6259 8.34315 11.5786 7 10.2867 7C8.9947 7 7.94737 8.34315 7.94737 10C7.94737 11.6569 8.9947 13 10.2867 13Z" fill="white"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_0_7" x="4.94737" y="5" width="10.6786" height="12" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="1"/>
+<feGaussianBlur stdDeviation="1.5"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.16 0 0 0 0 0.36 0 0 0 0 0.57 0 0 0 0.12 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_7"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_7" result="shape"/>
+</filter>
+</defs>
+</svg>
