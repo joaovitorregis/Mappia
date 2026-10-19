@@ -1,3 +1,28 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Ícones do Bootstrap Icons (somente os usados no projeto) */
 @font-face {
   font-family: 'bootstrap-icons';
@@ -22,3 +47,219 @@
 .bi-tools::before { content: "\f5db"; }
 .bi-check-circle-fill::before { content: "\f26a"; }
 .bi-chevron-right::before { content: "\f285"; }
+/* TELA INICIAL — referência: docs/design/telas/01-inicio.png.
+   As regras ficam limitadas a esta página para preservar as outras telas. */
+.pagina-inicio {
+  --azul: #0066ff;
+  --texto: #172d4b;
+  --texto-suave: #526a90;
+  --amarelo: #ffce00;
+  margin: 0;
+  min-height: 100svh;
+  padding: 31px 26px 35px;
+  box-sizing: border-box;
+  font-family: 'Inter', Arial, sans-serif;
+  color: var(--texto);
+  background:
+    radial-gradient(circle at 92% 3%, #d7eafb 0 37px, transparent 38px),
+    linear-gradient(38deg, transparent 13%, #ffdc50 13% 19%, transparent 19% 53%, #ffdc50 53% 53.6%, transparent 53.6%),
+    linear-gradient(133deg, #f2faff, #deefff 56%, #f3faff);
+}
+.pagina-inicio *, .pagina-inicio *::before, .pagina-inicio *::after {
+  box-sizing: border-box;
+}
+.pagina-inicio .app {
+  width: 100%;
+  max-width: 338px;
+  margin: 0 auto;
+  padding: 13px 9px 20px;
+  border: 1px solid #ffffff;
+  border-radius: 24px;
+  background: linear-gradient(100deg, #ffffffed, #f2faffb8);
+  box-shadow: 0 12px 30px #4278af12;
+}
+.pagina-inicio button, .pagina-inicio a { -webkit-tap-highlight-color: transparent; }
+.pagina-inicio button { font: inherit; cursor: pointer; }
+.pagina-inicio a { text-decoration: none; }
+.pagina-inicio :is(a, button):focus-visible {
+  outline: 3px solid var(--texto);
+  outline-offset: 4px;
+}
+/* Cabeçalho e navegação */
+.pagina-inicio .topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  margin: 0 9px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #dce8f3;
+}
+.pagina-inicio .logo {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1;
+  color: var(--azul);
+}
+.pagina-inicio .logo span { color: var(--amarelo); }
+.pagina-inicio .btn-entrar {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  min-height: 32px;
+  padding: 7px 11px;
+  border: 1px solid #c5ddff;
+  border-radius: 11px;
+  background: #eaf5ff;
+  color: var(--azul);
+  font-size: 11px;
+  font-weight: 600;
+}
+.pagina-inicio .tabs { display: flex; margin: 0 9px; }
+.pagina-inicio .tab {
+  flex: 1;
+  padding: 15px 2px 11px;
+  border-bottom: 3px solid transparent;
+  text-align: center;
+  font-size: 12px;
+  color: var(--texto-suave);
+}
+.pagina-inicio .tab.active {
+  border-bottom-color: var(--amarelo);
+  color: var(--azul);
+  font-weight: 600;
+}
+/* Chamada principal */
+.pagina-inicio .hero { padding: 25px 3px 0; }
+.pagina-inicio .local {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 9px 9px;
+  color: var(--azul);
+  font-size: 9px;
+  text-transform: uppercase;
+}
+.pagina-inicio .local .icone { font-size: 15px; }
+.pagina-inicio .titulo {
+  margin: 0 9px;
+  font-size: 32px;
+  line-height: 1.04;
+  font-weight: 800;
+  letter-spacing: -1.2px;
+}
+.pagina-inicio .destaque { position: relative; color: var(--azul); }
+.pagina-inicio .destaque::after {
+  content: '';
+  position: absolute;
+  left: 7%;
+  right: 1%;
+  bottom: -5px;
+  height: 9px;
+  border-top: 3px solid var(--amarelo);
+  border-radius: 50%;
+  transform: rotate(-4deg);
+}
+.pagina-inicio .subtitulo {
+  max-width: 260px;
+  margin: 13px 9px 17px;
+  color: var(--texto-suave);
+  font-size: 14px;
+  line-height: 1.2;
+}
+.pagina-inicio .btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 54px;
+  padding: 14px 20px 14px 26px;
+  border: 1px solid #339cff;
+  border-radius: 13px;
+  color: #fff;
+  background: linear-gradient(110deg, #168cf3, #005bd9);
+  box-shadow: 0 5px 10px #0068d933;
+  font-size: 14px;
+  font-weight: 500;
+}
+.pagina-inicio .btn-conteudo { display: flex; align-items: center; gap: 10px; }
+.pagina-inicio .btn-conteudo .icone { font-size: 23px; }
+.pagina-inicio .btn-primary > .icone { font-size: 19px; }
+/* Filtros: aparência apenas; a lógica será feita em JavaScript. */
+.pagina-inicio .filtros { display: flex; gap: 5px; margin: 19px 0 11px; }
+.pagina-inicio .chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex: 1;
+  min-height: 33px;
+  padding: 7px 9px;
+  border: 1px solid #d7e7f6;
+  border-radius: 20px;
+  background: #ffffffa6;
+  color: var(--texto-suave);
+  white-space: nowrap;
+  font-size: 10px;
+}
+.pagina-inicio .chip .icone { font-size: 15px; color: var(--texto); }
+.pagina-inicio .chip.active {
+  border-color: #3d98ff;
+  background: #e1f3ff;
+  color: var(--azul);
+  font-weight: 600;
+}
+.pagina-inicio .chip.active .icone { color: var(--azul); }
+/* Reutiliza somente a região do mapa na imagem do protótipo.
+   O recorte é proporcional: 319 × 315 dentro da referência de 390 × 796. */
+.pagina-inicio .mapa-container {
+  position: relative;
+  aspect-ratio: 319 / 315;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 7px 12px #28466416;
+}
+.pagina-inicio .mapa {
+  width: 100%;
+  height: 100%;
+  background-image: url('../docs/design/telas/01-inicio.png');
+  background-size: 122.257% auto;
+  background-position: 50% 88.358%;
+  background-repeat: no-repeat;
+  background-color: #dcecf1;
+}
+.pagina-inicio .btn-localizacao, .pagina-inicio .zoom {
+  position: absolute;
+  right: 6px;
+  width: 31px;
+  border: 0;
+  border-radius: 12px;
+  background: #fafdff;
+  color: var(--texto);
+  box-shadow: 0 2px 6px #28466412;
+}
+.pagina-inicio .btn-localizacao { bottom: 76px; height: 31px; font-size: 19px; }
+.pagina-inicio .zoom { bottom: 9px; overflow: hidden; }
+.pagina-inicio .zoom button {
+  display: block;
+  width: 100%;
+  height: 29px;
+  border: 0;
+  background: transparent;
+  color: var(--texto-suave);
+  font-size: 24px;
+  line-height: 1;
+}
+@media (hover: hover) {
+  .pagina-inicio .btn-primary:hover { filter: brightness(1.06); }
+  .pagina-inicio .tab:hover, .pagina-inicio .chip:hover { color: var(--azul); background-color: #e9f5ff; }
+}
+@media (max-width: 359px) {
+  .pagina-inicio { padding: 16px 10px; }
+  .pagina-inicio .chip { padding-inline: 6px; gap: 5px; }
+  .pagina-inicio .titulo { font-size: 30px; }
+  .pagina-inicio .btn-primary { padding-inline: 16px; font-size: 13px; }
+}
+@media (min-width: 768px) {
+  .pagina-inicio { padding-top: 48px; padding-bottom: 48px; }
+}
