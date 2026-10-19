@@ -7,17 +7,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
 
 </head>
 
-<body>
+<body class="site-mappia pagina-acompanhar">
   <main class="app">
 
     <header class="topbar">
       <a href="index.html" class="logo" aria-label="Mappia, página inicial">mappia<span>.</span></a>
 
-      <button type="button" class="btn-entrar" id="btn-entrar">
+      <button type="button" class="btn-entrar" id="btn-entrar" disabled title="Entrada em desenvolvimento">
         <i class="bi bi-person icone" aria-hidden="true"></i>
         Entrar
       </button>
@@ -33,6 +33,8 @@
       <h1 class="titulo">Acompanhe seus <span class="destaque">relatos.</span></h1>
       <p class="subtitulo">Veja o que já foi resolvido e o que está a caminho.</p>
     </section>
+
+    <p class="aviso-demo">Demonstração com três relatos fictícios. Consulte 0001, 0002 ou 0003.</p>
 
     <form class="busca" id="form-busca" role="search">
       <label for="protocolo" class="sr-only">Buscar por protocolo</label>
@@ -82,9 +84,9 @@
           <i class="bi bi-clock icone" aria-hidden="true"></i>
           Em análise
         </span>
-        <a href="#" class="relato-link" aria-label="Ver detalhes do relato 0001">
+        <button type="button" class="relato-link" disabled aria-label="Detalhes do relato 0001 em desenvolvimento">
           <i class="bi bi-chevron-right icone" aria-hidden="true"></i>
-        </a>
+        </button>
       </article>
 
       <article class="relato" data-status="andamento">
@@ -103,9 +105,9 @@
           <i class="bi bi-tools icone" aria-hidden="true"></i>
           Em andamento
         </span>
-        <a href="#" class="relato-link" aria-label="Ver detalhes do relato 0002">
+        <button type="button" class="relato-link" disabled aria-label="Detalhes do relato 0002 em desenvolvimento">
           <i class="bi bi-chevron-right icone" aria-hidden="true"></i>
-        </a>
+        </button>
       </article>
 
       <article class="relato" data-status="resolvido">
@@ -124,17 +126,17 @@
           <i class="bi bi-check-circle-fill icone" aria-hidden="true"></i>
           Resolvido
         </span>
-        <a href="#" class="relato-link" aria-label="Ver detalhes do relato 0003">
+        <button type="button" class="relato-link" disabled aria-label="Detalhes do relato 0003 em desenvolvimento">
           <i class="bi bi-chevron-right icone" aria-hidden="true"></i>
-        </a>
+        </button>
       </article>
 
     </section>
 
-    <p class="vazio" id="msg-vazio" hidden>Nenhum relato com esse status por enquanto.</p>
+    <p class="vazio" id="msg-vazio" hidden>Nenhum relato encontrado para esta busca e este status.</p>
 
   </main>
 
-  <script src="script.js"></script>
+  <script src="js/script.js?v=2"></script>
 </body>
 </html>

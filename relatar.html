@@ -8,17 +8,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
 
 </head>
 
-<body>
+<body class="site-mappia pagina-relatar">
   <main class="app">
 
     <header class="topbar">
       <a href="index.html" class="logo" aria-label="Mappia, página inicial">mappia<span>.</span></a>
 
-      <button type="button" class="btn-entrar" id="btn-entrar">
+      <button type="button" class="btn-entrar" id="btn-entrar" disabled title="Entrada em desenvolvimento">
         <i class="bi bi-person icone" aria-hidden="true"></i>
         Entrar
       </button>
@@ -32,10 +32,11 @@
 
     <section class="hero">
       <h1 class="titulo">Relatar um <span class="destaque">problema.</span></h1>
-      <p class="subtitulo">Conte o que você viu. Leva menos de um minuto.</p>
+      <p class="subtitulo">Conte o que você viu e indique onde o problema está.</p>
     </section>
 
-    <form class="form-relato" id="form-relato">
+    <form class="form-relato" id="form-relato" aria-describedby="aviso-demo">
+      <p class="aviso-demo" id="aviso-demo">Demonstração: este formulário ainda não envia nem salva relatos.</p>
 
       <fieldset class="campo">
         <legend>Qual é o problema?</legend>
@@ -70,8 +71,8 @@
       <div class="campo">
         <label for="endereco">Onde fica?</label>
         <div class="campo-com-botao">
-          <input type="text" id="endereco" name="endereco" placeholder="Rua, número ou ponto de referência" required>
-          <button type="button" class="btn-localizacao" id="btn-usar-localizacao" aria-label="Usar minha localização">
+          <input type="text" id="endereco" name="endereco" autocomplete="street-address" placeholder="Rua, número ou ponto de referência" required>
+          <button type="button" class="btn-localizacao" id="btn-usar-localizacao" disabled title="Localização em desenvolvimento" aria-label="Usar minha localização">
             <i class="bi bi-crosshair icone" aria-hidden="true"></i>
           </button>
         </div>
@@ -98,10 +99,11 @@
         <i class="bi bi-arrow-right icone" aria-hidden="true"></i>
       </button>
 
+      <p class="mensagem-form" id="mensagem-form" role="status" hidden></p>
     </form>
 
   </main>
 
-  <script src="script.js"></script>
+  <script src="js/script.js?v=2"></script>
 </body>
 </html>

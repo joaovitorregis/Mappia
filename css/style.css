@@ -49,7 +49,7 @@
 .bi-chevron-right::before { content: "\f285"; }
 /* TELA INICIAL — referência: docs/design/telas/01-inicio.png.
    As regras ficam limitadas a esta página para preservar as outras telas. */
-.pagina-inicio {
+.site-mappia {
   --azul: #0066ff;
   --texto: #172d4b;
   --texto-suave: #526a90;
@@ -65,10 +65,10 @@
     linear-gradient(38deg, transparent 13%, #ffdc50 13% 19%, transparent 19% 53%, #ffdc50 53% 53.6%, transparent 53.6%),
     linear-gradient(133deg, #f2faff, #deefff 56%, #f3faff);
 }
-.pagina-inicio *, .pagina-inicio *::before, .pagina-inicio *::after {
+.site-mappia *, .site-mappia *::before, .site-mappia *::after {
   box-sizing: border-box;
 }
-.pagina-inicio .app {
+.site-mappia .app {
   width: 100%;
   max-width: 338px;
   margin: 0 auto;
@@ -78,15 +78,15 @@
   background: linear-gradient(100deg, #ffffffed, #f2faffb8);
   box-shadow: 0 12px 30px #4278af12;
 }
-.pagina-inicio button, .pagina-inicio a { -webkit-tap-highlight-color: transparent; }
-.pagina-inicio button { font: inherit; cursor: pointer; }
-.pagina-inicio a { text-decoration: none; }
-.pagina-inicio :is(a, button):focus-visible {
+.site-mappia button, .site-mappia a { -webkit-tap-highlight-color: transparent; }
+.site-mappia button { font: inherit; cursor: pointer; }
+.site-mappia a { text-decoration: none; }
+.site-mappia :is(a, button):focus-visible {
   outline: 3px solid var(--texto);
   outline-offset: 4px;
 }
 /* Cabeçalho e navegação */
-.pagina-inicio .topbar {
+.site-mappia .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -95,15 +95,15 @@
   padding-bottom: 11px;
   border-bottom: 1px solid #dce8f3;
 }
-.pagina-inicio .logo {
+.site-mappia .logo {
   font-size: 28px;
   font-weight: 800;
   letter-spacing: -1px;
   line-height: 1;
   color: var(--azul);
 }
-.pagina-inicio .logo span { color: var(--amarelo); }
-.pagina-inicio .btn-entrar {
+.site-mappia .logo span { color: var(--amarelo); }
+.site-mappia .btn-entrar {
   display: inline-flex;
   gap: 6px;
   align-items: center;
@@ -116,8 +116,8 @@
   font-size: 11px;
   font-weight: 600;
 }
-.pagina-inicio .tabs { display: flex; margin: 0 9px; }
-.pagina-inicio .tab {
+.site-mappia .tabs { display: flex; margin: 0 9px; }
+.site-mappia .tab {
   flex: 1;
   padding: 15px 2px 11px;
   border-bottom: 3px solid transparent;
@@ -125,14 +125,14 @@
   font-size: 12px;
   color: var(--texto-suave);
 }
-.pagina-inicio .tab.active {
+.site-mappia .tab.active {
   border-bottom-color: var(--amarelo);
   color: var(--azul);
   font-weight: 600;
 }
 /* Chamada principal */
-.pagina-inicio .hero { padding: 25px 3px 0; }
-.pagina-inicio .local {
+.site-mappia .hero { padding: 25px 3px 0; }
+.site-mappia .local {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -141,16 +141,16 @@
   font-size: 9px;
   text-transform: uppercase;
 }
-.pagina-inicio .local .icone { font-size: 15px; }
-.pagina-inicio .titulo {
+.site-mappia .local .icone { font-size: 15px; }
+.site-mappia .titulo {
   margin: 0 9px;
   font-size: 32px;
   line-height: 1.04;
   font-weight: 800;
   letter-spacing: -1.2px;
 }
-.pagina-inicio .destaque { position: relative; color: var(--azul); }
-.pagina-inicio .destaque::after {
+.site-mappia .destaque { position: relative; color: var(--azul); }
+.site-mappia .destaque::after {
   content: '';
   position: absolute;
   left: 7%;
@@ -161,14 +161,14 @@
   border-radius: 50%;
   transform: rotate(-4deg);
 }
-.pagina-inicio .subtitulo {
+.site-mappia .subtitulo {
   max-width: 260px;
   margin: 13px 9px 17px;
   color: var(--texto-suave);
   font-size: 14px;
   line-height: 1.2;
 }
-.pagina-inicio .btn-primary {
+.site-mappia .btn-primary {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -182,12 +182,12 @@
   font-size: 14px;
   font-weight: 500;
 }
-.pagina-inicio .btn-conteudo { display: flex; align-items: center; gap: 10px; }
-.pagina-inicio .btn-conteudo .icone { font-size: 23px; }
-.pagina-inicio .btn-primary > .icone { font-size: 19px; }
+.site-mappia .btn-conteudo { display: flex; align-items: center; gap: 10px; }
+.site-mappia .btn-conteudo .icone { font-size: 23px; }
+.site-mappia .btn-primary > .icone { font-size: 19px; }
 /* Filtros: aparência apenas; a lógica será feita em JavaScript. */
-.pagina-inicio .filtros { display: flex; gap: 5px; margin: 19px 0 11px; }
-.pagina-inicio .chip {
+.site-mappia .filtros { display: flex; gap: 5px; margin: 19px 0 11px; }
+.site-mappia .chip {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -202,24 +202,24 @@
   white-space: nowrap;
   font-size: 10px;
 }
-.pagina-inicio .chip .icone { font-size: 15px; color: var(--texto); }
-.pagina-inicio .chip.active {
+.site-mappia .chip .icone { font-size: 15px; color: var(--texto); }
+.site-mappia .chip.active {
   border-color: #3d98ff;
   background: #e1f3ff;
   color: var(--azul);
   font-weight: 600;
 }
-.pagina-inicio .chip.active .icone { color: var(--azul); }
+.site-mappia .chip.active .icone { color: var(--azul); }
 /* Reutiliza somente a região do mapa na imagem do protótipo.
    O recorte é proporcional: 319 × 315 dentro da referência de 390 × 796. */
-.pagina-inicio .mapa-container {
+.site-mappia .mapa-container {
   position: relative;
   aspect-ratio: 319 / 315;
   overflow: hidden;
   border-radius: 18px;
   box-shadow: 0 7px 12px #28466416;
 }
-.pagina-inicio .mapa {
+.site-mappia .mapa {
   width: 100%;
   height: 100%;
   background-image: url('../docs/design/telas/01-inicio.png');
@@ -228,7 +228,7 @@
   background-repeat: no-repeat;
   background-color: #dcecf1;
 }
-.pagina-inicio .btn-localizacao, .pagina-inicio .zoom {
+.site-mappia .btn-localizacao, .site-mappia .zoom {
   position: absolute;
   right: 6px;
   width: 31px;
@@ -238,9 +238,9 @@
   color: var(--texto);
   box-shadow: 0 2px 6px #28466412;
 }
-.pagina-inicio .btn-localizacao { bottom: 76px; height: 31px; font-size: 19px; }
-.pagina-inicio .zoom { bottom: 9px; overflow: hidden; }
-.pagina-inicio .zoom button {
+.site-mappia .btn-localizacao { bottom: 76px; height: 31px; font-size: 19px; }
+.site-mappia .zoom { bottom: 9px; overflow: hidden; }
+.site-mappia .zoom button {
   display: block;
   width: 100%;
   height: 29px;
@@ -251,15 +251,166 @@
   line-height: 1;
 }
 @media (hover: hover) {
-  .pagina-inicio .btn-primary:hover { filter: brightness(1.06); }
-  .pagina-inicio .tab:hover, .pagina-inicio .chip:hover { color: var(--azul); background-color: #e9f5ff; }
+  .site-mappia .btn-primary:hover { filter: brightness(1.06); }
+  .site-mappia .tab:hover, .site-mappia .chip:hover { color: var(--azul); background-color: #e9f5ff; }
 }
 @media (max-width: 359px) {
-  .pagina-inicio { padding: 16px 10px; }
-  .pagina-inicio .chip { padding-inline: 6px; gap: 5px; }
-  .pagina-inicio .titulo { font-size: 30px; }
-  .pagina-inicio .btn-primary { padding-inline: 16px; font-size: 13px; }
+  .site-mappia { padding: 16px 10px; }
+  .site-mappia .chip { padding-inline: 6px; gap: 5px; }
+  .site-mappia .titulo { font-size: 30px; }
+  .site-mappia .btn-primary { padding-inline: 16px; font-size: 13px; }
 }
 @media (min-width: 768px) {
-  .pagina-inicio { padding-top: 48px; padding-bottom: 48px; }
+  .site-mappia { padding-top: 48px; padding-bottom: 48px; }
+}
+
+/* BASE RESPONSIVA COMPARTILHADA
+   Primeiro a coluna do celular; depois tablet (600px) e notebook (1024px). */
+.site-mappia { padding: 24px 16px; }
+.site-mappia .app { max-width: 480px; padding: 16px; }
+.site-mappia :is(button, a, input, textarea) { touch-action: manipulation; }
+.site-mappia button:disabled { cursor: default; }
+.site-mappia .btn-entrar:disabled { opacity: .75; }
+.site-mappia .tabs { margin-inline: 0; }
+.site-mappia .tab { min-height: 44px; }
+.site-mappia .hero { padding: 28px 0 0; }
+.site-mappia .titulo { font-size: clamp(30px, 5vw, 40px); line-height: 1.12; text-wrap: balance; }
+.site-mappia .subtitulo { max-width: 38ch; line-height: 1.5; }
+.site-mappia .filtros { flex-wrap: wrap; gap: 8px; }
+.site-mappia .chip { min-height: 44px; font-size: 12px; }
+.site-mappia .mapa-container { margin-top: 4px; }
+.site-mappia .btn-localizacao { width: 44px; height: 44px; bottom: 100px; }
+.site-mappia .zoom { width: 44px; }
+.site-mappia .zoom button { height: 44px; }
+.site-mappia .aviso-demo {
+  margin: 20px 0;
+  padding: 12px 14px;
+  border: 1px solid #cadfff;
+  border-radius: 12px;
+  color: #365779;
+  background: #edf6ff;
+  font-size: 12px;
+  line-height: 1.6;
+}
+/* Formulário: rótulos visíveis e tamanho de fonte que evita zoom automático no celular. */
+.site-mappia .form-relato { display: grid; gap: 24px; margin-top: 24px; }
+.site-mappia .form-relato .aviso-demo { margin: 0; }
+.site-mappia .campo { min-width: 0; margin: 0; padding: 0; border: 0; }
+.site-mappia .campo > label, .site-mappia .campo legend {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.site-mappia .campo .filtros { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; }
+.site-mappia .campo .chip { justify-content: flex-start; padding: 14px 10px; border-radius: 12px; cursor: pointer; }
+.site-mappia .campo .chip:has(input:checked) { border-color: var(--azul); background: #e4efff; color: #0054d1; }
+.site-mappia .campo .chip:has(input:focus-visible) { outline: 3px solid var(--texto); outline-offset: 3px; }
+.site-mappia input[type=radio] { accent-color: var(--azul); margin: 0; width: 16px; height: 16px; }
+.site-mappia :is(input[type=text], input[type=search], textarea) {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 15px 14px;
+  border: 1px solid #d2dff0;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--texto);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.site-mappia textarea { min-height: 140px; resize: vertical; }
+.site-mappia input::placeholder, .site-mappia textarea::placeholder { color: #617799; opacity: 1; }
+.site-mappia :is(input, textarea):focus-visible { outline: 3px solid #91bfff; outline-offset: 2px; border-color: var(--azul); }
+.site-mappia .campo-com-botao { position: relative; }
+.site-mappia .campo-com-botao input { padding-right: 58px; }
+.site-mappia .campo-com-botao .btn-localizacao { top: 6px; right: 6px; bottom: auto; background: #eef6ff; box-shadow: none; }
+.site-mappia .campo > .upload {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 20px 16px;
+  border: 1px dashed #96b9e6;
+  border-radius: 12px;
+  background: #f4f9ff;
+  color: #315d96;
+  cursor: pointer;
+}
+.site-mappia .upload .icone { font-size: 24px; }
+.site-mappia input[type=file] { max-width: 100%; font: inherit; font-size: 12px; }
+.site-mappia input::file-selector-button { padding: 10px; border: 1px solid #c5ddff; border-radius: 8px; background: #eaf5ff; color: #0054d1; cursor: pointer; }
+.site-mappia .form-relato > .btn-primary { width: 100%; font: inherit; font-size: 14px; }
+.site-mappia .mensagem-form { margin: 0; padding: 16px; background: #edf6ff; border-radius: 12px; font-size: 14px; line-height: 1.6; }
+/* Acompanhamento */
+.site-mappia .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.site-mappia .busca { display: flex; gap: 8px; }
+.site-mappia .btn-busca { flex: 0 0 54px; border: 0; border-radius: 12px; background: var(--azul); color: #fff; font-size: 20px; }
+.site-mappia .lista-relatos { display: grid; gap: 14px; margin-top: 22px; }
+.site-mappia .relato { display: grid; grid-template-columns: 44px minmax(0, 1fr) 28px; align-items: start; gap: 10px; padding: 18px 12px; border: 1px solid #d9e5f2; border-radius: 16px; background: #ffffffdb; }
+.site-mappia .relato-icone { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; background: #e7f1ff; color: var(--azul); font-size: 22px; }
+.site-mappia .relato-info { min-width: 0; }
+.site-mappia .relato-titulo { margin: 1px 0 8px; font-size: 16px; line-height: 1.35; }
+.site-mappia .relato-local { margin: 0 0 8px; color: var(--texto-suave); font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+.site-mappia .relato-meta { margin: 0; color: var(--texto-suave); font-size: 11px; line-height: 1.6; }
+.site-mappia .relato-meta span { font-weight: 600; }
+.site-mappia .status { grid-column: 2; display: inline-flex; align-items: center; gap: 6px; justify-self: start; padding: 6px 9px; border-radius: 8px; font-size: 11px; font-weight: 600; }
+.site-mappia .status-analise { background: #fff2c7; color: #765300; }
+.site-mappia .status-andamento { background: #e5efff; color: #1754a1; }
+.site-mappia .status-resolvido { background: #dff5e9; color: #1c6947; }
+.site-mappia .relato-link { grid-column: 3; grid-row: 1; width: 28px; min-height: 44px; padding: 0; border: 0; background: transparent; color: #7389a7; }
+.site-mappia .vazio { padding: 30px 16px; text-align: center; color: var(--texto-suave); font-size: 14px; }
+.site-mappia [hidden] { display: none !important; }
+@media (min-width: 600px) {
+  .site-mappia { padding: 32px; }
+  .site-mappia .app { max-width: 900px; padding: 24px; }
+  .site-mappia .topbar { margin: 0; min-height: 60px; }
+  .site-mappia .logo { font-size: 32px; }
+  .site-mappia .btn-entrar { min-height: 44px; padding-inline: 18px; font-size: 13px; }
+  .site-mappia .tab { font-size: 14px; padding-block: 18px; }
+  .site-mappia .hero { padding-top: 32px; }
+  .site-mappia .hero :is(.titulo, .subtitulo, .local) { margin-left: 0; }
+  .site-mappia .subtitulo { font-size: 16px; }
+  .site-mappia .local { font-size: 11px; }
+  .site-mappia .btn-primary { max-width: 380px; }
+  .site-mappia .filtros { justify-content: flex-start; }
+  .site-mappia .chip { flex: 0 1 auto; padding-inline: 18px; font-size: 13px; }
+  .site-mappia .mapa-container { width: 100%; max-width: 560px; margin: 20px auto 0; }
+  .site-mappia .form-relato { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; }
+  .site-mappia .form-relato > :is(.aviso-demo, fieldset, .btn-primary, .mensagem-form) { grid-column: 1 / -1; }
+  .site-mappia .campo .filtros { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .site-mappia .campo .chip { padding-inline: 10px; gap: 6px; }
+  .site-mappia .campo:has(textarea) { grid-column: 1 / -1; }
+  .site-mappia .lista-relatos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .site-mappia { padding: 48px; }
+  .site-mappia .app { max-width: 1180px; padding: 28px 36px 36px; }
+  .site-mappia .tabs { max-width: 460px; }
+  .site-mappia .titulo { font-size: clamp(38px, 3.5vw, 52px); letter-spacing: -1.8px; }
+  .site-mappia .pagina-inicio { width: 100%; }
+  .pagina-inicio .app { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); column-gap: 52px; }
+  .pagina-inicio :is(.topbar, .tabs) { grid-column: 1 / -1; }
+  .pagina-inicio .hero { grid-column: 1; grid-row: 3; align-self: center; padding-block: 50px 0; }
+  .pagina-inicio .hero .titulo { font-size: clamp(42px, 4vw, 56px); }
+  .pagina-inicio .hero .subtitulo { margin-block: 24px; }
+  .pagina-inicio .filtros { grid-column: 2; grid-row: 3; margin: 28px 0 14px; align-self: start; }
+  .pagina-inicio .mapa-container { grid-column: 2; grid-row: 3 / 5; align-self: start; margin-top: 90px; }
+  .pagina-inicio .chip { padding-inline: 12px; }
+  .pagina-relatar .app { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 0 48px; }
+  .pagina-relatar :is(.topbar, .tabs) { grid-column: 1 / -1; }
+  .pagina-relatar .hero { grid-column: 1; padding-top: 48px; }
+  .pagina-relatar .form-relato { grid-column: 2; margin-top: 36px; }
+  .pagina-relatar .campo .filtros { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pagina-acompanhar .hero { max-width: 720px; }
+  .pagina-acompanhar .busca { max-width: 560px; }
+  .pagina-acompanhar .aviso-demo { max-width: 560px; }
+  .pagina-acompanhar .lista-relatos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* A imagem demonstrativa já contém controles; evita desenhá-los duas vezes. */
+.pagina-inicio .mapa-container > :is(.btn-localizacao, .zoom) { display: none; }
+@media (min-width: 600px) {
+  .pagina-relatar .campo:has(#endereco), .pagina-relatar .campo:has(#foto) { grid-column: 1 / -1; }
 }
