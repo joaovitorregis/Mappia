@@ -2,7 +2,7 @@
 
 Documento de requisitos do produto (PRD)
 
-Versão 3.0 | 02/10/2026
+Versão 3.1 documental | 22/10/2026 (estimativas históricas de 02/10/2026)
 
 Projeto de extensão de Ciência da Computação da UNINASSAU Campina Grande, na disciplina Atividades Práticas Interdisciplinares de Extensão I.
 
@@ -13,6 +13,27 @@ Projeto de extensão de Ciência da Computação da UNINASSAU Campina Grande, na
 - [Joalison Normandia](https://github.com/joalisonnormandia)
 - [Jhonatan Xavier](https://github.com/jhonatandevpb)
 
+
+## Contrato da demonstração - revisão de 22/10/2026
+
+Esta revisão usa o HTML/JavaScript deste repositório como referência de capacidade implementada e o arquivo Figma `sXNaua5CmhShdvoC4J4upn` como referência canônica de design. O canvas não foi alterado nem revalidado nesta revisão. O arquivo `IY3T4Dv7QenJZWPRxngnf3` é uma referência histórica, não a fonte atual.
+
+| Fluxo | Disponível na demonstração | Ainda previsto |
+| --- | --- | --- |
+| Mapa (`index.html`) | Prévia estática; links para Relatar e Acompanhar. | Pinos interativos, filtros efetivos, GPS, moderação e contagens públicas por estado. |
+| Relato (`relatar.html`) | Quatro etapas; categoria, descrição e endereço; seleção local de foto; dados fictícios; revisão e edição. | Envio, persistência, upload, protocolo real e verificação antiabuso. |
+| Consulta (`acompanhar.html`) | Exemplo fixo MAP-2026-00428 e aviso para código não encontrado. | Consulta a registros reais, atualização de estados e histórico autenticado. |
+| Conta | Botões informam indisponibilidade; entrada desabilitada no início. | Cadastro, autenticação, vínculo e recuperação de senha (2.6, prioridade S). |
+
+Na etapa de dados pessoais, nome completo, CPF, telefone e e-mail são obrigatórios apenas para percorrer a demonstração. Use dados fictícios. O navegador verifica preenchimento e formato básico do e-mail; não verifica CPF, identidade, titularidade do contato ou consentimento. Os valores permanecem no formulário em memória; o código não os envia, não grava em banco ou armazenamento local e não cria conta. A foto é apenas selecionada no aparelho. Isso não constitui coleta segura em produção nem política de privacidade. A hospedagem e recursos externos podem receber requisições técnicas de carregamento, sem envio dos campos pelo código da aplicação.
+
+Para produção, a necessidade de cada identificador, especialmente CPF, finalidade, base legal, retenção, exclusão, acesso restrito e conteúdo do aviso precisam ser decididos antes de habilitar coleta. A identificação desenhada não é um requisito de coleta em produção aprovado por esta revisão. O cadastro ilustrado usa nome, e-mail e senha; nome e vínculo de conta ainda exigem revisão de escopo.
+
+O catálogo desta revisão acompanha os seis rótulos do formulário: Buracos na rua, Iluminação pública, Lixo e descarte irregular, Vazamentos e esgoto a céu aberto, Alagamentos e Outro problema. Acessibilidade e sinalização pertenciam ao catálogo anterior; podem ser descritas em Outro problema, sem categorias próprias nesta demonstração. O mapa atual não executa filtros; a implementação futura deve usar o mesmo catálogo do formulário (1.2 e 8.1).
+
+Em análise é o estado inicial previsto; Relato recebido nas exportações antigas representa recebimento, não validação. O exemplo HTML de consulta é fictício e usa Em análise, sem representar publicação no mapa. Somente Pendente, Crítico e Resolvido podem aparecer no mapa e nos indicadores futuros após validação. As imagens exportadas são históricas: a tela 07 ilustra consulta por protocolo, não uma lista autenticada; a tela 08 não comprova validação. Não há exportação atualizada dos estados públicos nem do histórico autenticado. As imagens não foram retocadas para simular essa atualização.
+
+Os 55 IDs e os totais históricos (183 pontos; MVP: 30 itens M e 96 pontos) foram preservados. A troca de catálogo e as questões de identificação/conta exigem reestimação antes da implementação de produção; os números de 02/10/2026 não comprovam cobertura dessas decisões. Critérios do MVP abaixo são metas futuras, não funcionalidades concluídas ou resultados de teste com moradores.
 
 ## 1. Visão do produto
 
@@ -47,7 +68,7 @@ As evoluções S e C permanecem no planejamento. O aplicativo nativo, a integra�
 
 | Épico | Tema | M | S | C |
 | --- | --- | --- | --- | --- |
-| 1 | Denúncia sem cadastro | 19 | 10 | 0 |
+| 1 | Relato sem conta | 19 | 10 | 0 |
 | 2 | Cadastro opcional após o envio | 9 | 8 | 3 |
 | 3 | Mapa colaborativo | 13 | 8 | 2 |
 | 4 | Acompanhamento | 6 | 9 | 3 |
@@ -61,7 +82,7 @@ As evoluções S e C permanecem no planejamento. O aplicativo nativo, a integra�
 
 Cada grupo corresponde ao épico de mesmo número no Product Backlog. Os IDs identificam os requisitos nas duas versões.
 
-### RF1. Denúncia sem cadastro
+### RF1. Relato sem conta
 
 | ID | Requisito | Prioridade | Pontos |
 | --- | --- | --- | --- |
@@ -158,7 +179,7 @@ Cada grupo corresponde ao épico de mesmo número no Product Backlog. Os IDs ide
 
 ## 6. Fluxo e regras de negócio
 
-O fluxo principal parte do mapa, segue para Reportar problema e para o formulário, e termina com a confirmação e o protocolo. Depois do envio, o visitante pode criar conta ou continuar sem cadastro. A consulta por protocolo permanece disponível nos dois casos.
+O fluxo principal parte do mapa, segue para Relatar um problema e para o formulário, e termina com a confirmação e o protocolo. Depois do envio, o visitante pode criar conta ou continuar sem cadastro. A consulta por protocolo permanece disponível nos dois casos.
 
 - O visitante acessa o mapa, registra uma ocorrência e consulta o protocolo sem criar conta.
 - O convite de cadastro aparece após a confirmação. Dispensar o convite não apaga o registro.
@@ -171,7 +192,7 @@ O fluxo principal parte do mapa, segue para Reportar problema e para o formulár
 - A classificação Crítico indica prioridade da ocorrência. Ela não representa um acionamento de emergência ou garantia de atendimento.
 - O encaminhamento a órgãos responsáveis é uma evolução do item 5.6. O registro não garante atendimento ou resolução pelo poder público.
 
-As categorias iniciais são buraco, iluminação, lixo, vazamento, acessibilidade e sinalização (1.2 e 8.1). Qualquer alteração no catálogo precisa manter formulário, filtro e documentos consistentes.
+As categorias iniciais são Buracos na rua, Iluminação pública, Lixo e descarte irregular, Vazamentos e esgoto a céu aberto, Alagamentos e Outro problema (1.2 e 8.1). Qualquer alteração no catálogo precisa manter formulário, filtro e documentos consistentes.
 
 ## 7. Dados e arquitetura prevista
 
@@ -180,6 +201,7 @@ A base técnica prevista usa HTML, CSS e JavaScript na interface, Leaflet no map
 | Dado | Uso previsto |
 | --- | --- |
 | Protocolo | Identificador único para acompanhamento. |
+| Identificação ilustrada | Nome, CPF, telefone e e-mail apenas fictícios na demonstração; tratamento real depende de decisão de necessidade, finalidade e proteção (1.6, 8.4 e 8.6). |
 | Categoria e descrição | Classificação e relato do problema. |
 | Latitude e longitude | Localização indicada no mapa ou obtida por GPS autorizado. |
 | Foto | Imagem associada ao relato, submetida à revisão antes da divulgação. |
@@ -228,9 +250,11 @@ Envios abusivos, exposição indevida em fotos, baixa participação e carga de 
 
 ## 12. Documentos relacionados
 
-- [Product Backlog do Mappia, versão 3.0](../product-backlog/Product_Backlog_Mappia.md)
-- [Protótipo no Figma](https://www.figma.com/design/IY3T4Dv7QenJZWPRxngnf3)
+- [Product Backlog do Mappia, versão 3.1 documental](../product-backlog/Product_Backlog_Mappia.md)
+- [Protótipo no Figma](https://www.figma.com/design/sXNaua5CmhShdvoC4J4upn/Mappia)
 
 ## Histórico da revisão
 
 Versão 3.0, 02/10/2026: nomenclatura Mappia nos dois documentos; requisitos ligados aos mesmos 55 IDs; preservação das prioridades e dos pontos do backlog anterior; critérios de aceitação detalhados. Encaminhamento, privacidade das imagens e publicação de estados têm a mesma fase de entrega no PRD e no backlog.
+
+Versão 3.1 documental, 22/10/2026: contrato da demonstração, categorias do HTML, referência Figma canônica, estados e limites das exportações históricas. Estimativas preservadas como históricas; reestimação pendente para alterações de escopo.

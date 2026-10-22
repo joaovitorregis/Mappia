@@ -2,7 +2,7 @@
 
 Product Backlog
 
-Versão 3.0 | 02/10/2026
+Versão 3.1 documental | 22/10/2026 (estimativas históricas de 02/10/2026)
 
 Projeto de extensão de Ciência da Computação da UNINASSAU Campina Grande, na disciplina Atividades Práticas Interdisciplinares de Extensão I.
 
@@ -14,9 +14,30 @@ Projeto de extensão de Ciência da Computação da UNINASSAU Campina Grande, na
 - [Jhonatan Xavier](https://github.com/jhonatandevpb)
 
 
+## Contrato da demonstração - revisão de 22/10/2026
+
+Esta revisão usa o HTML/JavaScript deste repositório como referência de capacidade implementada e o arquivo Figma `sXNaua5CmhShdvoC4J4upn` como referência canônica de design. O canvas não foi alterado nem revalidado nesta revisão. O arquivo `IY3T4Dv7QenJZWPRxngnf3` é uma referência histórica, não a fonte atual.
+
+| Fluxo | Disponível na demonstração | Ainda previsto |
+| --- | --- | --- |
+| Mapa (`index.html`) | Prévia estática; links para Relatar e Acompanhar. | Pinos interativos, filtros efetivos, GPS, moderação e contagens públicas por estado. |
+| Relato (`relatar.html`) | Quatro etapas; categoria, descrição e endereço; seleção local de foto; dados fictícios; revisão e edição. | Envio, persistência, upload, protocolo real e verificação antiabuso. |
+| Consulta (`acompanhar.html`) | Exemplo fixo MAP-2026-00428 e aviso para código não encontrado. | Consulta a registros reais, atualização de estados e histórico autenticado. |
+| Conta | Botões informam indisponibilidade; entrada desabilitada no início. | Cadastro, autenticação, vínculo e recuperação de senha (2.6, prioridade S). |
+
+Na etapa de dados pessoais, nome completo, CPF, telefone e e-mail são obrigatórios apenas para percorrer a demonstração. Use dados fictícios. O navegador verifica preenchimento e formato básico do e-mail; não verifica CPF, identidade, titularidade do contato ou consentimento. Os valores permanecem no formulário em memória; o código não os envia, não grava em banco ou armazenamento local e não cria conta. A foto é apenas selecionada no aparelho. Isso não constitui coleta segura em produção nem política de privacidade. A hospedagem e recursos externos podem receber requisições técnicas de carregamento, sem envio dos campos pelo código da aplicação.
+
+Para produção, a necessidade de cada identificador, especialmente CPF, finalidade, base legal, retenção, exclusão, acesso restrito e conteúdo do aviso precisam ser decididos antes de habilitar coleta. A identificação desenhada não é um requisito de coleta em produção aprovado por esta revisão. O cadastro ilustrado usa nome, e-mail e senha; nome e vínculo de conta ainda exigem revisão de escopo.
+
+O catálogo desta revisão acompanha os seis rótulos do formulário: Buracos na rua, Iluminação pública, Lixo e descarte irregular, Vazamentos e esgoto a céu aberto, Alagamentos e Outro problema. Acessibilidade e sinalização pertenciam ao catálogo anterior; podem ser descritas em Outro problema, sem categorias próprias nesta demonstração. O mapa atual não executa filtros; a implementação futura deve usar o mesmo catálogo do formulário (1.2 e 8.1).
+
+Em análise é o estado inicial previsto; Relato recebido nas exportações antigas representa recebimento, não validação. O exemplo HTML de consulta é fictício e usa Em análise, sem representar publicação no mapa. Somente Pendente, Crítico e Resolvido podem aparecer no mapa e nos indicadores futuros após validação. As imagens exportadas são históricas: a tela 07 ilustra consulta por protocolo, não uma lista autenticada; a tela 08 não comprova validação. Não há exportação atualizada dos estados públicos nem do histórico autenticado. As imagens não foram retocadas para simular essa atualização.
+
+Os 55 IDs e os totais históricos (183 pontos; MVP: 30 itens M e 96 pontos) foram preservados. A troca de catálogo e as questões de identificação/conta exigem reestimação antes da implementação de produção; os números de 02/10/2026 não comprovam cobertura dessas decisões. Critérios do MVP abaixo são metas futuras, não funcionalidades concluídas ou resultados de teste com moradores.
+
 ## Referência e situação
 
-Este backlog acompanha o [PRD do Mappia, versão 3.0](../prd/PRD_Mappia.md). Os itens descrevem requisitos planejados e seus critérios de aceitação.
+Este backlog acompanha o [PRD do Mappia, versão 3.1 documental](../prd/PRD_Mappia.md). Os itens descrevem requisitos planejados e seus critérios de aceitação.
 
 O produto contempla registro de problemas urbanos, mapa público e acompanhamento. O cadastro do morador é opcional após o envio. Equipe e comerciantes usam contas autenticadas para suas operações restritas.
 
@@ -26,7 +47,7 @@ M: essencial para o MVP. S: evolução importante. C: evolução desejável. Os 
 
 | Épico | Tema | M | S | C |
 | --- | --- | --- | --- | --- |
-| 1 | Denúncia sem cadastro | 19 | 10 | 0 |
+| 1 | Relato sem conta | 19 | 10 | 0 |
 | 2 | Cadastro opcional após o envio | 9 | 8 | 3 |
 | 3 | Mapa colaborativo | 13 | 8 | 2 |
 | 4 | Acompanhamento | 6 | 9 | 3 |
@@ -51,18 +72,18 @@ São 55 itens e 183 pontos no planejamento completo. O MVP contém 30 itens e 96
 - A classificação Crítico indica prioridade da ocorrência. Ela não representa um acionamento de emergência ou garantia de atendimento.
 - O encaminhamento a órgãos responsáveis é uma evolução do item 5.6. O registro não garante atendimento ou resolução pelo poder público.
 
-As categorias iniciais são buraco, iluminação, lixo, vazamento, acessibilidade e sinalização. Os critérios abaixo são condições de aceitação para a implementação futura.
+As categorias iniciais são Buracos na rua, Iluminação pública, Lixo e descarte irregular, Vazamentos e esgoto a céu aberto, Alagamentos e Outro problema. Os critérios abaixo são condições de aceitação para a implementação futura.
 
-## Épico 1. Denúncia sem cadastro
+## Épico 1. Relato sem conta
 
 | ID | Item | Prioridade | Pontos | Critério de aceitação |
 | --- | --- | --- | --- | --- |
-| 1.1 | Acessar o formulário sem conta | M | 2 | A ação Reportar problema abre o formulário sem pedir login ou cadastro. |
-| 1.2 | Selecionar a categoria | M | 2 | O formulário oferece buraco, iluminação, lixo, vazamento, acessibilidade e sinalização; a categoria selecionada acompanha o registro. |
+| 1.1 | Acessar o formulário sem conta | M | 2 | A ação Relatar um problema abre o formulário sem pedir login ou cadastro. |
+| 1.2 | Selecionar a categoria | M | 2 | O formulário oferece Buracos na rua, Iluminação pública, Lixo e descarte irregular, Vazamentos e esgoto a céu aberto, Alagamentos e Outro problema; a categoria selecionada acompanha o registro. |
 | 1.3 | Descrever o problema | M | 1 | A descrição é solicitada no formulário e fica associada à ocorrência; a ausência de texto impede a confirmação do envio. |
 | 1.4 | Informar a localização por mapa ou GPS | M | 5 | O local pode ser marcado no mapa ou obtido com autorização para GPS. A recusa de GPS mantém a marcação manual disponível. |
 | 1.5 | Anexar foto do problema | M | 5 | O envio pode ser concluído sem foto. Quando anexada, a foto acompanha a ocorrência. Falhas no upload são informadas antes de apresentar o envio como concluído. |
-| 1.6 | Exibir aviso de privacidade antes do envio | M | 2 | O formulário explica o uso da descrição, localização e foto e permite acessar a política de privacidade antes da confirmação. |
+| 1.6 | Exibir aviso de privacidade antes do envio | M | 2 | O formulário explica o uso da descrição, localização e foto e permite acessar a política de privacidade antes da confirmação. Qualquer futura coleta de nome, CPF, telefone ou e-mail depende da decisão de necessidade e finalidade, aviso específico e controles dos itens 8.4 e 8.6; os campos fictícios da demonstração não comprovam esse aceite. |
 | 1.7 | Confirmar o envio e gerar protocolo | M | 2 | Após persistir o registro, o sistema apresenta um protocolo único e o estado Em análise. Um envio com falha não gera confirmação de sucesso. |
 | 1.8 | Avisar sobre possível duplicata | S | 5 | Registros semelhantes próximos ao local informado são apresentados para consulta antes de criar outra ocorrência. |
 | 1.9 | Confirmar Também vejo esse problema | S | 3 | Um visitante sem conta consegue confirmar uma ocorrência existente; a contagem não cria uma ocorrência nova. |
@@ -74,7 +95,7 @@ As categorias iniciais são buraco, iluminação, lixo, vazamento, acessibilidad
 | --- | --- | --- | --- | --- |
 | 2.1 | Oferecer cadastro após confirmar o registro | M | 3 | O convite de cadastro aparece depois da confirmação e mantém o protocolo visível ou acessível. |
 | 2.2 | Dispensar o cadastro | M | 1 | A opção de dispensar o cadastro permite continuar sem conta; o registro e a consulta por protocolo permanecem disponíveis. |
-| 2.3 | Criar conta e vincular o registro atual | M | 5 | A conta é criada com e-mail e senha. O registro do envio recém-concluído é vinculado à conta autenticada, sem permitir apropriar registros apenas pelo protocolo. |
+| 2.3 | Criar conta e vincular o registro atual | M | 5 | A conta é criada com e-mail e senha; o nome ilustrado no design depende da revisão de escopo descrita no contrato da demonstração. O registro do envio recém-concluído é vinculado à conta autenticada, sem permitir apropriar registros apenas pelo protocolo. |
 | 2.4 | Vincular registros anteriores do aparelho | S | 3 | Após autenticação, registros anteriores associados à sessão do aparelho são vinculados à conta; registros de outras sessões não são vinculados. |
 | 2.5 | Consultar registros em outro aparelho | S | 3 | Ao autenticar a mesma conta em outro aparelho, o morador acessa a lista de registros vinculados a ela. |
 | 2.6 | Recuperar senha por e-mail | S | 2 | O morador solicita recuperação e conclui a troca de senha pelo fluxo de autenticação, sem expor a senha anterior. |
@@ -173,3 +194,5 @@ As categorias iniciais são buraco, iluminação, lixo, vazamento, acessibilidad
 ## Histórico da revisão
 
 Versão 3.0, 02/10/2026: adoção do nome Mappia, critérios de aceitação por item e dependências explícitas. Os 55 IDs, as prioridades e os pontos foram preservados. O total do MVP permanece em 96 pontos.
+
+Versão 3.1 documental, 22/10/2026: contrato da demonstração, categorias do HTML, referência Figma canônica, estados e limites das exportações históricas. Estimativas preservadas como históricas; reestimação pendente para alterações de escopo.
