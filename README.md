@@ -2,7 +2,7 @@
 
 O Mappia é um projeto de extensão voltado ao registro e acompanhamento de problemas urbanos. A proposta permite consultar ocorrências no mapa, relatar um problema e acompanhar seu andamento por protocolo.
 
-O projeto está em fase de prototipação. Este repositório reúne os requisitos, o backlog e as telas navegáveis no Figma.
+O projeto está em fase de prototipação. Este repositório reúne requisitos planejados, backlog, telas no Figma e uma demonstração estática em HTML/CSS/JavaScript.
 
 ## Protótipo
 
@@ -12,17 +12,20 @@ O projeto está em fase de prototipação. Este repositório reúne os requisito
 - [Arquivo de design](https://www.figma.com/design/sXNaua5CmhShdvoC4J4upn/Mappia?node-id=2045-121)
 - [Visão geral das telas](docs/design/telas-organizadas.png)
 
-O formulário organiza o relato em quatro etapas: descrição do problema, local e foto, dados pessoais e revisão. Após o envio, o morador recebe um protocolo. A conta é opcional e permite reunir os relatos em um histórico.
+A [demonstração HTML](index.html) permite navegar pelo formulário em quatro etapas e consultar o exemplo fixo MAP-2026-00428. Ela termina na revisão: não envia relatos nem gera protocolos. Use apenas dados fictícios nos campos de nome, CPF, telefone e e-mail. Não há validação de identidade.
+
+Envio, protocolo real, conta opcional e histórico são funcionalidades previstas. O mapa é uma prévia estática; filtros, GPS, autenticação, moderação e indicadores não estão integrados. As imagens acima são exportações históricas; consulte o [contrato e a matriz de capacidades](docs/prd/PRD_Mappia.md#contrato-da-demonstração---revisão-de-22102026).
 
 As interações do Figma demonstram o fluxo de uso. O protótipo não está conectado a serviços de envio, autenticação ou atendimento.
 
-## Escopo do MVP
+## Escopo planejado do MVP
 
 - Registro de ocorrências com categoria, descrição, localização e foto opcional.
-- Identificação do autor em uma etapa própria do formulário.
+- Etapa ilustrada de identificação; coleta em produção depende de decisão sobre necessidade dos campos, finalidade e proteção.
 - Acompanhamento por protocolo e histórico para moradores com conta.
 - Mapa público com ocorrências validadas e filtros por categoria.
 - Área de moderação e atualização do estado das ocorrências.
+- Contagens públicas por estado, somente de ocorrências validadas.
 
 ## Documentação
 
