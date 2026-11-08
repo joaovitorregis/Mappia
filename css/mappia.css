@@ -1,0 +1,424 @@
+/* Ícones do Bootstrap Icons (somente os usados no projeto) */
+@font-face {
+  font-family: 'bootstrap-icons';
+  src: url(data:font/woff2;base64,d09GMgABAAAAAAggAAsAAAAADvQAAAfUAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHCoGYACBPAqWcJImATYCJAMqCygABCAFgRAHIBu/C1GUb1IT5Edi7Bi5p4y/vciibCUfwk3/HQnhEiQh1DRtabtCJ3T7mXgyU+jUlK8Oc1G6eZ4bSuqGlrAVZkgoQeZe4fw495nYxMKnQ7Q3RHVYOJAjY19sYqldN/5QGAHOd7/SmY0oap8FXaMFjOqrTqDPJxSRGoWlJ7B2d893Hc2Q6WvFJ3DJfg8EgAA3cmDSatTzw9G7w+C+iAMLAIYBQFjiIfNhhmQ7TsNbTJLPhwP11zbBzKDnrlFXvTN2vlLf9SAeAImkJpIBEIDXRCHjjLq6yZXL4v+kG2nX/AH3Sn2d9rrn6ymvF70+/cb+5sGbT297vb319mOkWKRX5ErketHOdz0MA4jMFzkO2W/bf7CPsw+0F9g+2RSbaP3dmmd1CXeFf4QyQgHfkP4KAnC7OnQDlcJcYrI1iZOrCcwwcS+DaRNYapSNHcdVxScl8fZZJMuS/X89Ptrj4WOjhRhegkApp8kZ5eieHG13MIwg8ZioZo8b97cpNnaFsfSUrjrpNQ8tsMAoJ2trBN0JMEQIYRyS0q3aF5fzdH2LIpUjBAWlvvpylpFnFcIJYhgzJFSlrHQB+ZSuKq+j/Hfkp1QRQemE1/byx/9MRchM7R45xYK9zhjgK1bXYi+3nkkgjli3WDplEAJHU++dWEQt+f1khDID9xheHfWmlK/viMO2mog7erI54pxhQ1aH2oJhgRGRc9LTbYPuSP9Wyar2N64TEQVLafr6jiNUe4x7P6VFt5eOkLNv3kSQ3Xw66SzvPL7eSKlLrj0aw4XKuk9uNPsHCXUlS5WnxZavWZ5O2+mCpyi99Ql3h4uHbu7K63k9geuP9dObWDbdjChFGWQtX+OGJXXqa9Xszda83J0vqFRgPp0vpmP1Qr7Uz+HZSpVri9DCjGjRFeiMj7vwNv///zdlWJ8h2gILMxMQEmJ9PHQExIDlnbs3cKwe3bo8bXmDtnytunrnSaxfyicPnsHzNchVmVW6CMEwQohzWNayyZ4e7zTsmBQOFd131bA4ilcIC3y2L5/pCbrpEwkRtEPSGJNOoXjPuLp658UHfUaXn39eszj8ejgvRQTXHqknN+TNp/rx9TOWrZu2iCKX1U74IIxFEG6pJClW4j+z7b7SBaeImFyVguBQ5dDRPiuPu7QNWN2T3eMZbMAENEu2pg7YXX+ZlWXXbicIis7DKhNr03Vj9yuYvZdYdY6NzazZXi/DUuxeGNjn2nnCl1cdtiRDr2OTYNRlPRlwyjniDDHAC1hz0/chasyxZlKJ4Dmyx1x2/3nitymQk1thifGR6XHLbKLVAUNg9bN7jEVEgRiTHGQ19lpYoX6aXqeOTGXmTP9JKOFrnqaIq0PDlls0QQdYpPVj4l5+1amH6l9fxsVYmrzOlAJS/9FUvH3TLw0QtTeKlsLGDy89L38wwlLLia7N2VvcW7I3K/Kp5IyUk5knUzKST9XtympUozrVkRfMzda07CZfhdlak5+9aovVbQVVmnTzrRxm9Tl9I1CnNUNQaFOo3L8fUJrJNGBRekCuFQuCj1idBthu5mpVM9M7lIlJ3z0jt6JF7r0kmJm3utbqvFq8CzafdNYcUmkIu6Dsdla7GBeJxF28pXT4jSmwFKT1y0yjRmUD5kgoWC0Ywq/Kk27LCq8aR6cKXZIa3fjVqPbWw0ckbLvyB2+q5/+4si1hjD6adPVK/rQAfhNRw9SkYV1z1e9jfm02YvS+KMcdbyXvnRRaa/Bq19uxh4ySMzeW2jgzQfx9VHOUXsZpzf5e+UvXo4FZvy/Et9On69z4K66klKz1k1xXxnO6s38siiOf6of82WbY1BWD35jm1SbmMsjaYn5aR9aTs6oJdTcFom9Gcy8hyOqsu5oxxVxgnpKhGoEONQc37+rWxPjY/q2TX/g3VB+mbmmyRR1WfYP/BYLBWBQXT1IEB8RAWsChv1ydf+i0quat5qrDqH3sX622F25v9ddcD+euPTxU1Gx+YVFoeG03h6CcuYRGPmuphW6ac5PV2LJlv2al1x+FKz1yRrd4v/WPI8KRecEDE1G7jiaFJU1fkLT9ifppubrio/p4B3Jyqmf1lrJRo1ybNuU6Y6DUu8n/232Nml87eq15Ix8ucLaXHGIRi99PFV+cvriy2+WuHEwPFg+7mtaxIlaMNTgstHnDMeteqGMz4oxYMU6cmNarS7hldwnpA6eFZch5yoxCgVDdSfYsbrjeISVeY6fMbSg5G7HxvmN+0X9NF/WrvgVVzE5p9+LKG+yWmGFc+2FnDvhHVyJOPyVCl5G/ylTpIlONphcqdDYzWahFLl6Ln1Jz/qRJ45sNoarKD27Oo+teNsAMYN4RAy/SfayuElnHxumj3j5V/6dhyofEozsY4vWAy0JhNYqbgqralt1Z0v80RPtv+L+0Qj7uOo5Rn24CSkkCnkh8L7HwPMQrw0UiYYiTeDxYYiGezk8gCVkr8fVqi/HZMDLwJRz5GAYsIKGV8ZV4SfHhkGQKiIluQYpKH2onVohQa9WK0Vkrx0utjA/GHahdvZ7CBORYn5XFP/LnMo+pzw0gMj6DQtDoIu3gzeUKEMjGcRwagAFheRCkAJrGBAdSpjKeqWzXmBEDj5vryY7oh8nBGETXG4gO6A8veqCTFfbt3gRd0A1D0NuXHIhC3TnQ7u7hH5CGkshHCXyqXp0BAA==) format('woff2');
+}
+.bi { display: inline-block; font-family: 'bootstrap-icons' !important; font-style: normal; font-weight: normal; font-variant: normal; line-height: 1; vertical-align: -.125em; -webkit-font-smoothing: antialiased; }
+.bi-person::before { content: "\f4e1"; }
+.bi-geo-alt-fill::before { content: "\f3e7"; }
+.bi-plus-circle::before { content: "\f4fa"; }
+.bi-arrow-right::before { content: "\f138"; }
+.bi-grid-fill::before { content: "\f3fb"; }
+.bi-cone-striped::before { content: "\f2d2"; }
+.bi-trash::before { content: "\f5de"; }
+.bi-sliders::before { content: "\f56b"; }
+.bi-crosshair::before { content: "\f769"; }
+.bi-camera::before { content: "\f220"; }
+.bi-send::before { content: "\f6c0"; }
+.bi-droplet::before { content: "\f30d"; }
+.bi-lightbulb::before { content: "\f46b"; }
+.bi-search::before { content: "\f52a"; }
+.bi-clock::before { content: "\f293"; }
+.bi-tools::before { content: "\f5db"; }
+.bi-check-circle-fill::before { content: "\f26a"; }
+.bi-chevron-right::before { content: "\f285"; }
+
+/* >>> COLE AQUI, NESTA LINHA, o bloco de ícones do seu style.css antigo:
+   do "/* Ícones do Bootstrap Icons ..." até ".bi-chevron-right::before { ... }".
+   (Ele tem a fonte embutida em base64; não copiei para não arriscar corromper.) <<< */
+
+
+/* =====================================================================
+   MAPPIA — CSS ÚNICO
+   Usado por: index.html, relatar.html e acompanhar.html
+   Todas as telas: mesmo fundo, mesmo cabeçalho, mesmas abas, tela cheia.
+   Classe do <body>: "mappia pagina-inicio | pagina-relatar | pagina-acompanhar"
+   ===================================================================== */
+
+/* ---------- 1. Tokens ---------- */
+.mappia {
+  --azul: #0864f0;
+  --azul-escuro: #0f52b2;
+  --texto: #132743;
+  --suave: #586888;
+  --borda: #e1e8f0;
+  --borda-campo: #d6e0ed;
+  --amarelo: #fbc400;
+  --controle: #156fdb;
+  --foco: #86b7ff;
+  --gutter: clamp(16px, 5vw, 96px);   /* margem lateral única */
+  --respiro: 28px;                    /* espaço entre abas e conteúdo */
+}
+
+/* ---------- 2. Base e fundo (iguais em todas as telas) ---------- */
+.mappia {
+  margin: 0;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  font: 400 16px/1.5 'Inter', Arial, sans-serif;
+  color: var(--texto);
+  background-color: #f6f8fc;
+  background-image:
+    radial-gradient(54rem 34rem at 100% -8%, rgba(8, 100, 240, .11), transparent 62%),
+    radial-gradient(40rem 26rem at 0% 108%, rgba(251, 196, 0, .13), transparent 62%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+/* Grade fina, como ruas de um mapa; some suavemente para baixo */
+.mappia::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(19, 39, 67, .05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(19, 39, 67, .05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 75%);
+  mask-image: linear-gradient(180deg, #000 0%, transparent 75%);
+}
+.mappia *, .mappia *::before, .mappia *::after { box-sizing: border-box; }
+.mappia :is(h1, h2, p, ol, dl, dd) { margin: 0; }
+.mappia :is(button, input, textarea) { font: inherit; }
+.mappia :is(a, button, input, textarea, label) { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.mappia a { color: var(--azul); text-decoration: none; }
+.mappia button { cursor: pointer; }
+.mappia button:disabled { cursor: default; }
+.mappia :is(a, button, input, textarea):focus-visible { outline: 3px solid var(--foco); outline-offset: 3px; }
+.mappia [hidden] { display: none !important; }
+.mappia img { display: block; }
+.mappia .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* ---------- 3. A "janela" é a tela inteira ---------- */
+.mappia .app {
+  flex: 1 0 auto;
+  width: 100%;
+  padding: 8px var(--gutter) 40px;
+  background: transparent;
+}
+
+/* ---------- 4. Cabeçalho ---------- */
+.mappia .topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 68px;
+  border-bottom: 1px solid var(--borda);
+}
+.mappia .logo {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: var(--azul);
+}
+.mappia .logo span { color: var(--amarelo); }
+.mappia .btn-entrar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 84px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid #c5ddff;
+  border-radius: 11px;
+  background: #eaf5ff;
+  color: var(--azul);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+}
+.mappia .btn-entrar:disabled { opacity: .75; }
+.mappia .btn-entrar img { width: 13px; height: 15px; }
+
+/* ---------- 5. Abas ---------- */
+.mappia .tabs { display: flex; max-width: 520px; }
+.mappia .tab {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 14px 4px 11px;
+  border-bottom: 3px solid transparent;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--suave);
+}
+.mappia .tab.active { border-bottom-color: var(--amarelo); color: var(--azul); font-weight: 700; }
+
+/* ---------- 6. Botões (mesmo visual em todas as telas) ---------- */
+.mappia :is(.btn-primary, .primary) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 12px 20px;
+  border: 1px solid #339cff;
+  border-radius: 13px;
+  color: #fff;
+  background: linear-gradient(110deg, #168cf3, #005bd9);
+  box-shadow: 0 5px 10px #0068d933;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+}
+.mappia .btn-primary { display: flex; justify-content: space-between; padding: 14px 20px 14px 26px; font-size: 14px; font-weight: 500; }
+.mappia .btn-conteudo { display: flex; align-items: center; gap: 10px; }
+.mappia .btn-conteudo .icone { font-size: 23px; }
+.mappia .btn-primary > .icone { font-size: 19px; }
+.mappia .secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 12px 16px;
+  border: 1px solid var(--borda-campo);
+  border-radius: 13px;
+  background: #fff;
+  color: var(--azul-escuro);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+}
+.mappia .text-button { min-height: 44px; padding: 10px 0; border: 0; background: transparent; color: var(--azul); text-align: left; font-size: 14px; line-height: 20px; }
+@media (hover: hover) {
+  .mappia :is(.btn-primary, .primary):hover { filter: brightness(1.06); }
+  .mappia .tab:hover { color: var(--azul); background: #e9f5ff; }
+  .mappia .chip:hover { color: var(--azul); background-color: #e9f5ff; }
+}
+
+/* ---------- 7. Introdução de tela (títulos) ---------- */
+.mappia .step-intro { margin-top: var(--respiro); }
+.mappia .eyebrow { color: var(--azul); font-size: 12px; font-weight: 600; line-height: 16px; }
+.mappia .step-intro h1 { margin-top: 12px; font-size: 26px; font-weight: 700; line-height: 34px; letter-spacing: -.4px; }
+.mappia .step-intro .intro-copy { min-height: 20px; margin-top: 8px; color: var(--suave); font-size: 14px; line-height: 20px; }
+
+/* ---------- 8. TELA INICIAL (mapa) ---------- */
+.mappia .hero { padding: var(--respiro) 0 0; }
+.mappia .local {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 10px;
+  color: var(--azul);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.mappia .local .icone { font-size: 15px; }
+.mappia .titulo {
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+.mappia .destaque { position: relative; color: var(--azul); }
+.mappia .destaque::after {
+  content: '';
+  position: absolute;
+  left: 7%;
+  right: 1%;
+  bottom: -5px;
+  height: 9px;
+  border-top: 3px solid var(--amarelo);
+  border-radius: 50%;
+  transform: rotate(-4deg);
+}
+.mappia .subtitulo { max-width: 38ch; margin: 16px 0 24px; color: var(--suave); font-size: 16px; line-height: 1.5; }
+
+.mappia .filtros { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 12px; }
+.mappia .chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex: 1 1 auto;
+  min-height: 44px;
+  padding: 7px 14px;
+  border: 1px solid #d7e7f6;
+  border-radius: 22px;
+  background: #ffffffa6;
+  color: var(--suave);
+  white-space: nowrap;
+  font-size: 13px;
+}
+.mappia .chip .icone { font-size: 15px; color: var(--texto); }
+.mappia .chip.active { border-color: #3d98ff; background: #e1f3ff; color: var(--azul); font-weight: 600; }
+.mappia .chip.active .icone { color: var(--azul); }
+
+/* Recorte da região do mapa do protótipo (proporção 319 × 315) */
+.mappia .mapa-container {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 319 / 315;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 7px 12px #28466416;
+}
+.mappia .mapa {
+  width: 100%;
+  height: 100%;
+  background-image: url('../docs/design/telas/01-inicio.png');
+  background-size: 122.257% auto;
+  background-position: 50% 88.358%;
+  background-repeat: no-repeat;
+  background-color: #dcecf1;
+}
+/* A imagem demonstrativa já traz os controles; evita desenhá-los duas vezes. */
+.mappia .mapa-container > :is(.btn-localizacao, .zoom) { display: none; }
+
+/* ---------- 9. Passos de "Relatar" ---------- */
+.mappia .progress { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin-top: 16px; padding: 0; list-style: none; }
+.mappia .progress li { height: 3px; border-radius: 2px; background: #dee5f0; }
+.mappia .progress .current { background: var(--amarelo); }
+.mappia .progress .done { background: var(--controle); }
+
+.mappia .categories { display: grid; gap: 8px; margin: 8px 0 0; padding: 0 0 4px; border: 0; min-width: 0; }
+.mappia .category { position: relative; display: grid; grid-template-columns: 22px minmax(0, 1fr) 16px; align-items: center; gap: 12px; min-height: 48px; padding: 4px 11px; border: .7px solid transparent; border-radius: 12px; cursor: pointer; font-size: 14px; line-height: 20px; }
+.mappia .category > input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.mappia .category > img { width: 22px; height: 22px; }
+.mappia .category > .category-arrow, .mappia .category > .category-check { width: 16px; height: 16px; }
+.mappia .category .category-check { display: none; }
+.mappia .category:has(input:checked) { border-color: #d7e1ec; background: #f4f7fb; }
+.mappia .category:has(input:checked)::before { content: ''; position: absolute; left: 0; top: 9px; height: 32px; width: 2px; border-radius: 2px; background: var(--amarelo); }
+.mappia .category:has(input:checked) .category-arrow { display: none; }
+.mappia .category:has(input:checked) .category-check { display: block; }
+.mappia .category:has(input:focus-visible) { outline: 3px solid var(--foco); outline-offset: 2px; }
+
+.mappia .description-field { margin-top: 16px; }
+.mappia label:not(.category, .photo-upload) { display: block; font-size: 14px; font-weight: 600; line-height: 20px; }
+.mappia textarea, .mappia .input-icon input {
+  width: 100%;
+  min-width: 0;
+  border: .7px solid var(--borda-campo);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--texto);
+  font-size: 16px;
+  line-height: 24px;
+}
+.mappia textarea { display: block; height: 82px; min-height: 82px; margin-top: 8px; padding: 15px 13px; resize: vertical; }
+.mappia :is(input, textarea)::placeholder { color: var(--suave); opacity: 1; }
+
+.mappia .step-actions { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 12px; margin-top: 32px; }
+
+/* Passo 2: local e foto */
+.mappia .location-content { margin-top: 12px; }
+.mappia .location-button { width: 100%; height: 52px; border: 1px solid var(--borda); border-radius: 14px; background: transparent; color: var(--azul); font-weight: 600; }
+.mappia .location-map { position: relative; height: 208px; margin-top: 8px; overflow: hidden; border-radius: 14px; background: #e2edf9; box-shadow: 0 2px 6px #21385c0f; }
+.mappia .location-map .map-art { position: absolute; width: 319px; height: 315px; top: -33px; left: 0; }
+.mappia .location-pin { position: absolute; left: calc(50% - 14px); top: 88px; display: grid; place-items: center; width: 28px; height: 32px; border-radius: 16px; background: #fff; box-shadow: 0 2px 6px #0000001f; }
+.mappia .location-pin img { width: 21px; height: 24px; }
+.mappia .address-field { margin-top: 20px; }
+.mappia .input-icon { position: relative; margin-top: 8px; }
+.mappia .input-icon > img { position: absolute; left: 12px; top: 18px; width: 16px; height: 18px; pointer-events: none; }
+.mappia .input-icon input { display: block; height: 56px; padding: 15px 12px 15px 38px; }
+.mappia .photo-upload { position: relative; display: flex; gap: 14px; align-items: center; min-height: 56px; margin-top: 24px; padding: 12px 14px; border: 1px solid var(--borda); border-radius: 12px; color: var(--azul); font-weight: 600; cursor: pointer; }
+.mappia .photo-upload > img { width: 19px; height: 22px; }
+.mappia .photo-upload span { overflow-wrap: anywhere; }
+.mappia .photo-upload input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+.mappia .photo-upload:focus-within { outline: 3px solid var(--foco); outline-offset: 2px; }
+
+/* Passo 3: dados pessoais */
+.mappia .personal-content { margin-top: 24px; }
+.mappia .personal-field + .personal-field { margin-top: 16px; }
+.mappia .personal-note { margin-top: 22px; min-height: 48px; color: var(--suave); font-size: 14px; font-weight: 600; line-height: 20px; }
+.mappia .personal-content + .step-actions { margin-top: 18px; }
+
+/* Passo 4: revisão */
+.mappia .review-content { margin-top: 24px; }
+.mappia .review-list > div { padding-bottom: 18px; margin-bottom: 20px; border-bottom: 1px solid var(--borda); }
+.mappia .review-list > div:nth-child(2) { min-height: 120px; }
+.mappia .review-list > div:last-child { margin: 0; border: 0; padding: 0; }
+.mappia .review-list dt, .mappia .review-personal h2 { color: var(--suave); font-size: 14px; line-height: 20px; font-weight: 600; }
+.mappia .review-list dd { margin-top: 6px; overflow-wrap: anywhere; }
+.mappia .review-list .review-photo { margin-top: 14px; color: var(--suave); font-size: 14px; }
+.mappia .review-content > .text-button { margin-top: 18px; }
+.mappia .review-personal { margin-top: 20px; }
+.mappia .review-personal > p { margin-top: 6px; font-size: 14px; color: var(--suave); }
+.mappia .review-personal > .text-button { margin-top: 10px; }
+.mappia .security-demo { display: flex; align-items: center; gap: 14px; min-height: 48px; margin-top: 20px; padding: 10px 14px; border: .8px solid #d7e1ec; border-radius: 12px; background: #fff; font-size: 13px; }
+.mappia .security-demo img { width: 19px; height: 22px; }
+.mappia .review-step .step-actions { margin-top: 34px; }
+
+/* ---------- 10. Acompanhar ---------- */
+.mappia .tracking-layout { margin-top: 0; }
+.mappia .protocol-form { margin-top: 19px; }
+.mappia .protocol-form .primary { width: 100%; min-height: 52px; margin-top: 14px; }
+.mappia .tracking-details { margin-top: 36px; }
+.mappia .protocol-result { min-height: 190px; padding: 6px 10px 8px; border-left: 3px solid var(--amarelo); }
+.mappia .result-status { color: #16705d; font-size: 14px; font-weight: 600; line-height: 20px; }
+.mappia .protocol-result h2 { margin-top: 9px; font-size: 18px; font-weight: 700; line-height: 26px; }
+.mappia .result-reference { margin-top: 30px; color: #64748b; font-size: 14px; line-height: 20px; }
+.mappia .result-copy { margin-top: 13px; font-size: 16px; line-height: 24px; }
+.mappia .account-invite { margin-top: 8px; padding-top: 34px; border-top: 1px solid var(--borda); }
+.mappia .account-invite h2 { font-size: 18px; line-height: 26px; }
+.mappia .account-invite > p { margin-top: 12px; color: var(--suave); line-height: 24px; }
+.mappia .account-invite .text-button { margin-top: 12px; }
+.mappia .not-found { padding: 16px; border: 1px solid var(--borda-campo); border-radius: 10px; color: var(--suave); font-size: 14px; }
+
+/* ---------- 11. Rodapé e aviso (diálogo) ---------- */
+.mappia .demo-note { margin: 0; padding: 12px var(--gutter); background: transparent; color: var(--suave); text-align: center; font-size: 11px; }
+.mappia dialog { max-width: min(400px, calc(100% - 32px)); padding: 24px; border: 1px solid var(--borda); border-radius: 16px; color: var(--texto); }
+.mappia dialog::backdrop { background: #13274366; }
+.mappia dialog h2 { font-size: 22px; }
+.mappia dialog p { margin-block: 16px; }
+.mappia dialog .primary { width: 100%; }
+
+/* ---------- 12. Celular pequeno ---------- */
+@media (max-width: 359px) {
+  .mappia { --gutter: 12px; }
+  .mappia .step-intro h1 { font-size: 24px; }
+  .mappia .category { gap: 9px; font-size: 13px; }
+  .mappia .chip { padding-inline: 8px; gap: 5px; }
+}
+
+/* ---------- 13. Tablet (≥ 600px) ---------- */
+@media (min-width: 600px) {
+  .mappia { --respiro: 36px; }
+  .mappia .topbar { min-height: 76px; }
+  .mappia .logo { font-size: 32px; }
+  .mappia .local { font-size: 12px; }
+  .mappia .btn-primary { max-width: 380px; }
+  .mappia .chip { flex: 0 1 auto; padding-inline: 18px; }
+  .mappia .step-intro h1 { font-size: 30px; line-height: 38px; }
+  .mappia .report-step, .mappia .tracking-layout { max-width: 640px; }
+  .mappia .location-map .map-art { width: 100%; height: auto; }
+}
+
+/* ---------- 14. Notebook / desktop (≥ 1024px) ---------- */
+@media (min-width: 1024px) {
+  .mappia { --respiro: 44px; }
+
+  /* Tela inicial: texto à esquerda, mapa à direita */
+  .mappia.pagina-inicio .app { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); column-gap: 64px; align-content: start; }
+  .pagina-inicio .app > :is(.topbar, .tabs) { grid-column: 1 / -1; }
+  .pagina-inicio .hero { grid-column: 1; grid-row: 3 / 5; align-self: center; padding: 0; }
+  .pagina-inicio .titulo { font-size: clamp(44px, 4vw, 64px); }
+  .pagina-inicio .subtitulo { margin-block: 24px 28px; font-size: 18px; }
+  .pagina-inicio .filtros { grid-column: 2; grid-row: 3; width: 100%; max-width: 640px; justify-self: center; margin: var(--respiro) 0 12px; }
+  .pagina-inicio .mapa-container { grid-column: 2; grid-row: 4; justify-self: center; align-self: start; margin: 0; }
+
+  /* Relatar: título e progresso à esquerda, passo à direita */
+  .mappia .report-step:not([hidden]) { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); column-gap: 64px; max-width: none; margin-top: var(--respiro); }
+  .mappia .report-step .step-intro { grid-column: 1; grid-row: 1; margin-top: 0; }
+  .mappia .report-step .step-intro h1 { margin-top: 16px; font-size: 38px; line-height: 46px; }
+  .mappia .report-step .progress { grid-column: 1; grid-row: 2; align-self: start; margin-top: 24px; }
+  .mappia .report-step .step-content { grid-column: 2; grid-row: 1 / 4; max-width: 720px; margin-top: 0; }
+  .mappia .report-step .categories { margin-top: 0; }
+  .mappia .report-step .step-actions { grid-column: 2; max-width: 720px; margin-top: 32px; }
+  .mappia .location-map { height: 260px; }
+
+  /* Acompanhar: consulta à esquerda, resultado à direita */
+  .mappia .tracking-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; max-width: none; margin-top: var(--respiro); }
+  .mappia .tracking-query .step-intro { margin-top: 0; }
+  .mappia .tracking-query h1 { font-size: 38px; line-height: 46px; }
+  .mappia .protocol-form { max-width: 520px; margin-top: 28px; }
+  .mappia .tracking-details { margin-top: 0; max-width: 640px; }
+}
