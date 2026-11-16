@@ -2,7 +2,7 @@
 
 Product Backlog
 
-Versão 3.1 documental | 22/10/2026 (estimativas históricas de 02/10/2026)
+Versão 3.2 documental | 15/11/2026 (estimativas históricas de 02/10/2026)
 
 Projeto de extensão de Ciência da Computação da UNINASSAU Campina Grande, na disciplina Atividades Práticas Interdisciplinares de Extensão I.
 
@@ -27,17 +27,27 @@ Esta revisão usa o HTML/JavaScript deste repositório como referência de capac
 
 Na etapa de dados pessoais, nome completo, CPF, telefone e e-mail são obrigatórios apenas para percorrer a demonstração. Use dados fictícios. O navegador verifica preenchimento e formato básico do e-mail; não verifica CPF, identidade, titularidade do contato ou consentimento. Os valores permanecem no formulário em memória; o código não os envia, não grava em banco ou armazenamento local e não cria conta. A foto é apenas selecionada no aparelho. Isso não constitui coleta segura em produção nem política de privacidade. A hospedagem e recursos externos podem receber requisições técnicas de carregamento, sem envio dos campos pelo código da aplicação.
 
-Para produção, a necessidade de cada identificador, especialmente CPF, finalidade, base legal, retenção, exclusão, acesso restrito e conteúdo do aviso precisam ser decididos antes de habilitar coleta. A identificação desenhada não é um requisito de coleta em produção aprovado por esta revisão. O cadastro ilustrado usa nome, e-mail e senha; nome e vínculo de conta ainda exigem revisão de escopo.
+Para produção, CPF foi excluído. O relato sem conta exigirá somente um contato escolhido e verificado, e-mail ou telefone; nome não é obrigatório. A finalidade, retenção, exclusão, acesso restrito e aviso dos dados necessários ainda precisam ser definidos. A demonstração mantém campos fictícios antigos até a interface ser atualizada.
 
 O catálogo desta revisão acompanha os seis rótulos do formulário: Buracos na rua, Iluminação pública, Lixo e descarte irregular, Vazamentos e esgoto a céu aberto, Alagamentos e Outro problema. Acessibilidade e sinalização pertenciam ao catálogo anterior; podem ser descritas em Outro problema, sem categorias próprias nesta demonstração. O mapa atual não executa filtros; a implementação futura deve usar o mesmo catálogo do formulário (1.2 e 8.1).
 
 Em análise é o estado inicial previsto; Relato recebido nas exportações antigas representa recebimento, não validação. O exemplo HTML de consulta é fictício e usa Em análise, sem representar publicação no mapa. Somente Pendente, Crítico e Resolvido podem aparecer no mapa e nos indicadores futuros após validação. As imagens exportadas são históricas: a tela 07 ilustra consulta por protocolo, não uma lista autenticada; a tela 08 não comprova validação. Não há exportação atualizada dos estados públicos nem do histórico autenticado. As imagens não foram retocadas para simular essa atualização.
 
-Os 55 IDs e os totais históricos (183 pontos; MVP: 30 itens M e 96 pontos) foram preservados. A troca de catálogo e as questões de identificação/conta exigem reestimação antes da implementação de produção; os números de 02/10/2026 não comprovam cobertura dessas decisões. Critérios do MVP abaixo são metas futuras, não funcionalidades concluídas ou resultados de teste com moradores.
+Os 55 IDs anteriores e seus totais históricos (183 pontos; MVP: 30 itens M e 96 pontos) foram preservados como linha de base. Os novos itens 1.11 e 2.8 ainda não têm pontos; os números de 02/10/2026 não descrevem o MVP revisado. Critérios abaixo são metas futuras, não funcionalidades concluídas ou resultados de teste com moradores.
+
+## Decisões incorporadas em 15/11/2026
+
+- Retirar CPF do produto. O HTML demonstrativo e as exportações históricas do Figma ainda o contêm e precisam ser atualizados; não usar dados reais neles.
+- Enviar sem cadastro, verificando um contato escolhido por relato: e-mail por código/link ou telefone por código SMS. O outro contato não é exigido, e nome não é obrigatório. A verificação não cria conta permanente.
+- Mostrar o protocolo e então oferecer cadastro opcional por e-mail/senha ou telefone/SMS; continuar sem conta permanece possível.
+- Vincular o relato à conta somente pela sessão de envio ou por recuperação com comprovação segura do contato verificado, nunca por igualdade de contato digitado ou apenas pelo protocolo.
+- O backend (Firebase do planejamento anterior ou Supabase como alternativa), provedor de SMS, conta já existente/sessão perdida e eventual coleta opcional de nome continuam pendentes de decisão ou prova técnica.
+
+Os novos itens 1.11 e 2.8 são M sem pontos atribuídos. A linha de base de 55 IDs, 30 itens M e 96 pontos é histórica; reestimar o MVP revisto antes de usar seus totais como compromisso de entrega.
 
 ## Referência e situação
 
-Este backlog acompanha o [PRD do Mappia, versão 3.1 documental](../prd/PRD_Mappia.md). Os itens descrevem requisitos planejados e seus critérios de aceitação.
+Este backlog acompanha o [PRD do Mappia, versão 3.2 documental](../prd/PRD_Mappia.md). Os itens descrevem requisitos planejados e seus critérios de aceitação.
 
 O produto contempla registro de problemas urbanos, mapa público e acompanhamento. O cadastro do morador é opcional após o envio. Equipe e comerciantes usam contas autenticadas para suas operações restritas.
 
@@ -57,7 +67,7 @@ M: essencial para o MVP. S: evolução importante. C: evolução desejável. Os 
 | 8 | Base técnica e entrega | 29 | 3 | 0 |
 |  | Total | 96 | 61 | 26 |
 
-São 55 itens e 183 pontos no planejamento completo. O MVP contém 30 itens e 96 pontos.
+O planejamento anterior tinha 55 itens e 183 pontos, dos quais 30 itens M e 96 pontos no MVP. Esta revisão tem 57 itens, incluindo 32 itens M; 1.11 e 2.8 não foram estimados. Os 96 pontos não representam o esforço do MVP revisado.
 
 ## Regras comuns
 
@@ -83,11 +93,12 @@ As categorias iniciais são Buracos na rua, Iluminação pública, Lixo e descar
 | 1.3 | Descrever o problema | M | 1 | A descrição é solicitada no formulário e fica associada à ocorrência; a ausência de texto impede a confirmação do envio. |
 | 1.4 | Informar a localização por mapa ou GPS | M | 5 | O local pode ser marcado no mapa ou obtido com autorização para GPS. A recusa de GPS mantém a marcação manual disponível. |
 | 1.5 | Anexar foto do problema | M | 5 | O envio pode ser concluído sem foto. Quando anexada, a foto acompanha a ocorrência. Falhas no upload são informadas antes de apresentar o envio como concluído. |
-| 1.6 | Exibir aviso de privacidade antes do envio | M | 2 | O formulário explica o uso da descrição, localização e foto e permite acessar a política de privacidade antes da confirmação. Qualquer futura coleta de nome, CPF, telefone ou e-mail depende da decisão de necessidade e finalidade, aviso específico e controles dos itens 8.4 e 8.6; os campos fictícios da demonstração não comprovam esse aceite. |
+| 1.6 | Exibir aviso de privacidade antes do envio | M | 2 | O formulário explica o uso da descrição, localização, foto opcional e contato escolhido, e permite acessar a política de privacidade antes da confirmação. O CPF não é solicitado; os campos fictícios da demonstração não comprovam aceite para coleta real. |
 | 1.7 | Confirmar o envio e gerar protocolo | M | 2 | Após persistir o registro, o sistema apresenta um protocolo único e o estado Em análise. Um envio com falha não gera confirmação de sucesso. |
 | 1.8 | Avisar sobre possível duplicata | S | 5 | Registros semelhantes próximos ao local informado são apresentados para consulta antes de criar outra ocorrência. |
 | 1.9 | Confirmar Também vejo esse problema | S | 3 | Um visitante sem conta consegue confirmar uma ocorrência existente; a contagem não cria uma ocorrência nova. |
 | 1.10 | Remover metadados EXIF da foto | S | 2 | A imagem disponibilizada pelo sistema não contém os metadados EXIF de localização presentes no arquivo recebido. |
+| 1.11 | Verificar o contato escolhido antes do envio | M | A reestimar | O visitante escolhe e informa um e-mail ou telefone, sem exigir o outro nem nome; confirma o código/link enviado ao e-mail ou o código SMS ao telefone. O código expira, tem limite de tentativas e vale só para este relato. Falha de verificação mantém o formulário preenchido e impede a confirmação do envio sem criar conta. |
 
 ## Épico 2. Cadastro opcional após o envio
 
@@ -95,11 +106,12 @@ As categorias iniciais são Buracos na rua, Iluminação pública, Lixo e descar
 | --- | --- | --- | --- | --- |
 | 2.1 | Oferecer cadastro após confirmar o registro | M | 3 | O convite de cadastro aparece depois da confirmação e mantém o protocolo visível ou acessível. |
 | 2.2 | Dispensar o cadastro | M | 1 | A opção de dispensar o cadastro permite continuar sem conta; o registro e a consulta por protocolo permanecem disponíveis. |
-| 2.3 | Criar conta e vincular o registro atual | M | 5 | A conta é criada com e-mail e senha; o nome ilustrado no design depende da revisão de escopo descrita no contrato da demonstração. O registro do envio recém-concluído é vinculado à conta autenticada, sem permitir apropriar registros apenas pelo protocolo. |
+| 2.3 | Criar conta e vincular o registro atual | M | 5 histórico | Após o protocolo, o morador pode criar uma conta por e-mail e senha ou telefone confirmado por SMS. O registro recém-concluído é vinculado por sessão de envio ou prova segura do contato verificado. E-mail/telefone digitado ou protocolo isolado não permitem apropriação; falha no cadastro não apaga o registro. |
 | 2.4 | Vincular registros anteriores do aparelho | S | 3 | Após autenticação, registros anteriores associados à sessão do aparelho são vinculados à conta; registros de outras sessões não são vinculados. |
 | 2.5 | Consultar registros em outro aparelho | S | 3 | Ao autenticar a mesma conta em outro aparelho, o morador acessa a lista de registros vinculados a ela. |
 | 2.6 | Recuperar senha por e-mail | S | 2 | O morador solicita recuperação e conclui a troca de senha pelo fluxo de autenticação, sem expor a senha anterior. |
 | 2.7 | Entrar por link enviado ao e-mail | C | 3 | Um link de autenticação enviado ao e-mail permite acessar a conta sem digitar senha. |
+| 2.8 | Entrar ou criar conta por telefone com código SMS | M | A reestimar | A pessoa informa seu número e confirma o código SMS para criar ou acessar a conta vinculada a ele. Código inválido, expirado ou usado é recusado; pedidos e tentativas têm limite. A entrada por telefone não cria vínculo com relatos apenas por coincidência do número. |
 
 ## Épico 3. Mapa colaborativo
 
@@ -161,7 +173,7 @@ As categorias iniciais são Buracos na rua, Iluminação pública, Lixo e descar
 | --- | --- | --- | --- | --- |
 | 8.1 | Levantar dados e definir categorias | M | 5 | O levantamento registra fontes e categorias utilizadas; as seis categorias do item 1.2 têm a mesma identificação no PRD, formulário e filtro. |
 | 8.2 | Preparar protótipo navegável | M | 3 | O protótipo permite percorrer mapa, formulário, confirmação e convite opcional, incluindo a opção de continuar sem conta. |
-| 8.3 | Configurar serviços Firebase | M | 5 | A configuração prevê autenticação anônima e por e-mail, banco de ocorrências e armazenamento de imagens, com ambientes de desenvolvimento separados dos dados de uso. |
+| 8.3 | Configurar o backend escolhido | M | 5 histórico | A decisão Firebase ou Supabase está registrada antes de implementar. O ambiente de teste separa dados fictícios dos reais e oferece sessão de envio sem cadastro, autenticação por e-mail/senha e telefone/SMS, banco de ocorrências e armazenamento de imagens. |
 | 8.4 | Aplicar regras de acesso aos dados | M | 3 | As regras permitem criação controlada por sessão anônima, leitura pública somente de dados liberados e operações administrativas apenas por contas autorizadas. |
 | 8.5 | Implementar interface responsiva | M | 3 | Mapa, formulário e acompanhamento são utilizáveis em celular e desktop, sem perda de campos ou ações essenciais. |
 | 8.6 | Documentar privacidade e termos de uso | M | 2 | A política descreve os dados tratados, sua finalidade, acesso, armazenamento e canal para solicitações; os documentos ficam acessíveis no fluxo de envio e cadastro. |
@@ -196,3 +208,5 @@ As categorias iniciais são Buracos na rua, Iluminação pública, Lixo e descar
 Versão 3.0, 02/10/2026: adoção do nome Mappia, critérios de aceitação por item e dependências explícitas. Os 55 IDs, as prioridades e os pontos foram preservados. O total do MVP permanece em 96 pontos.
 
 Versão 3.1 documental, 22/10/2026: contrato da demonstração, categorias do HTML, referência Figma canônica, estados e limites das exportações históricas. Estimativas preservadas como históricas; reestimação pendente para alterações de escopo.
+
+Versão 3.2 documental, 15/11/2026: CPF retirado do produto, contato verificado antes do envio sem conta, cadastro opcional por e-mail/senha ou telefone/SMS e vínculo seguro. Itens 1.11 e 2.8 acrescentados sem pontos; 8.3 aguarda escolha de backend.

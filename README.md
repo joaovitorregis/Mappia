@@ -14,7 +14,7 @@ O projeto está em fase de prototipação. Este repositório reúne requisitos p
 
 A [demonstração HTML](index.html) permite navegar pelo formulário em quatro etapas e consultar o exemplo fixo MAP-2026-00428. Ela termina na revisão: não envia relatos nem gera protocolos. Use apenas dados fictícios nos campos de nome, CPF, telefone e e-mail. Não há validação de identidade.
 
-Envio, protocolo real, conta opcional e histórico são funcionalidades previstas. O mapa é uma prévia estática; filtros, GPS, autenticação, moderação e indicadores não estão integrados. As imagens acima são exportações históricas; consulte o [contrato e a matriz de capacidades](docs/prd/PRD_Mappia.md#contrato-da-demonstração---revisão-de-22102026).
+Envio, protocolo real, conta opcional e histórico são funcionalidades previstas. A jornada alvo exige um e-mail ou telefone verificado para enviar sem conta; remove o CPF e oferece entrada por e-mail/senha ou código SMS. O mapa é uma prévia estática; filtros, GPS, autenticação, moderação e indicadores não estão integrados. As imagens acima são exportações históricas; consulte o [contrato e a matriz de capacidades](docs/prd/PRD_Mappia.md#contrato-da-demonstração---revisão-de-22102026).
 
 As interações do Figma demonstram o fluxo de uso. O protótipo não está conectado a serviços de envio, autenticação ou atendimento.
 

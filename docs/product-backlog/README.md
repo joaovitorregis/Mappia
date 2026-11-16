@@ -1,6 +1,6 @@
 # Product Backlog Mappia
 
-Versão 3.1 documental, de 22/10/2026. Estimativas históricas de 02/10/2026 preservadas; mudanças de escopo exigem reestimação.
+Versão 3.2 documental, de 15/11/2026. Estimativas históricas de 02/10/2026 preservadas; o contato verificado e a autenticação por telefone exigem reestimação.
 
 - [Documento em PDF](Product_Backlog_Mappia.pdf)
 - [Backlog para consulta online](Product_Backlog_Mappia.md)

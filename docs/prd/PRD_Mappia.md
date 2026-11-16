@@ -2,7 +2,7 @@
 
 Documento de requisitos do produto (PRD)
 
-Versão 3.1 documental | 22/10/2026 (estimativas históricas de 02/10/2026)
+Versão 3.2 documental | 15/11/2026 (estimativas históricas de 02/10/2026)
 
 Projeto de extensão de Ciência da Computação da UNINASSAU Campina Grande, na disciplina Atividades Práticas Interdisciplinares de Extensão I.
 
@@ -27,13 +27,23 @@ Esta revisão usa o HTML/JavaScript deste repositório como referência de capac
 
 Na etapa de dados pessoais, nome completo, CPF, telefone e e-mail são obrigatórios apenas para percorrer a demonstração. Use dados fictícios. O navegador verifica preenchimento e formato básico do e-mail; não verifica CPF, identidade, titularidade do contato ou consentimento. Os valores permanecem no formulário em memória; o código não os envia, não grava em banco ou armazenamento local e não cria conta. A foto é apenas selecionada no aparelho. Isso não constitui coleta segura em produção nem política de privacidade. A hospedagem e recursos externos podem receber requisições técnicas de carregamento, sem envio dos campos pelo código da aplicação.
 
-Para produção, a necessidade de cada identificador, especialmente CPF, finalidade, base legal, retenção, exclusão, acesso restrito e conteúdo do aviso precisam ser decididos antes de habilitar coleta. A identificação desenhada não é um requisito de coleta em produção aprovado por esta revisão. O cadastro ilustrado usa nome, e-mail e senha; nome e vínculo de conta ainda exigem revisão de escopo.
+Para produção, a finalidade, retenção, exclusão, acesso restrito e conteúdo do aviso para os dados realmente necessários ainda precisam ser definidos. O CPF foi excluído do produto por decisão posterior; continua no HTML demonstrativo e nas exportações históricas do Figma apenas como divergência a corrigir. O relato sem conta exige um contato escolhido e verificado, e-mail ou telefone; nome não é obrigatório, e sua coleta opcional ainda não foi aprovada.
 
 O catálogo desta revisão acompanha os seis rótulos do formulário: Buracos na rua, Iluminação pública, Lixo e descarte irregular, Vazamentos e esgoto a céu aberto, Alagamentos e Outro problema. Acessibilidade e sinalização pertenciam ao catálogo anterior; podem ser descritas em Outro problema, sem categorias próprias nesta demonstração. O mapa atual não executa filtros; a implementação futura deve usar o mesmo catálogo do formulário (1.2 e 8.1).
 
 Em análise é o estado inicial previsto; Relato recebido nas exportações antigas representa recebimento, não validação. O exemplo HTML de consulta é fictício e usa Em análise, sem representar publicação no mapa. Somente Pendente, Crítico e Resolvido podem aparecer no mapa e nos indicadores futuros após validação. As imagens exportadas são históricas: a tela 07 ilustra consulta por protocolo, não uma lista autenticada; a tela 08 não comprova validação. Não há exportação atualizada dos estados públicos nem do histórico autenticado. As imagens não foram retocadas para simular essa atualização.
 
-Os 55 IDs e os totais históricos (183 pontos; MVP: 30 itens M e 96 pontos) foram preservados. A troca de catálogo e as questões de identificação/conta exigem reestimação antes da implementação de produção; os números de 02/10/2026 não comprovam cobertura dessas decisões. Critérios do MVP abaixo são metas futuras, não funcionalidades concluídas ou resultados de teste com moradores.
+Os 55 IDs anteriores e seus totais históricos (183 pontos; MVP: 30 itens M e 96 pontos) foram preservados como linha de base. Os novos itens 1.11 e 2.8 ainda não têm pontos; os números de 02/10/2026 não descrevem o MVP revisado. Critérios abaixo são metas futuras, não funcionalidades concluídas ou resultados de teste com moradores.
+
+## Decisões de produto — 15/11/2026
+
+- O Mappia não coleta CPF. A tela de dados pessoais, a revisão, os textos de ajuda e os documentos derivados devem retirar o campo antes de qualquer envio real.
+- O morador pode enviar e acompanhar pelo protocolo sem criar conta. Antes de confirmar o envio, verifica um contato escolhido: código ou link enviado ao e-mail, ou código por SMS ao telefone. Essa verificação não cria conta permanente. Depois de receber o protocolo, pode dispensar o cadastro ou criar/entrar em uma conta para reunir seus relatos.
+- A conta opcional oferece e-mail com senha e telefone com código enviado por SMS na primeira versão. O endereço de e-mail só é tratado como confirmado após a verificação do canal; o número só após a confirmação do código. Esses mecanismos comprovam controle do contato, não identidade civil.
+- O relato recém-enviado só é vinculado à conta pela sessão que fez o envio ou por recuperação com prova segura de posse do contato vinculado. Igualdade entre contato digitado e contato da conta, ou conhecimento do protocolo, não basta para reivindicar um relato.
+- O método de vínculo para conta já existente ou sessão perdida, a eventual coleta opcional de nome, o provedor e custo do SMS e a escolha final entre Firebase e Supabase ainda precisam de decisão e teste. O Figma e o HTML atuais são demonstrativos e não implementam esse fluxo.
+
+Os requisitos 1.11 e 2.8 acrescentam verificação do contato por relato e autenticação por telefone via SMS à V1. Os 55 IDs, 30 itens M e 96 pontos citados nesta documentação são a linha de base histórica anterior a eles; prioridades e estimativas afetadas precisam ser refeitas antes de anunciar o esforço do MVP revisado.
 
 ## 1. Visão do produto
 
@@ -62,11 +72,11 @@ Os objetivos de evolução incluem mapear pontos de descarte de resíduos, divul
 
 M significa essencial para o MVP; S identifica evoluções importantes; C identifica evoluções desejáveis. Os pontos são estimativas relativas de esforço, não horas de trabalho nem datas de entrega.
 
-O MVP reúne os 30 itens M, com 96 pontos. A entrega inclui registro sem conta, protocolo, cadastro opcional, mapa, acompanhamento, moderação, indicadores e base técnica. A moderação e as regras de acesso fazem parte do MVP.
+O MVP revisado reúne os 30 itens M anteriores e os novos 1.11 e 2.8, ambos sem estimativa. Os 96 pontos são apenas a linha de base histórica. A entrega inclui registro sem conta, contato verificado, protocolo, cadastro opcional, mapa, acompanhamento, moderação, indicadores e base técnica. A moderação e as regras de acesso fazem parte do MVP.
 
 As evoluções S e C permanecem no planejamento. O aplicativo nativo, a integração automática com sistemas internos da prefeitura, a moderação por IA e pagamentos estão fora do escopo documentado.
 
-| Épico | Tema | M | S | C |
+| Épico | Tema | M histórico | S histórico | C histórico |
 | --- | --- | --- | --- | --- |
 | 1 | Relato sem conta | 19 | 10 | 0 |
 | 2 | Cadastro opcional após o envio | 9 | 8 | 3 |
@@ -96,6 +106,7 @@ Cada grupo corresponde ao épico de mesmo número no Product Backlog. Os IDs ide
 | 1.8 | Avisar sobre possível duplicata | S | 5 |
 | 1.9 | Confirmar Também vejo esse problema | S | 3 |
 | 1.10 | Remover metadados EXIF da foto | S | 2 |
+| 1.11 | Verificar o contato escolhido antes do envio | M | A reestimar |
 
 ### RF2. Cadastro opcional após o envio
 
@@ -108,6 +119,7 @@ Cada grupo corresponde ao épico de mesmo número no Product Backlog. Os IDs ide
 | 2.5 | Consultar registros em outro aparelho | S | 3 |
 | 2.6 | Recuperar senha por e-mail | S | 2 |
 | 2.7 | Entrar por link enviado ao e-mail | C | 3 |
+| 2.8 | Entrar ou criar conta por telefone com código SMS | M | A reestimar |
 
 ### RF3. Mapa colaborativo
 
@@ -169,7 +181,7 @@ Cada grupo corresponde ao épico de mesmo número no Product Backlog. Os IDs ide
 | --- | --- | --- | --- |
 | 8.1 | Levantar dados e definir categorias | M | 5 |
 | 8.2 | Preparar protótipo navegável | M | 3 |
-| 8.3 | Configurar serviços Firebase | M | 5 |
+| 8.3 | Configurar o backend escolhido | M | 5 histórico |
 | 8.4 | Aplicar regras de acesso aos dados | M | 3 |
 | 8.5 | Implementar interface responsiva | M | 3 |
 | 8.6 | Documentar privacidade e termos de uso | M | 2 |
@@ -184,10 +196,11 @@ O fluxo principal parte do mapa, segue para Relatar um problema e para o formul�
 - O visitante acessa o mapa, registra uma ocorrência e consulta o protocolo sem criar conta.
 - O convite de cadastro aparece após a confirmação. Dispensar o convite não apaga o registro.
 - Cada envio persistido recebe um protocolo único e começa em Em análise.
+- A verificação do contato escolhido pertence somente à tentativa de envio. Ela não autentica a identidade civil nem cria conta permanente; falha ou expiração do código impede confirmar o relato e deve preservar o preenchimento para nova tentativa.
 - A equipe valida o registro como Pendente ou Crítico, ou o classifica como Rejeitado. Uma ocorrência validada pode passar a Resolvido.
 - O mapa e os indicadores públicos usam apenas ocorrências validadas. Em análise e Rejeitado ficam fora das contagens públicas.
 - A consulta por protocolo permite acompanhar o registro sem expor dados privados do autor. O protocolo não dá permissão para editar, moderar ou vincular um registro a uma conta.
-- O registro recém-enviado é vinculado à conta criada na mesma sessão. O vínculo de registros anteriores do aparelho é uma evolução prevista no item 2.4.
+- O registro recém-enviado é vinculado à conta criada ou acessada na mesma sessão, após comprovar o canal escolhido. Uma conta existente ou sessão perdida exige um mecanismo de recuperação que não aceite somente protocolo ou contato digitado. O vínculo de registros anteriores do aparelho é uma evolução prevista no item 2.4.
 - Contas da equipe exigem autenticação e permissão administrativa. O cadastro de comerciantes, previsto após o MVP, também exige conta.
 - A classificação Crítico indica prioridade da ocorrência. Ela não representa um acionamento de emergência ou garantia de atendimento.
 - O encaminhamento a órgãos responsáveis é uma evolução do item 5.6. O registro não garante atendimento ou resolução pelo poder público.
@@ -196,17 +209,17 @@ As categorias iniciais são Buracos na rua, Iluminação pública, Lixo e descar
 
 ## 7. Dados e arquitetura prevista
 
-A base técnica prevista usa HTML, CSS e JavaScript na interface, Leaflet no mapa e Firebase para autenticação, banco de dados e imagens. São escolhas de planejamento dos itens 3.1 e 8.3; não descrevem serviços já implantados.
+A base técnica anteriormente planejada usa HTML, CSS e JavaScript na interface, Leaflet no mapa e Firebase para autenticação, banco de dados e imagens. A comparação com o Aedes Data Lab trouxe Supabase como alternativa para o Mappia, mas a troca ainda não foi decidida. O item 8.3 precisa ser revisto após essa escolha; nenhum dos serviços está implantado neste repositório.
 
 | Dado | Uso previsto |
 | --- | --- |
 | Protocolo | Identificador único para acompanhamento. |
-| Identificação ilustrada | Nome, CPF, telefone e e-mail apenas fictícios na demonstração; tratamento real depende de decisão de necessidade, finalidade e proteção (1.6, 8.4 e 8.6). |
+| Identificação e contatos | O CPF está excluído do produto. No envio real, a pessoa informa e verifica um contato, e-mail ou telefone; o outro não é exigido. Nome não é obrigatório e sua eventual coleta opcional está pendente. Os quatro campos da demonstração atual ainda são fictícios. Apenas contato verificado pode servir à autenticação ou recuperação de vínculo. |
 | Categoria e descrição | Classificação e relato do problema. |
 | Latitude e longitude | Localização indicada no mapa ou obtida por GPS autorizado. |
 | Foto | Imagem associada ao relato, submetida à revisão antes da divulgação. |
 | Estado e datas | Estado atual, criação e atualização; histórico detalhado previsto em 4.4. |
-| Identificador de sessão ou conta | Associação interna ao envio e posterior vínculo com conta; não aparece no mapa público. |
+| Identificador de sessão ou conta | Associação interna ao envio e posterior vínculo com conta por canal confirmado; não aparece no mapa público. |
 | Validação | Decisão da equipe e conteúdo liberado para consulta pública. |
 | Confirmações e encaminhamento | Dados das evoluções 1.9 e 5.6, após o MVP. |
 
@@ -250,7 +263,7 @@ Envios abusivos, exposição indevida em fotos, baixa participação e carga de 
 
 ## 12. Documentos relacionados
 
-- [Product Backlog do Mappia, versão 3.1 documental](../product-backlog/Product_Backlog_Mappia.md)
+- [Product Backlog do Mappia, versão 3.2 documental](../product-backlog/Product_Backlog_Mappia.md)
 - [Protótipo no Figma](https://www.figma.com/design/sXNaua5CmhShdvoC4J4upn/Mappia)
 
 ## Histórico da revisão
@@ -258,3 +271,5 @@ Envios abusivos, exposição indevida em fotos, baixa participação e carga de 
 Versão 3.0, 02/10/2026: nomenclatura Mappia nos dois documentos; requisitos ligados aos mesmos 55 IDs; preservação das prioridades e dos pontos do backlog anterior; critérios de aceitação detalhados. Encaminhamento, privacidade das imagens e publicação de estados têm a mesma fase de entrega no PRD e no backlog.
 
 Versão 3.1 documental, 22/10/2026: contrato da demonstração, categorias do HTML, referência Figma canônica, estados e limites das exportações históricas. Estimativas preservadas como históricas; reestimação pendente para alterações de escopo.
+
+Versão 3.2 documental, 15/11/2026: decisão de retirar CPF, contato verificado por relato sem conta, cadastro opcional por e-mail/senha ou telefone/SMS, vínculo seguro e backend novamente aberto à escolha. Itens 1.11 e 2.8 acrescentados sem pontos; estimativa do MVP precisa de revisão.
