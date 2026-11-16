@@ -10,7 +10,7 @@ O repositório hoje tem HTML/CSS/JavaScript demonstrativo. `relatar.html` ainda 
 
 ## Quatro frentes e regra de colaboração
 
-As posições abaixo são **funções propostas**, sem atribuição de nomes ou suposição de experiência. Cada entrega tem uma pessoa responsável e outra revisora; a revisão roda entre as quatro. Quem modificar contrato compartilhado avisa as outras frentes antes de alterar a interface.
+Por decisão do usuário, a divisão permanece **por função**, sem atribuição de nomes ou suposição de experiência. Cada entrega tem uma pessoa responsável e outra revisora; a revisão roda entre as quatro. Quem modificar contrato compartilhado avisa as outras frentes antes de alterar a interface.
 
 | Frente | Responsabilidade principal | Arquivos/artefatos sob cuidado | Interface com as outras |
 | --- | --- | --- | --- |
