@@ -32,6 +32,7 @@ As interações do Figma demonstram o fluxo de uso. O protótipo não está cone
 - [Requisitos do produto](docs/prd/PRD_Mappia.md) · [PDF](docs/prd/PRD_Mappia.pdf)
 - [Product Backlog](docs/product-backlog/Product_Backlog_Mappia.md) · [PDF](docs/product-backlog/Product_Backlog_Mappia.pdf)
 - [Jornada do usuário](docs/design/JORNADA.md)
+- [Plano de implementação para quatro pessoas](docs/implementation/PLANO_MVP_4_PESSOAS.md)
 - [Telas do protótipo](docs/design/telas)
 
 ## Equipe
