@@ -32,7 +32,7 @@ def footer(canvas, doc):
     canvas.saveState()
     canvas.setFont('Helvetica', 8)
     canvas.setFillColor(colors.HexColor('#667085'))
-    canvas.drawString(36, 23, 'Mappia | revisão documental 15/11/2026 | estimativas históricas')
+    canvas.drawString(36, 23, 'Mappia | estado local 17/11/2026 | estimativas históricas')
     canvas.drawRightString(A4[0]-36, 23, str(doc.page))
     canvas.restoreState()
 

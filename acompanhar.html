@@ -42,14 +42,14 @@
         <header class="step-intro">
           <p class="eyebrow">ACOMPANHAMENTO</p>
           <h1 tabindex="-1">Como está seu relato?</h1>
-          <p class="intro-copy">Experimente o exemplo fictício MAP-2026-00428.</p>
+          <p class="intro-copy">Consulte um protocolo gerado neste servidor local. Ele desaparece quando o servidor para.</p>
         </header>
 
         <form id="consulta-protocolo" class="protocol-form">
           <label for="protocolo">Protocolo</label>
           <div class="input-icon">
             <img src="assets/figma/acompanhar-imgCampoIconeHash.svg" alt="">
-            <input id="protocolo" name="protocolo" placeholder="MAP-2026-00428" autocomplete="off" spellcheck="false" required>
+            <input id="protocolo" name="protocolo" placeholder="MAP-2026-00000001" autocomplete="off" spellcheck="false" required>
           </div>
           <button class="primary" type="submit">Consultar protocolo</button>
         </form>
@@ -57,15 +57,15 @@
 
       <!-- Resultado e convite para criar conta -->
       <div class="tracking-details">
-        <section class="protocol-result" id="resultado" aria-label="Exemplo de acompanhamento">
-          <p class="result-status">Em análise · exemplo fictício</p>
-          <h2>Buracos na rua</h2>
-          <p class="result-reference">Malvinas · MAP-2026-00428</p>
-          <p class="result-copy">Exemplo de relato ainda não validado. Nenhum registro real foi consultado.</p>
+        <section class="protocol-result" id="resultado" aria-label="Acompanhamento local" hidden>
+          <p class="result-status" id="result-status"></p>
+          <h2 id="result-category"></h2>
+          <p class="result-reference" id="result-protocol"></p>
+          <p class="result-copy">Este resumo local mostra apenas categoria e estado. Contato e local não aparecem na consulta por protocolo.</p>
         </section>
 
         <p id="nao-encontrado" class="not-found" role="status" hidden>
-          Protocolo não encontrado nesta demonstração. Use MAP-2026-00428 para consultar o exemplo.
+          Protocolo não encontrado neste servidor local.
         </p>
 
         <section class="account-invite">
@@ -78,7 +78,7 @@
     </div>
   </main>
 
-  <p class="demo-note">Protótipo demonstrativo. Nenhum dado é enviado ou salvo.</p>
+  <p class="demo-note">Ambiente local de desenvolvimento. Use somente dados fictícios; os relatos desaparecem quando o servidor para.</p>
 
   <!-- Aviso do protótipo (aberto pelo JS) -->
   <dialog id="aviso-dialog">
@@ -91,5 +91,6 @@
 
   <!-- JS -->
   <script src="js/figma.js?v=4"></script>
+  <script type="module" src="js/report-ui.mjs"></script>
 </body>
 </html>

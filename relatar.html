@@ -155,6 +155,7 @@
             <span id="foto-nome">Adicionar uma foto</span>
             <input type="file" id="foto" name="foto" accept="image/*" aria-label="Adicionar uma foto opcional">
           </label>
+          <button class="secondary" type="button" id="remove-photo" hidden>Remover foto</button>
         </div>
 
         <div class="step-actions">
@@ -163,12 +164,12 @@
         </div>
       </section>
 
-      <!-- ETAPA 3 · Dados pessoais -->
+      <!-- ETAPA 3 · Contato de teste -->
       <section class="report-step" data-step="3" hidden>
         <header class="step-intro">
-          <p class="eyebrow">3 DE 4 · DADOS PESSOAIS</p>
-          <h1 tabindex="-1">Quem está relatando?</h1>
-          <p class="intro-copy">Use dados fictícios para experimentar esta etapa.</p>
+          <p class="eyebrow">3 DE 4 · CONTATO</p>
+          <h1 tabindex="-1">Seu contato</h1>
+          <p class="intro-copy">Escolha e verifique um contato fictício. Nenhuma mensagem será enviada.</p>
         </header>
 
         <ol class="progress" aria-label="Etapas do relato">
@@ -179,39 +180,36 @@
         </ol>
 
         <div class="step-content personal-content">
-          <div class="personal-field">
-            <label for="nome">Nome completo</label>
-            <div class="input-icon">
-              <img src="assets/figma/dados-imgCampoIconePerson.svg" alt="">
-              <input type="text" id="nome" name="nome" placeholder="Seu nome completo" autocomplete="name" required>
-            </div>
-          </div>
+          <fieldset class="contact-options">
+            <legend>Qual contato você quer usar?</legend>
+            <label><input type="radio" name="contact-channel" value="email" checked> E-mail</label>
+            <label><input type="radio" name="contact-channel" value="phone"> Telefone</label>
+          </fieldset>
 
-          <div class="personal-field">
-            <label for="cpf">CPF</label>
-            <div class="input-icon">
-              <img src="assets/figma/dados-imgCampoIconeId.svg" alt="">
-              <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" autocomplete="off" inputmode="numeric" required>
-            </div>
-          </div>
-
-          <div class="personal-field">
-            <label for="telefone">Telefone</label>
-            <div class="input-icon">
-              <img src="assets/figma/dados-imgCampoIconePhone.svg" alt="">
-              <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" autocomplete="tel" required>
-            </div>
-          </div>
-
-          <div class="personal-field">
-            <label for="email">E-mail</label>
+          <div class="personal-field" id="email-field">
+            <label for="email">E-mail fictício</label>
             <div class="input-icon">
               <img src="assets/figma/dados-imgCampoIconeMail.svg" alt="">
-              <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" autocomplete="email" required>
+              <input type="email" id="email" name="email" placeholder="morador@example.com" autocomplete="off" value="morador@example.com" required>
             </div>
           </div>
 
-          <p class="personal-note">Use apenas dados fictícios. Não verificamos CPF ou identidade; esta demonstração não envia dados nem permite retorno da equipe.</p>
+          <div class="personal-field" id="phone-field" hidden>
+            <label for="phone">Telefone fictício</label>
+            <div class="input-icon">
+              <img src="assets/figma/dados-imgCampoIconePhone.svg" alt="">
+              <input type="tel" id="phone" name="phone" placeholder="00000000000" inputmode="numeric" autocomplete="off" value="00000000000" disabled>
+            </div>
+          </div>
+
+          <button class="secondary" type="button" id="request-code">Gerar código de teste</button>
+          <div class="verification-panel" id="verification-panel" hidden>
+            <label for="verification-code">Código exibido pelo servidor local</label>
+            <p id="demo-code" class="personal-note"></p>
+            <input id="verification-code" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="Digite o código de 6 dígitos">
+            <button class="secondary" type="button" id="verify-code">Confirmar código</button>
+          </div>
+          <p id="contact-feedback" class="personal-note" role="status" aria-live="polite">Use apenas contatos fictícios. A verificação local não cria conta.</p>
         </div>
 
         <div class="step-actions">
@@ -255,15 +253,16 @@
           <button class="text-button" type="button" data-edit="1">Editar informações</button>
 
           <div class="review-personal">
-            <h2>DADOS PESSOAIS</h2>
-            <p>Nome, CPF, telefone e e-mail</p>
-            <button class="text-button" type="button" data-edit="3">Editar dados pessoais</button>
+            <h2>CONTATO VERIFICADO</h2>
+            <p id="review-contact">Contato ainda não verificado</p>
+            <button class="text-button" type="button" data-edit="3">Editar contato</button>
           </div>
 
           <div class="security-demo" title="Elemento visual; verificação antiabuso ainda não integrada">
             <img src="assets/figma/revisao-imgIconeCheck.svg" alt="">
-            <span>Verificação de segurança não integrada</span>
+            <span>Relato local com contato fictício</span>
           </div>
+          <p id="submit-feedback" class="personal-note" role="status" aria-live="polite"></p>
         </div>
 
         <div class="step-actions">
@@ -275,7 +274,14 @@
     </form>
   </main>
 
-  <p class="demo-note">Protótipo demonstrativo. Nenhum dado é enviado ou salvo.</p>
+  <section id="confirmation" class="confirmation" hidden aria-live="polite">
+    <h2>Relato fictício recebido</h2>
+    <p>Protocolo: <strong id="confirmation-protocol"></strong></p>
+    <p>Estado: Em análise. Os dados ficam apenas na memória do servidor local e somem quando ele para.</p>
+    <a id="confirmation-link" class="primary" href="acompanhar.html">Acompanhar este relato</a>
+  </section>
+
+  <p class="demo-note">Ambiente local de desenvolvimento. Use somente dados fictícios. Foto e GPS ainda não são salvos.</p>
 
   <!-- Aviso do protótipo (aberto pelo JS) -->
   <dialog id="aviso-dialog">
@@ -288,5 +294,6 @@
 
   <!-- JS -->
   <script src="js/figma.js?v=4"></script>
+  <script type="module" src="js/report-ui.mjs"></script>
 </body>
 </html>

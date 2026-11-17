@@ -8,7 +8,7 @@ A jornada prevista do Mappia oferece dois caminhos principais: consultar ocorrê
 
 Na jornada alvo, o relato pode ser enviado sem conta. Antes de confirmar o envio, o morador escolhe **e-mail ou telefone** e verifica esse único contato por código. O CPF sai do formulário; nome não é obrigatório. A verificação de contato não cria uma conta permanente. Após receber o protocolo, o morador pode continuar sem conta ou criar/entrar em uma conta por e-mail e senha ou telefone com código SMS. O vínculo do relato à conta exige prova segura de posse do contato ou da sessão que enviou o relato; digitar o protocolo ou um contato igual não basta.
 
-O fluxo de verificação, seus estados de erro e o histórico autenticado ainda precisam ser desenhados e ligados no protótipo. A escolha do backend entre Firebase e Supabase permanece aberta.
+O HTML local agora permite testar escolha de canal, código fictício, bloqueio do envio sem verificação e consulta por protocolo temporário. Isso ainda precisa ser desenhado por completo no Figma; o histórico autenticado segue pendente. A escolha do backend entre Firebase e Supabase permanece aberta.
 
 ### Estado do Figma após a revisão de 15/11/2026
 
@@ -23,7 +23,7 @@ As ligações do protótipo e as telas 06–08 não foram revalidadas nesta revi
 
 ## Revisão da demonstração: 22/10/2026
 
-O Figma acima contém telas históricas e ajustes parciais da jornada alvo; não é ainda um fluxo completo de autenticação. As imagens abaixo são exportações históricas, sem data exata de exportação registrada. O [contrato da demonstração](../prd/PRD_Mappia.md#contrato-da-demonstração---revisão-de-22102026) separa HTML implementado, telas ilustradas e requisitos futuros.
+O Figma acima contém telas históricas e ajustes parciais da jornada alvo; não é ainda um fluxo completo de autenticação. As imagens abaixo são exportações históricas, sem data exata de exportação registrada. O [estado da implementação local](../prd/PRD_Mappia.md#estado-da-implementação-local---17112026) separa o teste atual, as telas ilustradas e os requisitos futuros.
 
 ## Registro de uma ocorrência
 
@@ -33,12 +33,12 @@ A ação “Relatar um problema”, na tela inicial, abre o formulário.
 | --- | --- |
 | Problema | Categoria e descrição da ocorrência. |
 | Local e foto | Posição do pino no mapa, endereço ou ponto de referência e foto opcional. |
-| Contato | Na jornada alvo, um e-mail ou telefone verificado. A demonstração HTML ainda pede nome, CPF, telefone e e-mail fictícios. |
+| Contato | Na jornada alvo, um e-mail ou telefone verificado. O teste local aceita apenas um canal fictício por relato, sem nome ou CPF. |
 | Revisão | Conferência das informações antes do envio. |
 
-No HTML, o morador pode voltar à etapa anterior ou editar as informações pela revisão. A confirmação com protocolo é prevista no design. O HTML termina na revisão e informa que nenhum envio ou protocolo real foi gerado.
+No HTML servido por `node dev/server.mjs`, o morador pode voltar à etapa anterior, confirmar um código exibido na própria tela, revisar e enviar o relato fictício. O protocolo gerado existe apenas na memória do processo local.
 
-Os quatro campos pessoais continuam obrigatórios somente na demonstração HTML, usando dados fictícios. Só há validação de preenchimento e formato básico de e-mail; não há verificação de CPF, contato ou identidade. A conta é opcional na jornada alvo e ainda não foi implementada.
+O teste local limita os contatos a `@example.com`, `.test` ou `00000000000`; não há verificação real de posse, identidade ou criação de conta. O CPF não integra o formulário atual.
 
 ## Consulta pelo mapa
 
@@ -48,7 +48,7 @@ O mapa HTML é estático: seleção de pinos, filtros e GPS ainda não estão in
 
 ## Acompanhamento e conta
 
-O protocolo permite consultar o andamento sem conta no produto previsto. No HTML, apenas MAP-2026-00428 retorna um exemplo fictício Em análise. A tabela abaixo descreve destinos da jornada alvo, não ações funcionais no HTML. O histórico autenticado não está ilustrado neste conjunto de exportações.
+O protocolo permite consultar o andamento sem conta no produto previsto. No servidor local, um protocolo gerado nesta execução retorna categoria e estado fictícios, sem dados de contato; após reinício, desaparece. A tabela abaixo descreve destinos da jornada alvo. O histórico autenticado não está ilustrado neste conjunto de exportações.
 
 | Ação | Destino |
 | --- | --- |

@@ -2,7 +2,7 @@
 
 Product Backlog
 
-Versão 3.2 documental | 15/11/2026 (estimativas históricas de 02/10/2026)
+Versão 3.2 documental | 15/11/2026 (estado local atualizado em 17/11/2026; estimativas históricas de 02/10/2026)
 
 Projeto de extensão de Ciência da Computação da UNINASSAU Campina Grande, na disciplina Atividades Práticas Interdisciplinares de Extensão I.
 
@@ -14,9 +14,13 @@ Projeto de extensão de Ciência da Computação da UNINASSAU Campina Grande, na
 - [Jhonatan Xavier](https://github.com/jhonatandevpb)
 
 
-## Contrato da demonstração - revisão de 22/10/2026
+## Estado da implementação local - 17/11/2026
 
-Esta revisão usa o HTML/JavaScript deste repositório como referência de capacidade implementada e o arquivo Figma `sXNaua5CmhShdvoC4J4upn` como referência canônica de design. O canvas não foi alterado nem revalidado nesta revisão. O arquivo `IY3T4Dv7QenJZWPRxngnf3` é uma referência histórica, não a fonte atual.
+Uma primeira fatia de desenvolvimento funciona com `node dev/server.mjs` e dados exclusivamente fictícios: formulário sem CPF, escolha de um contato (e-mail ou telefone), código exibido localmente, bloqueio sem confirmação, criação de relato temporário com protocolo e consulta desse protocolo sem exposição do contato. Os registros vivem apenas na memória do processo e desaparecem ao reiniciá-lo. O código não envia e-mail/SMS, não autentica uma conta, não salva foto e não conecta mapa ou moderação. Ainda não é apto a receber relatos reais. O backend definitivo segue indeciso entre Firebase e Supabase.
+
+## Contrato da demonstração - revisão histórica de 22/10/2026
+
+Esta seção registra o estado de 22/10/2026; a capacidade atual está acima. Naquela revisão, o HTML/JavaScript era referência de implementação e o arquivo Figma `sXNaua5CmhShdvoC4J4upn` era a referência canônica de design. O canvas não foi alterado nem revalidado naquela revisão. O arquivo `IY3T4Dv7QenJZWPRxngnf3` é uma referência histórica.
 
 | Fluxo | Disponível na demonstração | Ainda previsto |
 | --- | --- | --- |
@@ -37,7 +41,7 @@ Os 55 IDs anteriores e seus totais históricos (183 pontos; MVP: 30 itens M e 96
 
 ## Decisões incorporadas em 15/11/2026
 
-- Retirar CPF do produto. O HTML demonstrativo e as exportações históricas do Figma ainda o contêm e precisam ser atualizados; não usar dados reais neles.
+- Retirar CPF do produto. O formulário HTML atual já não o contém; as exportações históricas do Figma ainda precisam de atualização. Não usar dados reais no teste local.
 - Enviar sem cadastro, verificando um contato escolhido por relato: e-mail por código/link ou telefone por código SMS. O outro contato não é exigido, e nome não é obrigatório. A verificação não cria conta permanente.
 - Mostrar o protocolo e então oferecer cadastro opcional por e-mail/senha ou telefone/SMS; continuar sem conta permanece possível.
 - Vincular o relato à conta somente pela sessão de envio ou por recuperação com comprovação segura do contato verificado, nunca por igualdade de contato digitado ou apenas pelo protocolo.

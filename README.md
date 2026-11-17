@@ -2,7 +2,7 @@
 
 O Mappia é um projeto de extensão voltado ao registro e acompanhamento de problemas urbanos. A proposta permite consultar ocorrências no mapa, relatar um problema e acompanhar seu andamento por protocolo.
 
-O projeto está em fase de prototipação. Este repositório reúne requisitos planejados, backlog, telas no Figma e uma demonstração estática em HTML/CSS/JavaScript.
+O projeto está em fase de prototipação. Este repositório reúne requisitos, backlog, telas no Figma e uma primeira fatia funcional local com dados fictícios.
 
 ## Protótipo
 
@@ -12,16 +12,16 @@ O projeto está em fase de prototipação. Este repositório reúne requisitos p
 - [Arquivo de design](https://www.figma.com/design/sXNaua5CmhShdvoC4J4upn/Mappia?node-id=2045-121)
 - [Visão geral das telas](docs/design/telas-organizadas.png)
 
-A [demonstração HTML](index.html) permite navegar pelo formulário em quatro etapas e consultar o exemplo fixo MAP-2026-00428. Ela termina na revisão: não envia relatos nem gera protocolos. Use apenas dados fictícios nos campos de nome, CPF, telefone e e-mail. Não há validação de identidade.
+Para testar o fluxo local, execute `node dev/server.mjs` na raiz e abra `http://127.0.0.1:4173`. O formulário permite escolher e verificar **um** contato fictício (e-mail `morador@example.com` ou telefone `00000000000`), usando um código mostrado na própria página. O envio gera um protocolo local, consultável enquanto o processo estiver aberto. Os registros ficam somente na memória e somem ao reiniciar o servidor. O código não envia e-mail nem SMS, não verifica a posse real do contato e não cria conta.
 
-Envio, protocolo real, conta opcional e histórico são funcionalidades previstas. A jornada alvo exige um e-mail ou telefone verificado para enviar sem conta; remove o CPF e oferece entrada por e-mail/senha ou código SMS. O mapa é uma prévia estática; filtros, GPS, autenticação, moderação e indicadores não estão integrados. As imagens acima são exportações históricas; consulte o [contrato e a matriz de capacidades](docs/prd/PRD_Mappia.md#contrato-da-demonstração---revisão-de-22102026).
+O CPF foi retirado do formulário. Envio e consulta com persistência real, conta opcional, histórico e autenticação por e-mail/senha ou SMS continuam previstos. Foto pode ser escolhida na interface, mas seu upload ainda não funciona; remova a seleção para enviar o teste. O mapa é uma prévia estática; filtros, GPS, moderação e indicadores não estão integrados. As imagens acima são exportações históricas; consulte a [matriz de capacidades](docs/prd/PRD_Mappia.md#estado-da-implementação-local---17112026).
 
-As interações do Figma demonstram o fluxo de uso. O protótipo não está conectado a serviços de envio, autenticação ou atendimento.
+O Figma ilustra a jornada pretendida e ainda requer atualização de estados. O servidor local é uma ferramenta de desenvolvimento, não um serviço de envio, autenticação ou atendimento.
 
 ## Escopo planejado do MVP
 
 - Registro de ocorrências com categoria, descrição, localização e foto opcional.
-- Etapa ilustrada de identificação; coleta em produção depende de decisão sobre necessidade dos campos, finalidade e proteção.
+- Contato verificado por e-mail ou telefone, sem CPF; coleta em produção depende de finalidade, proteção e serviço de verificação definidos.
 - Acompanhamento por protocolo e histórico para moradores com conta.
 - Mapa público com ocorrências validadas e filtros por categoria.
 - Área de moderação e atualização do estado das ocorrências.

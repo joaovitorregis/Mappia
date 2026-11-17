@@ -325,11 +325,24 @@
 .mappia .photo-upload input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
 .mappia .photo-upload:focus-within { outline: 3px solid var(--foco); outline-offset: 2px; }
 
-/* Passo 3: dados pessoais */
+/* Passo 3: contato fictício verificado */
 .mappia .personal-content { margin-top: 24px; }
 .mappia .personal-field + .personal-field { margin-top: 16px; }
 .mappia .personal-note { margin-top: 22px; min-height: 48px; color: var(--suave); font-size: 14px; font-weight: 600; line-height: 20px; }
 .mappia .personal-content + .step-actions { margin-top: 18px; }
+.mappia .contact-options { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 0 0 20px; padding: 0; border: 0; }
+.mappia .contact-options legend { margin-bottom: 10px; font-weight: 600; }
+.mappia .contact-options label { display: inline-flex !important; align-items: center; gap: 8px; cursor: pointer; }
+.mappia .contact-options input { width: 18px; height: 18px; accent-color: var(--azul); }
+.mappia #request-code { width: 100%; min-height: 48px; margin-top: 20px; }
+.mappia .verification-panel { display: grid; gap: 9px; margin-top: 18px; padding: 16px; border: 1px solid var(--borda); border-radius: 12px; background: #fff; }
+.mappia .verification-panel .personal-note { min-height: 0; margin: 0; }
+.mappia .verification-panel input { width: 100%; min-height: 48px; padding: 10px 12px; border: 1px solid var(--borda-campo); border-radius: 10px; }
+.mappia .verification-panel button { min-height: 44px; }
+.mappia .confirmation { width: min(600px, calc(100% - 32px)); margin: 30px auto; padding: 26px; border: 1px solid var(--borda); border-radius: 18px; background: #fff; box-shadow: 0 10px 36px #13274314; }
+.mappia .confirmation h2 { font-size: 22px; }
+.mappia .confirmation p { margin-top: 14px; overflow-wrap: anywhere; }
+.mappia .confirmation .primary { display: inline-flex; margin-top: 20px; }
 
 /* Passo 4: revisão */
 .mappia .review-content { margin-top: 24px; }

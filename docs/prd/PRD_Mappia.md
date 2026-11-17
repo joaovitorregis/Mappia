@@ -2,7 +2,7 @@
 
 Documento de requisitos do produto (PRD)
 
-Versão 3.2 documental | 15/11/2026 (estimativas históricas de 02/10/2026)
+Versão 3.2 documental | 15/11/2026 (estado local atualizado em 17/11/2026; estimativas históricas de 02/10/2026)
 
 Projeto de extensão de Ciência da Computação da UNINASSAU Campina Grande, na disciplina Atividades Práticas Interdisciplinares de Extensão I.
 
@@ -14,9 +14,13 @@ Projeto de extensão de Ciência da Computação da UNINASSAU Campina Grande, na
 - [Jhonatan Xavier](https://github.com/jhonatandevpb)
 
 
-## Contrato da demonstração - revisão de 22/10/2026
+## Estado da implementação local - 17/11/2026
 
-Esta revisão usa o HTML/JavaScript deste repositório como referência de capacidade implementada e o arquivo Figma `sXNaua5CmhShdvoC4J4upn` como referência canônica de design. O canvas não foi alterado nem revalidado nesta revisão. O arquivo `IY3T4Dv7QenJZWPRxngnf3` é uma referência histórica, não a fonte atual.
+Uma primeira fatia de desenvolvimento funciona com `node dev/server.mjs` e dados exclusivamente fictícios: formulário sem CPF, escolha de um contato (e-mail ou telefone), código exibido localmente, bloqueio sem confirmação, criação de relato temporário com protocolo e consulta desse protocolo sem exposição do contato. Os registros vivem apenas na memória do processo e desaparecem ao reiniciá-lo. O código não envia e-mail/SMS, não autentica uma conta, não salva foto e não conecta mapa ou moderação. Ainda não é apto a receber relatos reais. O backend definitivo segue indeciso entre Firebase e Supabase.
+
+## Contrato da demonstração - revisão histórica de 22/10/2026
+
+Esta seção registra o estado de 22/10/2026; a capacidade atual está acima. Naquela revisão, o HTML/JavaScript era referência de implementação e o arquivo Figma `sXNaua5CmhShdvoC4J4upn` era a referência canônica de design. O canvas não foi alterado nem revalidado naquela revisão. O arquivo `IY3T4Dv7QenJZWPRxngnf3` é uma referência histórica.
 
 | Fluxo | Disponível na demonstração | Ainda previsto |
 | --- | --- | --- |
@@ -41,7 +45,7 @@ Os 55 IDs anteriores e seus totais históricos (183 pontos; MVP: 30 itens M e 96
 - O morador pode enviar e acompanhar pelo protocolo sem criar conta. Antes de confirmar o envio, verifica um contato escolhido: código ou link enviado ao e-mail, ou código por SMS ao telefone. Essa verificação não cria conta permanente. Depois de receber o protocolo, pode dispensar o cadastro ou criar/entrar em uma conta para reunir seus relatos.
 - A conta opcional oferece e-mail com senha e telefone com código enviado por SMS na primeira versão. O endereço de e-mail só é tratado como confirmado após a verificação do canal; o número só após a confirmação do código. Esses mecanismos comprovam controle do contato, não identidade civil.
 - O relato recém-enviado só é vinculado à conta pela sessão que fez o envio ou por recuperação com prova segura de posse do contato vinculado. Igualdade entre contato digitado e contato da conta, ou conhecimento do protocolo, não basta para reivindicar um relato.
-- O método de vínculo para conta já existente ou sessão perdida, a eventual coleta opcional de nome, o provedor e custo do SMS e a escolha final entre Firebase e Supabase ainda precisam de decisão e teste. O Figma e o HTML atuais são demonstrativos e não implementam esse fluxo.
+- O método de vínculo para conta já existente ou sessão perdida, a eventual coleta opcional de nome, o provedor e custo do SMS e a escolha final entre Firebase e Supabase ainda precisam de decisão e teste. O Figma e o fluxo local não implementam cadastro, autenticação ou vínculo.
 
 Os requisitos 1.11 e 2.8 acrescentam verificação do contato por relato e autenticação por telefone via SMS à V1. Os 55 IDs, 30 itens M e 96 pontos citados nesta documentação são a linha de base histórica anterior a eles; prioridades e estimativas afetadas precisam ser refeitas antes de anunciar o esforço do MVP revisado.
 
@@ -214,7 +218,7 @@ A base técnica anteriormente planejada usa HTML, CSS e JavaScript na interface,
 | Dado | Uso previsto |
 | --- | --- |
 | Protocolo | Identificador único para acompanhamento. |
-| Identificação e contatos | O CPF está excluído do produto. No envio real, a pessoa informa e verifica um contato, e-mail ou telefone; o outro não é exigido. Nome não é obrigatório e sua eventual coleta opcional está pendente. Os quatro campos da demonstração atual ainda são fictícios. Apenas contato verificado pode servir à autenticação ou recuperação de vínculo. |
+| Identificação e contatos | O CPF está excluído do produto. No envio real, a pessoa informa e verifica um contato, e-mail ou telefone; o outro não é exigido. Nome não é obrigatório e sua eventual coleta opcional está pendente. O teste local usa apenas contatos fictícios e códigos exibidos na tela. Apenas contato verificado por serviço real poderá servir à autenticação ou recuperação de vínculo. |
 | Categoria e descrição | Classificação e relato do problema. |
 | Latitude e longitude | Localização indicada no mapa ou obtida por GPS autorizado. |
 | Foto | Imagem associada ao relato, submetida à revisão antes da divulgação. |
