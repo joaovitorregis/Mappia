@@ -13,6 +13,16 @@ test('as categorias do formulário correspondem ao catálogo da interface', asyn
   assert.equal(nomeCategoria('desconhecida'), 'Ocorrência');
 });
 
+test('o formulário começa sem um contato compartilhado que esgote o limite da turma', async () => {
+  const html = await readFile(new URL('../relatar.html', import.meta.url), 'utf8');
+  for (const id of ['email', 'phone']) {
+    const input = html.match(new RegExp('<input\\b[^>]*\\bid="' + id + '"[^>]*>'))?.[0];
+    assert.ok(input, id);
+    assert.doesNotMatch(input, /\bvalue=/);
+    assert.match(input, /\brequired\b/);
+  }
+});
+
 test('acompanhamento e moderação usam etapas válidas e horário local', () => {
   assert.equal(etapas.recebida, 'Em análise');
   assert.deepEqual(transicoes.rejeitada, []);

@@ -8,6 +8,7 @@ import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 
 const gestor = '00000000-0000-4000-8000-000000000001';
 const morador = '00000000-0000-4000-8000-000000000002';
+const outroMorador = '00000000-0000-4000-8000-000000000003';
 const migration = new URL('../supabase/migrations/0001_mappia.sql', import.meta.url);
 
 async function checkFlow({ anon, manager, direct }) {
@@ -55,7 +56,7 @@ test('Postgres local aplica a migração e separa acesso anônimo, morador e ges
     create table auth.users(id uuid primary key);
     create function auth.uid() returns uuid language sql stable
     as $$ select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid $$;
-    insert into auth.users values ('${gestor}'), ('${morador}');
+    insert into auth.users values ('${gestor}'), ('${morador}'), ('${outroMorador}');
     create schema storage;
     create table storage.buckets(id text primary key, name text, public boolean, file_size_limit bigint, allowed_mime_types text[]);
     create table storage.objects(bucket_id text, name text);
@@ -89,9 +90,13 @@ test('Postgres local aplica a migração e separa acesso anônimo, morador e ges
   });
   await assert.rejects(resident('gestor_alterar_etapa', update), /ACESSO_GESTOR/);
   assert.deepEqual(await resident('meus_relatos'), []);
+  const otherResident = as('authenticated', outroMorador);
+  assert.equal(await otherResident('vincular_relatos', { tokens: [created.protocolo] }), 0);
   assert.equal(await resident('vincular_relatos', { tokens: [created.token] }), 1);
   assert.equal((await resident('meus_relatos'))[0].protocolo, created.protocolo);
   assert.equal(await resident('vincular_relatos', { tokens: [created.token] }), 0);
+  assert.equal(await otherResident('vincular_relatos', { tokens: [created.token] }), 0);
+  assert.deepEqual(await otherResident('meus_relatos'), []);
   assert.deepEqual(await as('anon')('indicadores_publicos'), { validada: 1, encaminhada: 0, resolvida: 0 });
   const anonymous = as('anon');
   const challenge = await anonymous('iniciar_verificacao', { canal: 'telefone', contato: '(83) 00000-0000' });
