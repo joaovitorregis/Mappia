@@ -16,6 +16,10 @@ Projeto de extensão de Ciência da Computação da UNINASSAU Campina Grande, na
 
 ## Estado da implementação local - 17/11/2026
 
+**Atualização da versão de apresentação.** A branch `João-Vitor` entrega site estático conectado ao Supabase, com relato e foto opcional, código de teste na tela, acompanhamento, mapa público e painel do gestor. A conta opcional funciona por e-mail e senha, com vínculo por token do aparelho. Destina-se à demonstração com dados fictícios em Campina Grande. O plano da apresentação define as etapas e decisões desse recorte. [Plano da apresentação](../implementation/PLANO_GPT_APRESENTACAO.md)
+
+**Histórico da primeira fatia.**
+
 Uma primeira fatia de desenvolvimento funciona com `node dev/server.mjs` e dados exclusivamente fictícios: formulário sem CPF, escolha de um contato (e-mail ou telefone), código exibido localmente, bloqueio sem confirmação, criação de relato temporário com protocolo e consulta desse protocolo sem exposição do contato. Os registros vivem apenas na memória do processo e desaparecem ao reiniciá-lo. O código não envia e-mail/SMS, não autentica uma conta, não salva foto e não conecta mapa ou moderação. Ainda não é apto a receber relatos reais. O backend definitivo segue indeciso entre Firebase e Supabase.
 
 ## Contrato da demonstração - revisão histórica de 22/10/2026

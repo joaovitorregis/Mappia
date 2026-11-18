@@ -11,7 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- CSS único (inclui os ícones do Bootstrap) -->
-  <link rel="stylesheet" href="css/mappia.css?v=5">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="css/mappia.css?v=6">
 </head>
 
 <body class="mappia pagina-inicio">
@@ -21,12 +22,13 @@
     <header class="topbar">
       <a href="index.html?v=5" class="logo" aria-label="Mappia, página inicial">mappia<span>.</span></a>
 
-      <button type="button" class="btn-entrar" id="btn-entrar" disabled title="Entrada em desenvolvimento">
+      <a href="conta.html" class="btn-entrar" data-conta>
         <!--class do bootstrap-->
         <i class="bi bi-person icone" aria-hidden="true"></i>
         Entrar
-      </button>
+      </a>
     </header>
+    <p class="apresentacao" data-apresentacao hidden>Modo apresentação · dados de teste</p>
 
     <!--barra de navegação-->
     <nav class="tabs" aria-label="Seções do aplicativo">
@@ -55,48 +57,25 @@
       </a>
     </section>
 
-    <!--parte de filtros do mapa-->
-    <section class="filtros" aria-label="Filtrar problemas no mapa">
-      <button type="button" class="chip active" data-filtro="todas">
-        <i class="bi bi-grid-fill icone" aria-hidden="true"></i>
-        Todas
-      </button>
-
-      <button type="button" class="chip" data-filtro="buracos">
-        <i class="bi bi-cone-striped icone" aria-hidden="true"></i>
-        Buracos
-      </button>
-
-      <button type="button" class="chip" data-filtro="lixo">
-        <i class="bi bi-trash icone" aria-hidden="true"></i>
-        Lixo
-      </button>
-
-      <button type="button" class="chip" id="btn-filtros">
-        <i class="bi bi-sliders icone" aria-hidden="true"></i>
-        Filtros
-      </button>
-    </section>
-
-    <!--parte onde vai ficar o mapa-->
-    <section class="mapa-container" aria-label="Mapa de problemas do bairro">
-      <!-- Prévia estática do protótipo. O mapa interativo será implementado depois. -->
-      <div id="mapa" class="mapa" role="img" aria-label="Prévia ilustrativa do mapa de Campina Grande com ocorrências; mapa ainda não interativo."></div>
-
-      <!-- Controles do mapa -->
-      <button type="button" class="btn-localizacao" id="btn-localizacao" aria-label="Minha localização">
-        <i class="bi bi-crosshair icone" aria-hidden="true"></i>
-      </button>
-
-      <div class="zoom">
-        <button type="button" id="zoom-mais" aria-label="Aproximar">+</button>
-        <button type="button" id="zoom-menos" aria-label="Afastar">−</button>
-      </div>
+    <section class="mapa-publico" aria-label="Ocorrências públicas">
+      <ul class="map-counts" aria-label="Contagem de ocorrências">
+        <li><strong data-contagem="validada">—</strong> Validadas</li>
+        <li><strong data-contagem="encaminhada">—</strong> Encaminhadas</li>
+        <li><strong data-contagem="resolvida">—</strong> Resolvidas</li>
+      </ul>
+      <div class="filtros" id="map-filters" aria-label="Filtrar por categoria"></div>
+      <div class="mapa-container"><div id="mapa" class="mapa mapa-interativo" aria-label="Mapa público de Campina Grande"></div></div>
+      <button type="button" class="text-button" id="btn-localizacao">Usar minha localização</button>
+      <p id="map-gps" role="status"></p>
+      <p id="map-status" role="status"></p>
+      <button type="button" class="secondary" id="map-retry" hidden>Tentar de novo</button>
     </section>
 
   </main>
 
   <!-- JS -->
-  <script src="js/script.js?v=4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module" src="js/base.mjs"></script>
+  <script type="module" src="js/mapa-publico.mjs"></script>
 </body>
 </html>

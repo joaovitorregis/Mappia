@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- CSS único (inclui os ícones do Bootstrap) -->
-  <link rel="stylesheet" href="css/mappia.css?v=5">
+  <link rel="stylesheet" href="css/mappia.css?v=6">
 </head>
 
 <body class="mappia pagina-acompanhar">
@@ -21,11 +21,12 @@
     <header class="topbar">
       <a class="logo" href="index.html?v=5" aria-label="Mappia, página inicial">mappia<span>.</span></a>
 
-      <button class="btn-entrar" type="button" data-conta>
+      <a class="btn-entrar" href="conta.html" data-conta>
         <img src="assets/figma/relatar-imgEntrarIconeDeUsuario.svg" alt="" width="13" height="15">
         Entrar
-      </button>
+      </a>
     </header>
+    <p class="apresentacao" data-apresentacao hidden>Modo apresentação · dados de teste</p>
 
     <!--barra de navegação-->
     <nav class="tabs" aria-label="Seções do aplicativo">
@@ -42,7 +43,7 @@
         <header class="step-intro">
           <p class="eyebrow">ACOMPANHAMENTO</p>
           <h1 tabindex="-1">Como está seu relato?</h1>
-          <p class="intro-copy">Consulte um protocolo gerado neste servidor local. Ele desaparece quando o servidor para.</p>
+          <p class="intro-copy">Use o protocolo recebido no envio para consultar o andamento.</p>
         </header>
 
         <form id="consulta-protocolo" class="protocol-form">
@@ -53,44 +54,37 @@
           </div>
           <button class="primary" type="submit">Consultar protocolo</button>
         </form>
+        <section class="account-invite" hidden>
+          <h2>Protocolos deste aparelho</h2>
+          <ul id="protocolos-salvos"></ul>
+        </section>
       </div>
 
       <!-- Resultado e convite para criar conta -->
       <div class="tracking-details">
-        <section class="protocol-result" id="resultado" aria-label="Acompanhamento local" hidden>
+        <section class="protocol-result" id="resultado" aria-label="Acompanhamento" aria-live="polite" hidden>
           <p class="result-status" id="result-status"></p>
           <h2 id="result-category"></h2>
           <p class="result-reference" id="result-protocol"></p>
-          <p class="result-copy">Este resumo local mostra apenas categoria e estado. Contato e local não aparecem na consulta por protocolo.</p>
+          <ol id="result-history" class="timeline" aria-label="Histórico do relato"></ol>
+          <p id="result-rejection" hidden>O relato não foi aprovado para aparecer no mapa público.</p>
         </section>
 
         <p id="nao-encontrado" class="not-found" role="status" hidden>
-          Protocolo não encontrado neste servidor local.
+          Não encontramos esse protocolo. Confira se digitou certo.
         </p>
 
         <section class="account-invite">
           <h2>Seus relatos, juntos.</h2>
-          <p>O histórico com conta está previsto; entrada e cadastro ainda não estão disponíveis.</p>
-          <button class="text-button" type="button" data-conta>Entrar ou criar conta</button>
+          <p>Entre ou crie uma conta para guardar os relatos deste aparelho.</p>
+          <a class="text-button" href="conta.html" data-conta="Entrar ou criar conta">Entrar ou criar conta</a>
         </section>
       </div>
 
     </div>
   </main>
 
-  <p class="demo-note">Ambiente local de desenvolvimento. Use somente dados fictícios; os relatos desaparecem quando o servidor para.</p>
-
-  <!-- Aviso do protótipo (aberto pelo JS) -->
-  <dialog id="aviso-dialog">
-    <h2>Protótipo demonstrativo</h2>
-    <p id="aviso-texto"></p>
-    <form method="dialog">
-      <button class="primary">Entendi</button>
-    </form>
-  </dialog>
-
-  <!-- JS -->
-  <script src="js/figma.js?v=4"></script>
-  <script type="module" src="js/report-ui.mjs"></script>
+  <script type="module" src="js/base.mjs"></script>
+  <script type="module" src="js/acompanhar.mjs"></script>
 </body>
 </html>

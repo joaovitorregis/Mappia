@@ -11,7 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- CSS único (inclui os ícones do Bootstrap) -->
-  <link rel="stylesheet" href="css/mappia.css?v=5">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="css/mappia.css?v=6">
 </head>
 
 <body class="mappia pagina-relatar">
@@ -21,11 +22,12 @@
     <header class="topbar">
       <a class="logo" href="index.html?v=5" aria-label="Mappia, página inicial">mappia<span>.</span></a>
 
-      <button class="btn-entrar" type="button" data-conta>
+      <a class="btn-entrar" href="conta.html" data-conta>
         <img src="assets/figma/relatar-imgEntrarIconeDeUsuario.svg" alt="" width="13" height="15">
         Entrar
-      </button>
+      </a>
     </header>
+    <p class="apresentacao" data-apresentacao hidden>Modo apresentação · dados de teste</p>
 
     <!--barra de navegação-->
     <nav class="tabs" aria-label="Seções do aplicativo">
@@ -57,7 +59,7 @@
             <legend class="sr-only">Escolha o tipo de problema</legend>
 
             <label class="category">
-              <input type="radio" name="tipo" value="Buracos na rua" checked>
+              <input type="radio" name="tipo" value="buracos" checked>
               <img src="assets/figma/relatar-imgIconeRoad.svg" alt="" width="22" height="22">
               <span>Buracos na rua</span>
               <img src="assets/figma/relatar-imgIconeArrow.svg" alt="" width="16" height="16" class="category-arrow">
@@ -65,7 +67,7 @@
             </label>
 
             <label class="category">
-              <input type="radio" name="tipo" value="Iluminação pública">
+              <input type="radio" name="tipo" value="iluminacao">
               <img src="assets/figma/relatar-imgIconeLamp.svg" alt="" width="22" height="22">
               <span>Iluminação pública</span>
               <img src="assets/figma/relatar-imgIconeArrow.svg" alt="" width="16" height="16" class="category-arrow">
@@ -73,7 +75,7 @@
             </label>
 
             <label class="category">
-              <input type="radio" name="tipo" value="Lixo e descarte irregular">
+              <input type="radio" name="tipo" value="lixo">
               <img src="assets/figma/relatar-imgIconeTrash.svg" alt="" width="22" height="22">
               <span>Lixo e descarte irregular</span>
               <img src="assets/figma/relatar-imgIconeArrow.svg" alt="" width="16" height="16" class="category-arrow">
@@ -81,7 +83,7 @@
             </label>
 
             <label class="category">
-              <input type="radio" name="tipo" value="Vazamentos e esgoto a céu aberto">
+              <input type="radio" name="tipo" value="vazamentos">
               <img src="assets/figma/relatar-imgIconeWater.svg" alt="" width="22" height="22">
               <span>Vazamentos e esgoto a céu aberto</span>
               <img src="assets/figma/relatar-imgIconeArrow.svg" alt="" width="16" height="16" class="category-arrow">
@@ -89,7 +91,7 @@
             </label>
 
             <label class="category">
-              <input type="radio" name="tipo" value="Alagamentos">
+              <input type="radio" name="tipo" value="alagamentos">
               <img src="assets/figma/relatar-imgIconeFlood.svg" alt="" width="22" height="22">
               <span>Alagamentos</span>
               <img src="assets/figma/relatar-imgIconeArrow.svg" alt="" width="16" height="16" class="category-arrow">
@@ -97,7 +99,7 @@
             </label>
 
             <label class="category">
-              <input type="radio" name="tipo" value="Outro problema">
+              <input type="radio" name="tipo" value="outro">
               <img src="assets/figma/relatar-imgIconePlus.svg" alt="" width="22" height="22">
               <span>Outro problema</span>
               <img src="assets/figma/relatar-imgIconeArrow.svg" alt="" width="16" height="16" class="category-arrow">
@@ -107,7 +109,7 @@
 
           <div class="description-field">
             <label for="descricao">Descreva em poucas palavras</label>
-            <textarea id="descricao" name="descricao" rows="2" placeholder="Ex.: Buraco perto da esquina da minha rua." required></textarea>
+            <textarea id="descricao" name="descricao" rows="2" minlength="5" maxlength="1000" placeholder="Ex.: Buraco perto da esquina da minha rua." required></textarea>
           </div>
         </div>
 
@@ -122,7 +124,7 @@
         <header class="step-intro">
           <p class="eyebrow">2 DE 4 · LOCAL E FOTO</p>
           <h1 tabindex="-1">Onde fica o problema?</h1>
-          <p class="intro-copy">Mapa ilustrativo. Informe o endereço e uma referência.</p>
+          <p class="intro-copy">Marque no mapa e informe um ponto de referência fictício.</p>
         </header>
 
         <ol class="progress" aria-label="Etapas do relato">
@@ -133,20 +135,16 @@
         </ol>
 
         <div class="step-content location-content">
-          <button class="location-button" type="button" data-local-demo>Usar minha localização</button>
-
-          <div class="location-map" role="img" aria-label="Mapa ilustrativo de Campina Grande; localização ainda não interativa">
-            <img src="assets/figma/local-imgCartografiaDetalheDoLocal.svg" alt="" class="map-art">
-            <span class="location-pin">
-              <img src="assets/figma/local-imgIconePino.svg" alt="">
-            </span>
-          </div>
+          <button class="location-button" type="button" id="gps-relato">Usar minha localização</button>
+          <div class="location-map" id="mapa-relato" aria-label="Mapa para marcar o local do relato"></div>
+          <button class="text-button" type="button" id="marcar-centro">Marcar o centro do mapa</button>
+          <p id="location-feedback" class="personal-note" role="status"></p>
 
           <div class="address-field">
             <label for="endereco">Endereço e ponto de referência</label>
             <div class="input-icon">
               <img src="assets/figma/local-imgCampoIconePin.svg" alt="">
-              <input id="endereco" name="endereco" autocomplete="street-address" placeholder="Ex.: em frente ao mercado" required>
+              <input id="endereco" name="endereco" autocomplete="off" maxlength="300" placeholder="Ex.: em frente ao mercado" required>
             </div>
           </div>
 
@@ -156,6 +154,7 @@
             <input type="file" id="foto" name="foto" accept="image/*" aria-label="Adicionar uma foto opcional">
           </label>
           <button class="secondary" type="button" id="remove-photo" hidden>Remover foto</button>
+          <img id="foto-preview" class="foto-preview" alt="Prévia da foto" hidden>
         </div>
 
         <div class="step-actions">
@@ -198,18 +197,18 @@
             <label for="phone">Telefone fictício</label>
             <div class="input-icon">
               <img src="assets/figma/dados-imgCampoIconePhone.svg" alt="">
-              <input type="tel" id="phone" name="phone" placeholder="00000000000" inputmode="numeric" autocomplete="off" value="00000000000" disabled>
+              <input type="tel" id="phone" name="phone" placeholder="83000000000" inputmode="numeric" autocomplete="off" value="83000000000" required disabled>
             </div>
           </div>
 
           <button class="secondary" type="button" id="request-code">Gerar código de teste</button>
           <div class="verification-panel" id="verification-panel" hidden>
-            <label for="verification-code">Código exibido pelo servidor local</label>
+            <label for="verification-code">Código de apresentação</label>
             <p id="demo-code" class="personal-note"></p>
             <input id="verification-code" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="Digite o código de 6 dígitos">
             <button class="secondary" type="button" id="verify-code">Confirmar código</button>
           </div>
-          <p id="contact-feedback" class="personal-note" role="status" aria-live="polite">Use apenas contatos fictícios. A verificação local não cria conta.</p>
+          <p id="contact-feedback" class="personal-note" role="status" aria-live="polite">Use apenas contatos fictícios.</p>
         </div>
 
         <div class="step-actions">
@@ -251,6 +250,9 @@
           </dl>
 
           <button class="text-button" type="button" data-edit="1">Editar informações</button>
+          <div class="location-map" id="review-map" aria-label="Prévia da localização"></div>
+          <img id="review-image" class="foto-preview" alt="Foto do relato" hidden>
+          <button class="text-button" type="button" data-edit="2">Editar local e foto</button>
 
           <div class="review-personal">
             <h2>CONTATO VERIFICADO</h2>
@@ -260,8 +262,9 @@
 
           <div class="security-demo" title="Elemento visual; verificação antiabuso ainda não integrada">
             <img src="assets/figma/revisao-imgIconeCheck.svg" alt="">
-            <span>Relato local com contato fictício</span>
+            <span>Relato de apresentação com contato fictício</span>
           </div>
+          <p class="personal-note">Use apenas dados de teste. A equipe gestora vê contato fictício, foto e posição exata. Depois da validação, o mapa mostra a posição aproximada e o ponto de referência.</p>
           <p id="submit-feedback" class="personal-note" role="status" aria-live="polite"></p>
         </div>
 
@@ -275,25 +278,18 @@
   </main>
 
   <section id="confirmation" class="confirmation" hidden aria-live="polite">
-    <h2>Relato fictício recebido</h2>
+    <h2 tabindex="-1">Relato fictício recebido</h2>
     <p>Protocolo: <strong id="confirmation-protocol"></strong></p>
-    <p>Estado: Em análise. Os dados ficam apenas na memória do servidor local e somem quando ele para.</p>
+    <p>Seu relato está em análise.</p>
+    <button type="button" class="secondary" id="copiar-protocolo">Copiar protocolo</button>
+    <p id="confirmation-note" role="status"></p>
     <a id="confirmation-link" class="primary" href="acompanhar.html">Acompanhar este relato</a>
+    <p><a href="conta.html?modo=cadastro">Criar conta para guardar meus relatos</a></p>
+    <p><a href="index.html">Continuar sem conta</a></p>
   </section>
 
-  <p class="demo-note">Ambiente local de desenvolvimento. Use somente dados fictícios. Foto e GPS ainda não são salvos.</p>
-
-  <!-- Aviso do protótipo (aberto pelo JS) -->
-  <dialog id="aviso-dialog">
-    <h2>Protótipo demonstrativo</h2>
-    <p id="aviso-texto"></p>
-    <form method="dialog">
-      <button class="primary">Entendi</button>
-    </form>
-  </dialog>
-
-  <!-- JS -->
-  <script src="js/figma.js?v=4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module" src="js/base.mjs"></script>
   <script type="module" src="js/report-ui.mjs"></script>
 </body>
 </html>

@@ -1,0 +1,39 @@
+name: Publicar Mappia de apresentação
+on:
+  push:
+    branches: ['João-Vitor']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: mappia-pages
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    if: github.ref_name == 'João-Vitor'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/configure-pages@v5
+      - name: Separar arquivos públicos
+        run: |
+          mkdir -p public
+          cp index.html relatar.html acompanhar.html conta.html meus-relatos.html public/
+          cp -r assets css js gestor public/
+          if [ -f docs/implementation/qr-mappia.png ]; then
+            cp docs/implementation/qr-mappia.png public/
+          fi
+          touch public/.nojekyll
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: public
+      - uses: actions/deploy-pages@v4
+        id: deploy

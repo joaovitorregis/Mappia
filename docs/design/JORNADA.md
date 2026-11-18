@@ -1,5 +1,9 @@
 # Jornada do usuário
 
+## Versão de apresentação
+
+O site usa Supabase para verificar contato fictício, persistir relatos, consultar protocolos, vincular relatos à conta e moderar ocorrências. O mapa Leaflet em Campina Grande mostra ocorrências aprovadas com coordenada aproximada. O gestor consulta a coordenada exata e a foto privada. A conta de demonstração usa e-mail e senha com confirmação por link dispensada. Os estados abaixo registram a evolução do protótipo e do Figma. [Roteiro da versão de apresentação](../implementation/ROTEIRO_APRESENTACAO.md)
+
 A jornada prevista do Mappia oferece dois caminhos principais: consultar ocorrências no mapa e registrar um problema. O acompanhamento pode ser feito por protocolo ou pelo histórico da conta.
 
 [Protótipo navegável](https://www.figma.com/proto/sXNaua5CmhShdvoC4J4upn/Mappia?node-id=2031-152&page-id=0%3A1&starting-point-node-id=2031%3A152&scaling=scale-down) · [Arquivo de design](https://www.figma.com/design/sXNaua5CmhShdvoC4J4upn/Mappia?node-id=2045-121)

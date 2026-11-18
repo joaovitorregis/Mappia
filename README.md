@@ -2,9 +2,12 @@
 
 O Mappia é um projeto de extensão voltado ao registro e acompanhamento de problemas urbanos. A proposta permite consultar ocorrências no mapa, relatar um problema e acompanhar seu andamento por protocolo.
 
-O projeto está em fase de prototipação. Este repositório reúne requisitos, backlog, telas no Figma e uma primeira fatia funcional local com dados fictícios.
+O repositório contém a versão de apresentação do Mappia para os alunos, com dados fictícios em Campina Grande, PB.
 
-## Protótipo
+## Demonstração
+
+- [Abrir o Mappia](https://joaovitorregis.github.io/Mappia/) · [Painel do gestor](https://joaovitorregis.github.io/Mappia/gestor/)
+- [Roteiro e QR da apresentação](docs/implementation/ROTEIRO_APRESENTACAO.md)
 
 ![Telas do Mappia organizadas por jornada](docs/design/telas-organizadas.png)
 
@@ -12,15 +15,9 @@ O projeto está em fase de prototipação. Este repositório reúne requisitos, 
 - [Arquivo de design](https://www.figma.com/design/sXNaua5CmhShdvoC4J4upn/Mappia?node-id=2045-121)
 - [Visão geral das telas](docs/design/telas-organizadas.png)
 
-Para testar o fluxo local, execute `node dev/server.mjs` na raiz e abra `http://127.0.0.1:4173`. O formulário permite escolher e verificar **um** contato fictício (e-mail `morador@example.com` ou telefone `00000000000`), usando um código mostrado na própria página. O envio gera um protocolo local, consultável enquanto o processo estiver aberto. Os registros ficam somente na memória e somem ao reiniciar o servidor. O código não envia e-mail nem SMS, não verifica a posse real do contato e não cria conta.
+O relato aceita um contato fictício, e-mail ou telefone, com código mostrado na tela. O protocolo permite acompanhar o andamento, e a conta opcional por e-mail e senha guarda o histórico. O painel do gestor permite mudar a etapa, e o mapa público exibe somente ocorrências aprovadas, com posição aproximada. As fotos ficam no Storage privado. O acesso à conta por telefone, a entrega de códigos por e-mail ou SMS e a operação com moradores reais ficam fora desta apresentação.
 
-O CPF foi retirado do formulário. Envio e consulta com persistência real, conta opcional, histórico e autenticação por e-mail/senha ou SMS continuam previstos. Foto pode ser escolhida na interface, mas seu upload ainda não funciona; remova a seleção para enviar o teste. O mapa é uma prévia estática; filtros, GPS, moderação e indicadores não estão integrados. As imagens acima são exportações históricas; consulte a [matriz de capacidades](docs/prd/PRD_Mappia.md#estado-da-implementação-local---17112026).
-
-O Figma ilustra a jornada pretendida e ainda requer atualização de estados. O servidor local é uma ferramenta de desenvolvimento, não um serviço de envio, autenticação ou atendimento.
-
-## Banco da versão de apresentação
-
-A Fase 1 inclui a migração Supabase, dados fictícios em Campina Grande e testes das funções de relato, consulta e moderação. O protótipo acima ainda usa o servidor local. Para rodar os testes, execute `npm ci` e `npm test`. Veja os passos de aplicação e validação no [guia do Supabase](docs/implementation/SUPABASE_SETUP.md).
+Para executar localmente, rode `node dev/server.mjs` e abra `http://127.0.0.1:4173`. A interface usa o mesmo Supabase de apresentação. Para testar o código, execute `npm ci` e `npm test`. O teste remoto é opcional e usa credenciais locais do gestor. [Guia do Supabase](docs/implementation/SUPABASE_SETUP.md)
 
 ## Escopo planejado do MVP
 

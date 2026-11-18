@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mappia · Painel do gestor</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="../css/mappia.css?v=6">
+</head><body class="mappia">
+<main class="app gestor-app">
+<header class="topbar"><a class="logo" href="../index.html" aria-label="Mappia, página inicial">mappia<span>.</span></a>
+<a class="btn-entrar" href="../index.html">Mapa público</a></header>
+<p class="apresentacao" data-apresentacao hidden>Modo apresentação · dados de teste</p>
+<section class="workspace-panel" id="gestor-login">
+<h1>Painel do gestor</h1>
+<form class="workspace-form" id="gestor-form">
+<label for="gestor-email">E-mail</label><input id="gestor-email" type="email" name="email" required autocomplete="username">
+<label for="gestor-senha">Senha</label><input id="gestor-senha" type="password" name="senha" required autocomplete="current-password">
+<button class="primary" type="submit">Entrar no painel</button>
+</form>
+</section>
+<section class="workspace-panel gestor-workspace" id="gestor-painel" hidden>
+<div class="workspace-heading"><h1>Ocorrências</h1><button class="secondary" id="gestor-sair" type="button">Sair</button></div>
+<form class="gestor-filtros" id="gestor-filtros">
+<label>Período <select name="periodo"><option value="todos">Todos</option><option value="hoje">Hoje</option><option value="7d">7 dias</option><option value="30d">30 dias</option></select></label>
+<label>Categoria <select name="categoria"><option value="">Todas</option></select></label>
+</form>
+<p id="gestor-contagens"></p>
+<div class="account-modes">
+<button class="chip active" id="gestor-ver-lista" type="button" aria-pressed="true">Lista</button>
+<button class="chip" id="gestor-ver-mapa" type="button" aria-pressed="false">Mapa</button>
+</div>
+<ul class="report-list" id="gestor-lista"></ul>
+<div class="gestor-map" id="gestor-mapa" hidden aria-label="Mapa de ocorrências da equipe"></div>
+</section>
+<section class="workspace-panel gestor-workspace" id="gestor-detalhe" hidden>
+<button class="text-button" id="gestor-voltar" type="button">Voltar à lista</button>
+<h1 id="detalhe-titulo" tabindex="-1"></h1>
+<dl id="detalhe-dados" class="detail-list"></dl>
+<div id="detalhe-mapa" class="location-map" aria-label="Localização exata da ocorrência"></div>
+<img id="detalhe-foto" class="foto-preview" alt="Foto da ocorrência" hidden>
+<p id="detalhe-foto-status" role="status"></p>
+<h2>Histórico</h2><ol class="timeline" id="detalhe-historico"></ol>
+<form class="workspace-form" id="gestor-etapa" hidden>
+<label for="nova-etapa">Alterar etapa</label><select id="nova-etapa" name="etapa"></select>
+<label for="observacao">Observação interna (opcional)</label><textarea id="observacao" name="observacao" maxlength="1000"></textarea>
+<button class="primary" type="submit">Salvar etapa</button>
+</form>
+</section>
+<p id="gestor-status" class="workspace-status" role="status" aria-live="polite"></p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script type="module" src="../js/base.mjs"></script><script type="module" src="../js/gestor.mjs"></script>
+</body></html>
