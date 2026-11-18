@@ -18,6 +18,10 @@ O CPF foi retirado do formulário. Envio e consulta com persistência real, cont
 
 O Figma ilustra a jornada pretendida e ainda requer atualização de estados. O servidor local é uma ferramenta de desenvolvimento, não um serviço de envio, autenticação ou atendimento.
 
+## Banco da versão de apresentação
+
+A Fase 1 inclui a migração Supabase, dados fictícios em Campina Grande e testes das funções de relato, consulta e moderação. O protótipo acima ainda usa o servidor local. Para rodar os testes, execute `npm ci` e `npm test`. Veja os passos de aplicação e validação no [guia do Supabase](docs/implementation/SUPABASE_SETUP.md).
+
 ## Escopo planejado do MVP
 
 - Registro de ocorrências com categoria, descrição, localização e foto opcional.
@@ -33,6 +37,7 @@ O Figma ilustra a jornada pretendida e ainda requer atualização de estados. O 
 - [Product Backlog](docs/product-backlog/Product_Backlog_Mappia.md) · [PDF](docs/product-backlog/Product_Backlog_Mappia.pdf)
 - [Jornada do usuário](docs/design/JORNADA.md)
 - [Plano de implementação para quatro pessoas](docs/implementation/PLANO_MVP_4_PESSOAS.md)
+- [Plano da versão para apresentação](docs/implementation/PLANO_GPT_APRESENTACAO.md)
 - [Telas do protótipo](docs/design/telas)
 
 ## Equipe

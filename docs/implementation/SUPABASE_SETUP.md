@@ -12,7 +12,7 @@ A Fase 0 está pronta quando o projeto estiver criado, a configuração de e-mai
 
 ## 2. Aplicar o banco da Fase 1
 
-Com a CLI instalada, abra a raiz do repositório na branch `João-Vitor`. No PowerShell, substitua `REF_DO_PROJETO` pela referência do projeto Supabase que você criou para a apresentação.
+Com a CLI instalada, abra a raiz do repositório na branch `João-Vitor`. Se ainda não houver `supabase/config.toml`, rode `supabase init` uma vez. No PowerShell, substitua `REF_DO_PROJETO` pela referência do projeto Supabase que você criou para a apresentação.
 
 ```powershell
 supabase login
@@ -38,6 +38,26 @@ on conflict (user_id) do nothing;
 ```
 
 3. Com o gestor criado, a validação da Fase 1 usa `GESTOR_EMAIL` e `GESTOR_SENHA` no ambiente local do teste. A função `sou_gestor()` deve retornar `true` para essa conta.
+
+### Rodar os testes da Fase 1
+
+Na raiz, execute `npm ci` e `npm test`. A suíte local usa Postgres embutido com substitutos para os esquemas Auth e Storage. Ela carrega a migração, testa os papéis do banco, aplica o seed e executa o reset em uma base descartável.
+
+Para validar o serviço hospedado, defina `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `GESTOR_EMAIL` e `GESTOR_SENHA` no ambiente local. Execute no PowerShell:
+
+```powershell
+$env:MAPPIA_TEST_REMOTE = '1'
+node --test tests/supabase.smoke.test.mjs
+Remove-Item Env:MAPPIA_TEST_REMOTE
+```
+
+O teste hospedado cria e valida um relato fictício no projeto indicado. Sem `MAPPIA_TEST_REMOTE=1`, `npm test` roda a suíte local e sinaliza o teste hospedado como pulado.
+
+### Contrato para a integração do site
+
+- `confirmar_codigo` devolve `{ prova }` em caso de sucesso ou `{ erro }` para código incorreto, expirado ou tentativas esgotadas. Esse formato permite gravar a tentativa sem abortar a transação.
+- `criar_relato` entrega o token secreto apenas na criação de um relato sem conta. Uma repetição com a mesma chave e os mesmos dados retorna o protocolo existente. Alterar os dados sob a mesma chave retorna `IDEMPOTENCIA_CONFLITO`.
+- As RPCs de verificação e criação exigem modo apresentação ativo. O código aparece na tela de demonstração e esta fase não envia e-mail ou SMS.
 
 ## 4. Limpar os dados depois da apresentação
 
