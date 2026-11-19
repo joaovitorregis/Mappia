@@ -1,4 +1,4 @@
-import { TILE_URL } from './config.js';
+import { TILE_URL } from './config.js?v=10';
 export const centro = [-7.2307, -35.8811];
 export function criarMapa(elemento, opcoes = {}) {
   const L = window.L;

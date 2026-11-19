@@ -1,9 +1,12 @@
-import { iniciarVerificacao, confirmarCodigo, criarRelato, subirFoto } from './supabase.mjs';
-import { criarMapa, localizar, temCartografia } from './mapa-base.mjs?v=9';
+import { recebimentoRealDisponivel, verificarContato, criarRelato, subirFoto } from './supabase.mjs?v=10';
+import { SUPABASE_URL, TURNSTILE_SITE_KEY } from './config.js?v=10';
+import { montarTurnstile } from './turnstile.mjs';
+import { telefoneBrasileiro } from './telefone.mjs';
+import { criarMapa, localizar, temCartografia } from './mapa-base.mjs?v=10';
 import { prepararFoto } from './foto.mjs';
 import { nomeCategoria } from './categorias.mjs';
-import { erroAmigavel } from './erros.mjs';
-import { guardarProtocolo, linkProtocolo } from './protocolos.mjs';
+import { erroAmigavel } from './erros.mjs?v=10';
+import { guardarProtocolo, linkProtocolo } from './protocolos.mjs?v=10';
 
 const form = document.querySelector('#relato-etapas');
 const el = id => document.getElementById(id);
@@ -13,12 +16,14 @@ const feedback = el('submit-feedback');
 let step = 1;
 let mapa, pino, mapaRevisao, pinoRevisao, ponto;
 let verificacao, prova, foto, fotoUrl, envio;
+let widget, carregandoWidget, fotoAutorizada;
+let solicitandoCodigo = false;
 let versaoContato = 0;
 let versaoFoto = 0;
 let pedidoGps = 0;
 let preparandoFoto = false;
 let enviando = false;
-const chaveRascunho = 'mappia.rascunho';
+const chaveRascunho = 'mappia:' + SUPABASE_URL + ':real:rascunho';
 
 function salvarRascunho() {
   const data = new FormData(form);
@@ -106,6 +111,7 @@ function show(next) {
   step = next;
   steps.forEach((box, index) => { box.hidden = index !== step - 1; });
   if (step === 2) abrirMapa();
+  if (step === 3) prepararSeguranca();
   if (step === 4) review();
   steps[step - 1].querySelector('h1').focus();
   window.scrollTo(0, 0);
@@ -117,7 +123,28 @@ function invalidarContato() {
   prova = undefined;
   verificacao = undefined;
   el('verification-panel').hidden = true;
-  contato.textContent = 'Gere e confirme um código para este contato fictício.';
+  contato.textContent = '';
+}
+
+function habilitarEnvioCodigo(pronto = Boolean(widget?.token)) {
+  el('request-code').disabled = !pronto || solicitandoCodigo;
+}
+
+function prepararSeguranca() {
+  if (carregandoWidget) return;
+  const status = el('contato-seguranca-status');
+  status.textContent = 'Carregando verificação de segurança…';
+  carregandoWidget = montarTurnstile(el('contato-seguranca'), 'contato-envio', pronto => {
+    habilitarEnvioCodigo(pronto);
+    if (pronto) status.textContent = '';
+  }, () => {
+    status.textContent = 'A verificação de segurança falhou. Tente novamente no formulário.';
+  }).then(resultado => {
+    widget = resultado;
+    habilitarEnvioCodigo();
+  }).catch(() => {
+    status.textContent = 'Não foi possível carregar a verificação de segurança. Atualize a página para tentar novamente.';
+  });
 }
 
 function estadoCanal() {
@@ -133,28 +160,40 @@ form.querySelectorAll('[name="contact-channel"]').forEach(radio => radio.addEven
 for (const id of ['email', 'phone']) el(id).addEventListener('input', invalidarContato);
 estadoCanal();
 
-el('request-code').addEventListener('click', async event => {
-  const button = event.currentTarget;
+el('request-code').addEventListener('click', async () => {
+  if (solicitandoCodigo || !widget?.token) return;
   const data = new FormData(form);
   const canal = data.get('contact-channel') === 'email' ? 'email' : 'telefone';
   const input = el(canal === 'email' ? 'email' : 'phone');
   if (!input.reportValidity()) return;
+  const valor = canal === 'telefone' ? telefoneBrasileiro(input.value) : input.value.trim();
+  if (!valor) {
+    contato.textContent = 'Informe um celular brasileiro com DDD.';
+    return;
+  }
+  const captcha = widget.token;
   invalidarContato();
   const versao = versaoContato;
-  button.disabled = true;
+  solicitandoCodigo = true;
+  habilitarEnvioCodigo();
+  contato.textContent = 'Enviando o código…';
   try {
-    const result = await iniciarVerificacao({ canal, contato: input.value });
+    const result = await verificarContato({ acao: 'enviar', canal, contato: valor, captcha });
     if (versao !== versaoContato) return;
+    if (!result?.verificacao_id) throw new Error('VERIFICACAO_INDISPONIVEL');
     verificacao = result.verificacao_id;
-    el('demo-code').textContent = 'Código de teste: ' + result.codigo_demo;
     el('verification-code').value = '';
     el('verification-panel').hidden = false;
-    contato.textContent = 'Modo apresentação: em uso real, o código chegaria por e-mail ou SMS.';
+    contato.textContent = canal === 'email'
+      ? 'Confira a caixa de entrada e a pasta de spam do seu e-mail.'
+      : 'Confira o SMS enviado para o celular.';
     el('verification-code').focus();
   } catch (error) {
     if (versao === versaoContato) contato.textContent = erroAmigavel(error);
   } finally {
-    button.disabled = false;
+    solicitandoCodigo = false;
+    widget.reset();
+    habilitarEnvioCodigo();
   }
 });
 
@@ -162,11 +201,17 @@ el('verify-code').addEventListener('click', async event => {
   if (!verificacao) return;
   const button = event.currentTarget;
   const versao = versaoContato;
+  const codigo = el('verification-code').value.trim();
+  if (!/^\d{6}$/.test(codigo)) {
+    contato.textContent = 'Digite os seis dígitos que você recebeu.';
+    return;
+  }
   button.disabled = true;
   try {
-    const result = await confirmarCodigo({ verificacao_id: verificacao, codigo: el('verification-code').value.trim() });
+    const result = await verificarContato({ acao: 'confirmar', verificacao_id: verificacao, codigo });
     if (versao !== versaoContato) return;
-    prova = result;
+    if (!result?.prova) throw new Error('VERIFICACAO_INDISPONIVEL');
+    prova = result.prova;
     contato.textContent = 'Código confirmado. Você pode continuar.';
     el('verification-panel').hidden = true;
   } catch (error) {
@@ -237,7 +282,7 @@ for (const botao of form.querySelectorAll('[data-next]')) {
 form.querySelectorAll('[data-back]').forEach(botao => botao.addEventListener('click', () => show(step - 1)));
 form.querySelectorAll('[data-edit]').forEach(botao => botao.addEventListener('click', () => show(Number(botao.dataset.edit))));
 
-el('enviar-demo').addEventListener('click', async event => {
+el('enviar-relato').addEventListener('click', async event => {
   if (enviando || !prova || !ponto) return;
   const button = event.currentTarget;
   const data = new FormData(form);
@@ -247,21 +292,41 @@ el('enviar-demo').addEventListener('click', async event => {
   };
   const assinatura = JSON.stringify(campos);
   if (envio?.assinatura !== assinatura || envio.foto !== foto) {
-    envio = { assinatura, foto, id: crypto.randomUUID(), caminho: foto ? 'pendentes/' + crypto.randomUUID() + '.jpg' : null };
+    envio = { assinatura, foto, id: crypto.randomUUID() };
+  }
+  if (foto && fotoAutorizada?.prova === prova && fotoAutorizada.arquivo !== foto) {
+    invalidarContato();
+    show(3);
+    contato.textContent = 'Confirme um novo código para enviar a foto que você escolheu.';
+    return;
   }
   enviando = true;
   button.disabled = true;
   feedback.textContent = 'Enviando relato…';
+  let verificarDeNovo = false;
   try {
-    if (envio.caminho && !envio.enviada) {
-      try {
-        await subirFoto(envio.caminho, foto);
-      } catch (error) {
-        if (String(error.statusCode ?? error.status) !== '409') throw error;
-      }
-      envio.enviada = true;
+    if (foto && fotoAutorizada?.prova !== prova) {
+      fotoAutorizada = { prova, arquivo: foto, acesso: null, enviada: false };
     }
-    const relato = await criarRelato({ ...campos, foto_path: envio.caminho, chave_idempotencia: envio.id });
+    if (foto && !fotoAutorizada.acesso) {
+      const acesso = await verificarContato({ acao: 'foto', prova });
+      if (!acesso?.path || !acesso?.token) throw new Error('FOTO_INVALIDA');
+      fotoAutorizada.acesso = acesso;
+    }
+    if (foto && !fotoAutorizada.enviada) {
+      try {
+        await subirFoto(fotoAutorizada.acesso, foto);
+      } catch (error) {
+        const duplicado = error.error === 'Duplicate' || error.code === 'ResourceAlreadyExists' ||
+          String(error.statusCode ?? error.status) === '409';
+        if (!duplicado) {
+          fotoAutorizada.acesso = null;
+          throw error;
+        }
+      }
+      fotoAutorizada.enviada = true;
+    }
+    const relato = await criarRelato({ ...campos, foto_path: foto ? fotoAutorizada.acesso.path : null, chave_idempotencia: envio.id });
     try { guardarProtocolo(relato); } catch { el('confirmation-note').textContent = 'Copie o protocolo. O navegador bloqueou o armazenamento neste aparelho.'; }
     try { sessionStorage.removeItem(chaveRascunho); } catch { /* protocolo já gerado */ }
     form.hidden = true;
@@ -271,10 +336,15 @@ el('enviar-demo').addEventListener('click', async event => {
     el('confirmation').querySelector('h2').focus();
   } catch (error) {
     feedback.textContent = erroAmigavel(error);
-    if (error.message === 'CONTATO_NAO_VERIFICADO') invalidarContato();
+    verificarDeNovo = error.message === 'CONTATO_NAO_VERIFICADO';
   } finally {
     enviando = false;
     button.disabled = false;
+    if (verificarDeNovo) {
+      invalidarContato();
+      show(3);
+      contato.textContent = 'Confirme um novo código antes de enviar o relato.';
+    }
   }
 });
 
@@ -287,7 +357,7 @@ el('copiar-protocolo').addEventListener('click', async () => {
   }
 });
 
-try {
+function restaurarRascunho() {
   const rascunho = JSON.parse(sessionStorage.getItem(chaveRascunho));
   if (rascunho) {
     const tipo = [...form.elements.tipo].find(item => item.value === rascunho.tipo);
@@ -299,6 +369,19 @@ try {
     if (etapa > 1) show(etapa);
     if (rascunho.tinhaFoto) el('location-feedback').textContent = 'Rascunho recuperado. Selecione a foto novamente.';
   }
-} catch {
-  // A página permanece utilizável se o navegador descartar o rascunho.
 }
+
+async function abrirRecebimento() {
+  if (!TURNSTILE_SITE_KEY) return;
+  const status = el('recebimento-status');
+  status.textContent = 'Verificando se o envio de relatos está disponível…';
+  try {
+    if (await recebimentoRealDisponivel() !== true) throw new Error('VERIFICACAO_INDISPONIVEL');
+    el('recebimento-aviso').hidden = true;
+    form.hidden = false;
+    try { restaurarRascunho(); } catch { /* O envio fica disponível sem rascunho local. */ }
+  } catch {
+    status.textContent = 'O envio de relatos está indisponível no momento.';
+  }
+}
+abrirRecebimento();

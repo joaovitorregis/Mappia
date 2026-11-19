@@ -1,6 +1,7 @@
 const mensagens = {
   CONTATO_INVALIDO: 'Confira o e-mail ou o telefone informado.',
-  VERIFICACAO_INDISPONIVEL: 'A verificação de apresentação está indisponível.',
+  VERIFICACAO_INDISPONIVEL: 'A verificação está indisponível no momento. Tente mais tarde.',
+  CAPTCHA_INVALIDO: 'Conclua novamente a verificação de segurança.',
   CODIGO_INVALIDO: 'Código incorreto. Confira os seis dígitos.',
   CODIGO_EXPIRADO: 'O código expirou. Gere outro código.',
   TENTATIVAS_ESGOTADAS: 'Tentativas esgotadas. Gere outro código.',
@@ -17,7 +18,11 @@ const mensagens = {
   invalid_credentials: 'E-mail ou senha incorretos.',
   user_already_exists: 'Já existe uma conta com este e-mail. Use a opção Entrar.',
   weak_password: 'Escolha uma senha com pelo menos seis caracteres.',
-  over_request_rate_limit: 'Muitas tentativas. Aguarde um pouco e tente novamente.'
+  over_request_rate_limit: 'Muitas tentativas. Aguarde um pouco e tente novamente.',
+  email_not_confirmed: 'Abra o link de confirmação enviado para o seu e-mail.',
+  phone_provider_disabled: 'O acesso por telefone não está disponível.',
+  otp_expired: 'O código expirou ou está incorreto. Confira o SMS ou solicite outro.',
+  captcha_failed: 'Conclua novamente a verificação de segurança.'
 };
 export function erroAmigavel(erro) {
   return mensagens[erro?.code] ?? mensagens[erro?.message] ??

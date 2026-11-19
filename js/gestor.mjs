@@ -1,8 +1,10 @@
-import { cliente, conferir, souGestor, gestorListar, gestorDetalhe, alterarEtapa, urlDaFoto } from './supabase.mjs';
+import { cliente, conferir, souGestor, gestorListar, gestorDetalhe, alterarEtapa, urlDaFoto } from './supabase.mjs?v=10';
 import { preencherCategorias, nomeCategoria } from './categorias.mjs';
 import { etapas, transicoes, dataLocal } from './etapas.mjs';
-import { erroAmigavel } from './erros.mjs';
-import { criarMapa } from './mapa-base.mjs?v=9';
+import { erroAmigavel } from './erros.mjs?v=10';
+import { criarMapa } from './mapa-base.mjs?v=10';
+import { TURNSTILE_SITE_KEY } from './config.js?v=10';
+import { montarTurnstile } from './turnstile.mjs';
 
 const el = id => document.getElementById(id);
 const status = el('gestor-status');
@@ -16,7 +18,26 @@ const etapaForm = el('gestor-etapa');
 let selecionado, listaAtual = [], mapa, pontos, local, localPino;
 let pedido = 0, pedidoDetalhe = 0;
 let consultaEmCurso = 0, ultimaLista;
+const loginBotao = login.querySelector('button');
+const loginSeguranca = el('gestor-seguranca-status');
+let captcha, loginEmCurso = false;
 preencherCategorias(filtros.elements.categoria);
+
+function atualizarLogin(pronto = !TURNSTILE_SITE_KEY || Boolean(captcha?.token)) {
+  loginBotao.disabled = loginEmCurso || !pronto;
+}
+if (TURNSTILE_SITE_KEY) {
+  atualizarLogin();
+  loginSeguranca.textContent = 'Carregando verificação de segurança…';
+  montarTurnstile(el('gestor-seguranca'), 'gestor-acesso', pronto => {
+    atualizarLogin(pronto);
+    if (pronto) loginSeguranca.textContent = '';
+  }, () => { loginSeguranca.textContent = 'A verificação de segurança falhou. Tente novamente.'; })
+    .then(widget => { captcha = widget; atualizarLogin(); })
+    .catch(() => {
+      loginSeguranca.textContent = 'Não foi possível carregar a verificação de segurança. Atualize a página.';
+    });
+}
 
 function mostrarPainel() {
   el('gestor-login').hidden = true;
@@ -37,17 +58,24 @@ async function conferirSessao() {
 }
 login.addEventListener('submit', async event => {
   event.preventDefault();
-  const button = login.querySelector('button');
-  button.disabled = true;
+  if (loginEmCurso || (TURNSTILE_SITE_KEY && !captcha?.token)) return;
+  const captchaToken = captcha?.token;
+  loginEmCurso = true;
+  atualizarLogin();
   status.textContent = 'Entrando…';
   try {
-    conferir(await cliente.auth.signInWithPassword({ email: login.elements.email.value.trim(), password: login.elements.senha.value }));
+    conferir(await cliente.auth.signInWithPassword({
+      email: login.elements.email.value.trim(), password: login.elements.senha.value,
+      options: { captchaToken }
+    }));
     login.reset();
     await conferirSessao();
   } catch (error) {
     status.textContent = erroAmigavel(error);
   } finally {
-    button.disabled = false;
+    loginEmCurso = false;
+    captcha?.reset();
+    atualizarLogin();
   }
 });
 el('gestor-sair').addEventListener('click', async () => {

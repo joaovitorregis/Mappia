@@ -2,12 +2,12 @@
 
 O Mappia é um projeto de extensão voltado ao registro e acompanhamento de problemas urbanos. A proposta permite consultar ocorrências no mapa, relatar um problema e acompanhar seu andamento por protocolo.
 
-O repositório contém a versão de apresentação do Mappia para os alunos, com dados fictícios em Campina Grande, PB.
+O Mappia cobre Campina Grande, PB. O site está em transição para aceitar relatos reais. O mapa público começa sem os registros da apresentação, e o formulário permanece fechado até a entrega por e-mail e SMS estar configurada e testada.
 
-## Demonstração
+## Site
 
 - [Abrir o Mappia](https://joaovitorregis.github.io/Mappia/) · [Painel do gestor](https://joaovitorregis.github.io/Mappia/gestor/)
-- [Roteiro e QR da apresentação](docs/implementation/ROTEIRO_APRESENTACAO.md)
+- [Ativação e verificação da produção](docs/implementation/ATIVAR_PRODUCAO.md)
 
 ![Telas do Mappia organizadas por jornada](docs/design/telas-organizadas.png)
 
@@ -15,9 +15,9 @@ O repositório contém a versão de apresentação do Mappia para os alunos, com
 - [Arquivo de design](https://www.figma.com/design/sXNaua5CmhShdvoC4J4upn/Mappia?node-id=2045-121)
 - [Visão geral das telas](docs/design/telas-organizadas.png)
 
-O relato aceita um contato fictício, e-mail ou telefone, com código mostrado na tela. O protocolo permite acompanhar o andamento, e a conta opcional por e-mail e senha guarda o histórico. O painel do gestor permite mudar a etapa, e o mapa público exibe somente ocorrências aprovadas, com posição aproximada. As fotos ficam no Storage privado. O acesso à conta por telefone, a entrega de códigos por e-mail ou SMS e a operação com moradores reais ficam fora desta apresentação.
+O novo fluxo envia o código de verificação ao e-mail ou telefone pelo serviço configurado. A conta continua opcional. O protocolo permite acompanhar a moderação, e o mapa mostra ocorrências aprovadas com posição aproximada. Fotos, referência livre e contatos ficam restritos à equipe. O envio e a conta pública dependem da ativação dos serviços.
 
-Para executar localmente, rode `node dev/server.mjs` e abra `http://127.0.0.1:4173`. A interface usa o mesmo Supabase de apresentação. Para testar o código, execute `npm ci` e `npm test`. O teste remoto é opcional e usa credenciais locais do gestor. [Guia do Supabase](docs/implementation/SUPABASE_SETUP.md)
+Para executar localmente, rode `node dev/server.mjs` e abra `http://127.0.0.1:4173`. Para testar, execute `npm ci` e `npm test`. [Guia do Supabase](docs/implementation/SUPABASE_SETUP.md)
 
 ## Escopo planejado do MVP
 
