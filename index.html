@@ -12,7 +12,7 @@
 
   <!-- CSS único (inclui os ícones do Bootstrap) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="css/mappia.css?v=6">
+  <link rel="stylesheet" href="css/mappia.css?v=7">
 </head>
 
 <body class="mappia pagina-inicio">
@@ -37,14 +37,43 @@
       <a href="acompanhar.html?v=5" class="tab">Acompanhar</a>
     </nav>
 
-    <!--meio da tela-->
+    <section class="mapa-publico" aria-labelledby="map-title">
+      <h1 id="map-title">Mapa de Campina Grande</h1>
+      <div id="map-inline">
+        <div id="map-navigation" class="map-navigation">
+          <div class="map-tools" aria-label="Controles do mapa">
+            <div class="map-zoom" role="group" aria-label="Zoom">
+              <button type="button" class="chip" id="map-zoom-in" aria-label="Aproximar" disabled>+</button>
+              <button type="button" class="chip" id="map-zoom-out" aria-label="Afastar" disabled>−</button>
+            </div>
+            <button type="button" class="chip" id="btn-localizacao" disabled>Minha localização</button>
+            <button type="button" class="chip" id="map-recenter" disabled>Voltar à cidade</button>
+            <button type="button" class="chip" id="map-expand" aria-haspopup="dialog" disabled>Ampliar mapa</button>
+          </div>
+          <div class="mapa-container">
+            <div id="mapa" class="mapa mapa-interativo" role="region" aria-label="Mapa público de Campina Grande" aria-describedby="map-help"></div>
+          </div>
+          <p id="map-help" class="map-help">Arraste para navegar. Use dois dedos, os botões + e − ou a roda do mouse com o mapa em foco para mudar o zoom.</p>
+          <p id="map-gps" role="status"></p>
+        </div>
+      </div>
+      <ul class="map-counts" aria-label="Contagem de ocorrências">
+        <li><strong data-contagem="validada">—</strong> Validadas</li>
+        <li><strong data-contagem="encaminhada">—</strong> Encaminhadas</li>
+        <li><strong data-contagem="resolvida">—</strong> Resolvidas</li>
+      </ul>
+      <div class="filtros" id="map-filters" role="group" aria-label="Filtrar por categoria"></div>
+      <p id="map-status" role="status"></p>
+      <button type="button" class="secondary" id="map-retry" hidden>Tentar de novo</button>
+    </section>
+
     <section class="hero">
       <p class="local">
         <i class="bi bi-geo-alt-fill icone" aria-hidden="true"></i>
         <span id="cidade">Campina Grande</span>
       </p>
 
-      <h1 class="titulo">Seu bairro,<br>mais <span class="destaque">visível.</span></h1>
+      <h2 class="titulo">Seu bairro,<br>mais <span class="destaque">visível.</span></h2>
 
       <p class="subtitulo">Viu algo que precisa de atenção? Conte aqui.</p>
 
@@ -57,25 +86,18 @@
       </a>
     </section>
 
-    <section class="mapa-publico" aria-label="Ocorrências públicas">
-      <ul class="map-counts" aria-label="Contagem de ocorrências">
-        <li><strong data-contagem="validada">—</strong> Validadas</li>
-        <li><strong data-contagem="encaminhada">—</strong> Encaminhadas</li>
-        <li><strong data-contagem="resolvida">—</strong> Resolvidas</li>
-      </ul>
-      <div class="filtros" id="map-filters" aria-label="Filtrar por categoria"></div>
-      <div class="mapa-container"><div id="mapa" class="mapa mapa-interativo" aria-label="Mapa público de Campina Grande"></div></div>
-      <button type="button" class="text-button" id="btn-localizacao">Usar minha localização</button>
-      <p id="map-gps" role="status"></p>
-      <p id="map-status" role="status"></p>
-      <button type="button" class="secondary" id="map-retry" hidden>Tentar de novo</button>
-    </section>
-
   </main>
+  <dialog id="map-dialog" class="map-dialog" aria-labelledby="map-dialog-title">
+    <div class="map-dialog-header">
+      <h2 id="map-dialog-title">Mapa ampliado</h2>
+      <form method="dialog"><button class="chip" type="submit" autofocus>Fechar mapa</button></form>
+    </div>
+    <div id="map-expanded"></div>
+  </dialog>
 
   <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
   <script type="module" src="js/base.mjs"></script>
-  <script type="module" src="js/mapa-publico.mjs"></script>
+  <script type="module" src="js/mapa-publico.mjs?v=7"></script>
 </body>
 </html>

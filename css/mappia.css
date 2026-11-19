@@ -251,7 +251,6 @@
 .mappia .chip.active { border-color: #3d98ff; background: #e1f3ff; color: var(--azul); font-weight: 600; }
 .mappia .chip.active .icone { color: var(--azul); }
 
-/* Recorte da região do mapa do protótipo (proporção 319 × 315) */
 .mappia .mapa-container {
   position: relative;
   width: 100%;
@@ -264,14 +263,8 @@
 .mappia .mapa {
   width: 100%;
   height: 100%;
-  background-image: url('../docs/design/telas/01-inicio.png');
-  background-size: 122.257% auto;
-  background-position: 50% 88.358%;
-  background-repeat: no-repeat;
   background-color: #dcecf1;
 }
-/* A imagem demonstrativa já traz os controles; evita desenhá-los duas vezes. */
-.mappia .mapa-container > :is(.btn-localizacao, .zoom) { display: none; }
 
 /* ---------- 9. Passos de "Relatar" ---------- */
 .mappia .progress { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin-top: 16px; padding: 0; list-style: none; }
@@ -442,12 +435,29 @@
   font-size: .8rem;
 }
 .mappia a.btn-entrar { text-decoration: none; }
-.mappia .mapa-publico { min-width: 0; }
-.mappia .mapa-interativo { background-image: none; }
-.mappia .mapa-publico .mapa-container { max-width: none; }
-.mappia .map-counts { display: flex; flex-wrap: wrap; gap: 6px 14px; list-style: none; padding: 0; margin: 0 0 12px; font-size: .86rem; }
+.mappia .mapa-publico { min-width: 0; margin-top: 18px; }
+.mappia .mapa-publico h1 { font-size: clamp(1.25rem, 3vw, 1.65rem); line-height: 1.2; }
+.mappia .map-navigation .mapa-container { max-width: none; height: clamp(310px, 52dvh, 560px); aspect-ratio: auto; }
+.mappia .map-tools { display: flex; flex-wrap: wrap; gap: 6px; margin-block: 10px 8px; }
+.mappia .map-tools .chip, .mappia .map-dialog-header .chip { min-height: 44px; }
+.mappia .map-zoom { display: flex; gap: 4px; }
+.mappia .map-zoom .chip { justify-content: center; min-width: 44px; font-size: 1.25rem; line-height: 1; }
+.mappia .map-tools .chip:disabled { opacity: .5; }
+.mappia .mapa-interativo:focus-visible { outline: 3px solid var(--foco); outline-offset: -3px; }
+.mappia .map-navigation .map-help { margin: 8px 0 0; color: var(--suave); font-size: .82rem; }
+.mappia #map-gps:empty { display: none; }
+.mappia #map-gps:not(:empty) { margin: 6px 0 0; }
+.mappia .map-counts { display: flex; flex-wrap: wrap; gap: 6px 14px; list-style: none; padding: 0; margin: 12px 0 10px; font-size: .86rem; }
+.mappia .map-dialog { width: min(1100px, calc(100% - 16px)); max-width: none; max-height: calc(100dvh - 16px); padding: clamp(10px, 2vw, 20px); }
+.mappia .map-dialog-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 12px; }
+.mappia .map-dialog-header h2 { font-size: 1.125rem; }
+.mappia .map-dialog .mapa-container { height: max(170px, calc(100dvh - 200px)); }
+.mappia:has(.map-dialog[open]) { overflow: hidden; }
 .mappia .mapa-publico .filtros { flex-wrap: wrap; margin: 0 0 12px; }
-.mappia .map-pin span { display: block; width: 18px; height: 18px; background: var(--pin-color); border: 2px solid #fff; border-radius: 50%; box-shadow: 0 1px 5px #13274355; }
+.mappia .map-pin { display: grid; place-items: center; }
+.mappia .map-pin span { display: grid; place-items: center; min-width: 20px; min-height: 20px; padding-inline: 4px; background: var(--pin-color); border: 2px solid #fff; border-radius: 999px; box-shadow: 0 1px 5px #13274355; color: white; font-weight: 700; }
+.mappia .map-popup article + article { border-top: 1px solid var(--borda); margin-top: 10px; padding-top: 10px; }
+.mappia .map-popup a { display: inline-flex; align-items: center; min-height: 36px; text-decoration: underline; }
 .mappia .location-map, .mappia .gestor-map, .mappia .mapa-interativo { isolation: isolate; }
 .mappia .foto-preview { display: block; margin: 12px 0; max-width: min(100%, 360px); max-height: 270px; border-radius: 12px; object-fit: contain; }
 .mappia .timeline { padding-left: 22px; margin: 12px 0 0; }
@@ -472,5 +482,5 @@
 @media (min-width: 1024px) {
   .pagina-inicio .app > :is(.topbar, .tabs, .apresentacao) { grid-column: 1 / -1; grid-row: auto; }
   .pagina-inicio .app > .hero { grid-column: 1; grid-row: 4; }
-  .pagina-inicio .mapa-publico { grid-column: 2; grid-row: 4; align-self: start; }
+  .pagina-inicio .mapa-publico { grid-column: 2; grid-row: 4; align-self: start; margin-top: 18px; }
 }
