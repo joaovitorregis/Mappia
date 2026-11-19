@@ -1,7 +1,7 @@
 name: Publicar Mappia de apresentação
 on:
   push:
-    branches: ['João-Vitor']
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   publicar:
-    if: github.ref_name == 'João-Vitor'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
