@@ -1,4 +1,4 @@
-import { ocorrenciasPublicas, indicadoresPublicos } from './supabase.mjs';
+import { ocorrenciasPublicas } from './supabase.mjs';
 import { categorias, nomeCategoria } from './categorias.mjs';
 import { etapas, dataLocal } from './etapas.mjs';
 import { centro, criarMapa, localizar } from './mapa-base.mjs';
@@ -18,9 +18,14 @@ const recentrar = document.querySelector('#map-recenter');
 const localizacao = document.querySelector('#btn-localizacao');
 const zoomIn = document.querySelector('#map-zoom-in');
 const zoomOut = document.querySelector('#map-zoom-out');
+const intervaloAtualizacao = 15_000;
+const marcadores = new Map();
 let mapa, pinos;
+let ocorrencias = null;
 let selecionada = null;
-let versao = 0;
+let consultando = false;
+let falha = false;
+let proximaConsulta;
 for (const [id, nome] of [[null, 'Todas'], ...Object.entries(categorias).map(([id, cat]) => [id, cat.nome])]) {
   const botao = document.createElement('button');
   botao.type = 'button';
@@ -34,7 +39,7 @@ for (const [id, nome] of [[null, 'Todas'], ...Object.entries(categorias).map(([i
       item.classList.toggle('active', item === botao);
       item.setAttribute('aria-pressed', String(item === botao));
     }
-    carregar();
+    if (ocorrencias) atualizarVista();
   });
   filtros.append(botao);
 }
@@ -60,8 +65,17 @@ function mostrarPinos(ocorrencias) {
     porPonto.get(coordenadas).push(relato);
   }
 
-  pinos.clearLayers();
-  for (const grupo of porPonto.values()) {
+  for (const [ponto, { marcador }] of marcadores) {
+    if (porPonto.has(ponto)) continue;
+    pinos.removeLayer(marcador);
+    marcadores.delete(ponto);
+  }
+
+  for (const [ponto, grupo] of porPonto) {
+    const assinatura = JSON.stringify(grupo);
+    const existente = marcadores.get(ponto);
+    if (existente?.assinatura === assinatura) continue;
+
     const primeiro = grupo[0];
     const varios = grupo.length > 1;
     const cor = varios ? '#165bb3' : categorias[primeiro.categoria]?.cor ?? '#506777';
@@ -70,21 +84,52 @@ function mostrarPinos(ocorrencias) {
     const simbolo = document.createElement('span');
     simbolo.style.setProperty('--pin-color', cor);
     if (varios) simbolo.textContent = String(grupo.length);
-    const marcador = window.L.marker([primeiro.lat, primeiro.lng], {
-      alt: rotulo, title: rotulo,
-      icon: window.L.divIcon({ className: 'map-pin', html: simbolo, iconSize: [36, 36] })
-    });
+    const icon = window.L.divIcon({ className: 'map-pin', html: simbolo, iconSize: [36, 36] });
     const conteudo = document.createElement('div');
     conteudo.className = 'map-popup';
     conteudo.append(...grupo.map(resumo));
-    marcador.bindPopup(conteudo, { maxHeight: 175, maxWidth: 246, minWidth: 140 }).addTo(pinos);
+    if (existente) {
+      const { marcador } = existente;
+      marcador.options.title = rotulo;
+      marcador.options.alt = rotulo;
+      marcador.setIcon(icon);
+      marcador.getElement().title = rotulo;
+      const popup = marcador.getPopup();
+      // Atualizar um cartão aberto sem deslocar a vista.
+      popup.options.autoPan = false;
+      marcador.setPopupContent(conteudo);
+      popup.options.autoPan = true;
+      marcador.getElement().setAttribute('aria-label', rotulo);
+      existente.assinatura = assinatura;
+    } else {
+      const marcador = window.L.marker([primeiro.lat, primeiro.lng], { alt: rotulo, title: rotulo, icon });
+      marcador.bindPopup(conteudo, { maxHeight: 175, maxWidth: 246, minWidth: 140 }).addTo(pinos);
+      marcador.getElement().setAttribute('aria-label', rotulo);
+      marcadores.set(ponto, { marcador, assinatura });
+    }
   }
 }
 
+function atualizarVista() {
+  const visiveis = selecionada ? ocorrencias.filter(row => row.categoria === selecionada) : ocorrencias;
+  mostrarPinos(visiveis);
+  const contagens = { validada: 0, encaminhada: 0, resolvida: 0 };
+  for (const row of ocorrencias) {
+    if (Object.hasOwn(contagens, row.etapa)) contagens[row.etapa]++;
+  }
+  for (const span of document.querySelectorAll('[data-contagem]')) {
+    const valor = String(contagens[span.dataset.contagem]);
+    if (span.textContent !== valor) span.textContent = valor;
+  }
+  if (!falha) status.textContent = visiveis.length ? '' : 'Nenhuma ocorrência nesta categoria.';
+}
+
 async function carregar() {
-  const atual = ++versao;
-  status.textContent = 'Carregando ocorrências…';
-  retry.hidden = true;
+  if (consultando || document.hidden) return;
+  clearTimeout(proximaConsulta);
+  consultando = true;
+  retry.disabled = true;
+  if (!ocorrencias) status.textContent = 'Carregando ocorrências…';
   try {
     if (!mapa) {
       mapa = criarMapa(mapaEl, { touchZoom: true, zoomControl: false });
@@ -97,18 +142,28 @@ async function carregar() {
       for (const botao of [abrir, recentrar, localizacao]) botao.disabled = false;
       pinos = window.L.layerGroup().addTo(mapa);
     }
-    const [rows, counts] = await Promise.all([ocorrenciasPublicas(selecionada), indicadoresPublicos()]);
-    if (atual !== versao) return;
-    mostrarPinos(rows);
-    for (const span of document.querySelectorAll('[data-contagem]')) span.textContent = counts[span.dataset.contagem];
-    status.textContent = rows.length ? '' : 'Nenhuma ocorrência nesta categoria.';
+    ocorrencias = await ocorrenciasPublicas(null, AbortSignal.timeout(10_000));
+    falha = false;
+    atualizarVista();
+    retry.hidden = true;
   } catch {
-    if (atual !== versao) return;
-    status.textContent = 'Não foi possível carregar as ocorrências.';
+    falha = true;
+    status.textContent = ocorrencias
+      ? 'Sem atualização no momento. O mapa mostra os últimos dados recebidos.'
+      : 'Não foi possível carregar as ocorrências.';
     retry.hidden = false;
+  } finally {
+    consultando = false;
+    retry.disabled = false;
+    if (!document.hidden) proximaConsulta = setTimeout(carregar, intervaloAtualizacao);
   }
 }
 retry.addEventListener('click', carregar);
+window.addEventListener('online', carregar);
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) clearTimeout(proximaConsulta);
+  else carregar();
+});
 zoomIn.addEventListener('click', () => mapa.zoomIn());
 zoomOut.addEventListener('click', () => mapa.zoomOut());
 localizacao.addEventListener('click', () => localizar(mapa, gps));

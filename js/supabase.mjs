@@ -20,7 +20,11 @@ export async function confirmarCodigo(args) {
 }
 export const criarRelato = args => rpc('criar_relato', args);
 export const consultarProtocolo = protocolo => rpc('consultar_protocolo', { protocolo });
-export const ocorrenciasPublicas = categoria => rpc('ocorrencias_publicas', { categoria });
+export async function ocorrenciasPublicas(categoria, signal) {
+  let query = cliente.rpc('ocorrencias_publicas', { categoria });
+  if (signal) query = query.abortSignal(signal);
+  return conferir(await query);
+}
 export const indicadoresPublicos = () => rpc('indicadores_publicos');
 export const vincularRelatos = tokens => rpc('vincular_relatos', { tokens });
 export const meusRelatos = () => rpc('meus_relatos');
