@@ -9,7 +9,7 @@ import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 const gestor = '00000000-0000-4000-8000-000000000001';
 const morador = '00000000-0000-4000-8000-000000000002';
 const outroMorador = '00000000-0000-4000-8000-000000000003';
-const migrations = ['0001_mappia.sql', '0002_recuperar_token_envio.sql', '0003_separar_producao.sql'];
+const migrations = ['0001_mappia.sql', '0002_recuperar_token_envio.sql'];
 
 async function checkFlow({ anon, manager, direct }) {
   const id = randomUUID();
@@ -53,7 +53,6 @@ test('Postgres local aplica a migração e separa acesso anônimo, morador e ges
   await db.exec(`
     create role anon;
     create role authenticated;
-    create role service_role;
     create schema auth;
     create table auth.users(id uuid primary key);
     create function auth.uid() returns uuid language sql stable
@@ -69,7 +68,6 @@ test('Postgres local aplica a migração e separa acesso anônimo, morador e ges
   for (const migration of migrations) {
     await db.exec(await readFile(new URL('../supabase/migrations/' + migration, import.meta.url), 'utf8'));
   }
-  await db.exec("update public.configuracao set valor = 'true' where chave = 'modo_apresentacao'");
   await db.query('insert into public.gestores values ($1)', [gestor]);
 
   function as(role, user) {
@@ -122,12 +120,9 @@ test('Postgres local aplica a migração e separa acesso anônimo, morador e ges
     });
   }
   await assert.rejects(storageAs('anon', "insert into storage.objects values ('fotos', 'publica.jpg')"), /row-level security/);
-  await assert.rejects(storageAs('anon', "insert into storage.objects values ('fotos', 'pendentes/00000000-0000-4000-8000-000000000003.jpg')"), /row-level security/);
-  await db.exec("insert into storage.objects values ('fotos', 'pendentes/00000000-0000-4000-8000-000000000003.jpg')");
+  await storageAs('anon', "insert into storage.objects values ('fotos', 'pendentes/00000000-0000-4000-8000-000000000003.jpg')");
   assert.deepEqual(await storageAs('anon', 'select name from storage.objects'), []);
   assert.deepEqual(await storageAs('authenticated', 'select name from storage.objects', morador), []);
-  assert.deepEqual(await storageAs('authenticated', 'select name from storage.objects', gestor), []);
-  await db.exec("update public.relatos set foto_path = 'pendentes/00000000-0000-4000-8000-000000000003.jpg'");
   assert.equal((await storageAs('authenticated', 'select name from storage.objects', gestor)).length, 1);
   // O Storage real remove o objeto físico. A tabela aqui é somente um substituto local.
   await db.exec('delete from storage.objects');
@@ -136,79 +131,32 @@ test('Postgres local aplica a migração e separa acesso anônimo, morador e ges
   assert.equal(total, 1);
   await db.exec(await readFile(new URL('../supabase/seed.sql', import.meta.url), 'utf8'));
   assert.equal((await as('anon')('ocorrencias_publicas')).length, 11);
-
-  // Imita o corte público. Os registros antigos continuam isolados no banco.
-  await db.exec("update public.configuracao set valor = 'false' where chave = 'modo_apresentacao'");
-  assert.equal(await anonymous('recebimento_real_disponivel'), false);
-  assert.deepEqual(await anonymous('ocorrencias_publicas'), []);
-  assert.deepEqual(await anonymous('consultar_protocolo', { protocolo: created.protocolo }), []);
-  assert.deepEqual(await resident('meus_relatos'), []);
-  assert.deepEqual(await as('authenticated', gestor)('gestor_listar'), []);
-  await assert.rejects(anonymous('iniciar_verificacao', { canal: 'email', contato: 'demo@example.com' }), /VERIFICACAO_INDISPONIVEL/);
-  const edge = as('service_role');
-  await assert.rejects(edge('preparar_verificacao_real', { canal: 'email', contato: 'real@example.com' }), /VERIFICACAO_INDISPONIVEL/);
-
-  await db.exec("update public.configuracao set valor = 'true' where chave = 'recebimento_real_ativo'");
-  assert.equal(await anonymous('recebimento_real_disponivel'), true);
-  await assert.rejects(anonymous('criar_relato', { ...args, chave_idempotencia: randomUUID() }), /CONTATO_NAO_VERIFICADO/);
-  await assert.rejects(anonymous('preparar_verificacao_real', { canal: 'email', contato: 'real@example.com' }), /permission denied/);
-  const telefoneReal = await edge('preparar_verificacao_real', { canal: 'telefone', contato: '(83) 91234-5678' });
-  assert.equal(telefoneReal.contato, '+5583912345678');
-  await assert.rejects(edge('preparar_verificacao_real', { canal: 'telefone', contato: '+5583912345678' }), /LIMITE_CODIGOS/);
-  const emailReal = await edge('preparar_verificacao_real', { canal: 'email', contato: ' Teste@Example.com ' });
-  const verificacao_id = emailReal.verificacao_id;
-  await assert.rejects(edge('emitir_prova_real', { verificacao_id }), /CONTATO_NAO_VERIFICADO/);
-  assert.deepEqual(await edge('registrar_tentativa_real', { verificacao_id }), { canal: 'email', contato: 'teste@example.com' });
-  await assert.rejects(anonymous('emitir_prova_real', { verificacao_id }), /permission denied/);
-  const provaReal = await edge('emitir_prova_real', { verificacao_id });
-  await assert.rejects(edge('emitir_prova_real', { verificacao_id }), /CONTATO_NAO_VERIFICADO/);
-  const foto = await edge('autorizar_foto_real', { prova: provaReal });
-  assert.match(foto, /^real\/[\w-]+\.jpg$/);
-  assert.equal(await edge('autorizar_foto_real', { prova: provaReal }), foto);
-  await db.query("insert into storage.objects values ('fotos', $1), ('fotos', 'real/outra.jpg')", [foto]);
-  const pedidoReal = { ...args, prova: provaReal, foto_path: foto, chave_idempotencia: randomUUID() };
-  await assert.rejects(anonymous('criar_relato', { ...pedidoReal, foto_path: 'real/outra.jpg' }), /FOTO_INVALIDA/);
-  const relatoReal = await anonymous('criar_relato', pedidoReal);
-  const gestores = as('authenticated', gestor);
-  const [registro] = await gestores('gestor_listar');
-  assert.equal(registro.protocolo, relatoReal.protocolo);
-  assert.ok(!('contato' in registro));
-  await gestores('gestor_alterar_etapa', { id: registro.id, nova_etapa: 'validada' });
-  const [publico] = await anonymous('ocorrencias_publicas');
-  assert.equal(publico.protocolo, relatoReal.protocolo);
-  assert.ok(!('referencia' in publico) && !('foto_path' in publico) && !('contato' in publico));
-  assert.deepEqual(await storageAs('anon', 'select name from storage.objects'), []);
-  assert.deepEqual(await storageAs('authenticated', 'select name from storage.objects', gestor), [{ name: foto }]);
-  await assert.rejects(db.exec(await readFile(new URL('../supabase/reset_apresentacao.sql', import.meta.url), 'utf8')), /MODO_APRESENTACAO_DESATIVADO/);
-  await db.exec('rollback');
+  await db.exec(await readFile(new URL('../supabase/reset_apresentacao.sql', import.meta.url), 'utf8'));
+  assert.deepEqual(await as('anon')('ocorrencias_publicas'), []);
   assert.equal(await as('authenticated', gestor)('sou_gestor'), true);
 });
 
-const { SUPABASE_URL, SUPABASE_ANON_KEY } = process.env;
-test('Supabase hospedado oculta demonstração e bloqueia emissão de código fictício', {
+const { SUPABASE_URL, SUPABASE_ANON_KEY, GESTOR_EMAIL, GESTOR_SENHA } = process.env;
+test('Supabase hospedado executa o fluxo pela API', {
   skip: process.env.MAPPIA_TEST_REMOTE !== '1'
 }, async () => {
-  assert.ok(SUPABASE_URL && SUPABASE_ANON_KEY, 'Configure o endereço e a chave pública no ambiente local');
+  assert.ok([SUPABASE_URL, SUPABASE_ANON_KEY, GESTOR_EMAIL, GESTOR_SENHA].every(Boolean), 'Configure as quatro variáveis no ambiente local');
   const options = { auth: { persistSession: false, autoRefreshToken: false } };
   const anonymous = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, options);
+  const gestorClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, options);
+  const { error } = await gestorClient.auth.signInWithPassword({ email: GESTOR_EMAIL, password: GESTOR_SENHA });
+  assert.equal(error, null);
   const rpc = client => async (name, args) => {
     const { data, error } = await client.rpc(name, args);
     if (error) throw new Error(error.message);
     return data;
   };
-  const anon = rpc(anonymous);
-  const entradaAtiva = await anon('recebimento_real_disponivel');
-  assert.equal(typeof entradaAtiva, 'boolean');
-  const mapa = await anon('ocorrencias_publicas');
-  if (process.env.MAPPIA_EXPECT_CLOSED === '1') {
-    assert.equal(entradaAtiva, false);
-    assert.deepEqual(mapa, []);
-  }
-  for (const relato of mapa) {
-    assert.ok(!('contato' in relato) && !('referencia' in relato) && !('foto_path' in relato));
-  }
-  assert.deepEqual(await anon('consultar_protocolo', { protocolo: 'MAP-2026-DE000001' }), []);
-  await assert.rejects(anon('iniciar_verificacao', { canal: 'email', contato: 'corte@example.com' }), /VERIFICACAO_INDISPONIVEL/);
-  const { data, error } = await anonymous.from('relatos').select('id').limit(1);
-  assert.ok(error || data?.length === 0, 'A consulta direta não pode expor registros');
+  await checkFlow({
+    anon: rpc(anonymous),
+    manager: rpc(gestorClient),
+    async direct() {
+      const { data, error } = await anonymous.from('relatos').select('id').limit(1);
+      assert.ok(error || data?.length === 0, 'A consulta direta não pode expor registros');
+    }
+  });
 });

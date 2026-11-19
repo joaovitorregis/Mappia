@@ -1,8 +1,8 @@
-import { ocorrenciasPublicas } from './supabase.mjs?v=10';
+import { ocorrenciasPublicas } from './supabase.mjs';
 import { categorias, nomeCategoria } from './categorias.mjs';
-import { etapas } from './etapas.mjs';
-import { centro, criarMapa, localizar } from './mapa-base.mjs?v=10';
-import { linkProtocolo } from './protocolos.mjs?v=10';
+import { etapas, dataLocal } from './etapas.mjs';
+import { centro, criarMapa, localizar } from './mapa-base.mjs?v=9';
+import { linkProtocolo } from './protocolos.mjs';
 
 const filtros = document.querySelector('#map-filters');
 const status = document.querySelector('#map-status');
@@ -50,7 +50,7 @@ function resumo(relato) {
   const titulo = document.createElement('strong');
   titulo.textContent = nomeCategoria(relato.categoria);
   const info = document.createElement('p');
-  info.textContent = etapas[relato.etapa];
+  info.textContent = [etapas[relato.etapa], relato.referencia, dataLocal(relato.criado_em)].join(' · ');
   const link = document.createElement('a');
   link.textContent = 'Ver acompanhamento';
   link.href = linkProtocolo(relato.protocolo);

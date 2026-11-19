@@ -1,8 +1,8 @@
-import { consultarProtocolo } from './supabase.mjs?v=10';
+import { consultarProtocolo } from './supabase.mjs';
 import { nomeCategoria } from './categorias.mjs';
 import { dataLocal, etapas } from './etapas.mjs';
-import { linkProtocolo, protocolosSalvos } from './protocolos.mjs?v=10';
-import { erroAmigavel } from './erros.mjs?v=10';
+import { linkProtocolo, protocolosSalvos } from './protocolos.mjs';
+import { erroAmigavel } from './erros.mjs';
 
 const form = document.querySelector('#consulta-protocolo');
 const campo = form.elements.protocolo;

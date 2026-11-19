@@ -1,5 +1,0 @@
-project_id = "mappia"
-
-# A verificação do primeiro contato ocorre antes de existir uma conta.
-[functions.contato-verificacao]
-verify_jwt = false

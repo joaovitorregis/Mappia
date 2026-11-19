@@ -8,13 +8,12 @@
 <main class="app gestor-app">
 <header class="topbar"><a class="logo" href="../index.html" aria-label="Mappia, página inicial">mappia<span>.</span></a>
 <a class="btn-entrar" href="../index.html">Mapa público</a></header>
+<p class="apresentacao" data-apresentacao hidden>Modo apresentação · dados de teste</p>
 <section class="workspace-panel" id="gestor-login">
 <h1>Painel do gestor</h1>
 <form class="workspace-form" id="gestor-form">
 <label for="gestor-email">E-mail</label><input id="gestor-email" type="email" name="email" required autocomplete="username">
 <label for="gestor-senha">Senha</label><input id="gestor-senha" type="password" name="senha" required autocomplete="current-password">
-<div id="gestor-seguranca"></div>
-<p id="gestor-seguranca-status" role="status"></p>
 <button class="primary" type="submit">Entrar no painel</button>
 </form>
 </section>
@@ -49,5 +48,5 @@
 <p id="gestor-status" class="workspace-status" role="status" aria-live="polite"></p>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
-<script type="module" src="../js/base.mjs?v=10"></script><script type="module" src="../js/gestor.mjs?v=10"></script>
+<script type="module" src="../js/base.mjs"></script><script type="module" src="../js/gestor.mjs?v=9"></script>
 </body></html>

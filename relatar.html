@@ -27,6 +27,7 @@
         Entrar
       </a>
     </header>
+    <p class="apresentacao" data-apresentacao hidden>Modo apresentação · dados de teste</p>
 
     <!--barra de navegação-->
     <nav class="tabs" aria-label="Seções do aplicativo">
@@ -36,11 +37,7 @@
     </nav>
 
     <!--formulário em 4 etapas (o JS mostra uma etapa por vez)-->
-    <section id="recebimento-aviso" class="workspace-panel" aria-labelledby="recebimento-titulo">
-      <h1 id="recebimento-titulo">Relatar um problema</h1>
-      <p id="recebimento-status" role="status">O envio de relatos está indisponível no momento.</p>
-    </section>
-    <form id="relato-etapas" novalidate hidden>
+    <form id="relato-etapas" novalidate>
 
       <!-- ETAPA 1 · Tipo de problema -->
       <section class="report-step" data-step="1">
@@ -127,7 +124,7 @@
         <header class="step-intro">
           <p class="eyebrow">2 DE 4 · LOCAL E FOTO</p>
           <h1 tabindex="-1">Onde fica o problema?</h1>
-          <p class="intro-copy">Marque no mapa e informe um ponto de referência.</p>
+          <p class="intro-copy">Marque no mapa e informe um ponto de referência fictício.</p>
         </header>
 
         <ol class="progress" aria-label="Etapas do relato">
@@ -166,12 +163,12 @@
         </div>
       </section>
 
-      <!-- ETAPA 3 · Contato -->
+      <!-- ETAPA 3 · Contato de teste -->
       <section class="report-step" data-step="3" hidden>
         <header class="step-intro">
           <p class="eyebrow">3 DE 4 · CONTATO</p>
           <h1 tabindex="-1">Seu contato</h1>
-          <p class="intro-copy">Confirme seu e-mail ou celular com o código que você receberá.</p>
+          <p class="intro-copy">Escolha e verifique um contato fictício. Nenhuma mensagem será enviada.</p>
         </header>
 
         <ol class="progress" aria-label="Etapas do relato">
@@ -189,29 +186,29 @@
           </fieldset>
 
           <div class="personal-field" id="email-field">
-            <label for="email">E-mail</label>
+            <label for="email">E-mail fictício</label>
             <div class="input-icon">
               <img src="assets/figma/dados-imgCampoIconeMail.svg" alt="">
-              <input type="email" id="email" name="email" autocomplete="email" required>
+              <input type="email" id="email" name="email" placeholder="aluno23@example.com" autocomplete="off" required>
             </div>
           </div>
 
           <div class="personal-field" id="phone-field" hidden>
-            <label for="phone">Celular brasileiro com DDD</label>
+            <label for="phone">Telefone fictício</label>
             <div class="input-icon">
               <img src="assets/figma/dados-imgCampoIconePhone.svg" alt="">
-              <input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel" required disabled>
+              <input type="tel" id="phone" name="phone" placeholder="83000000023" inputmode="numeric" autocomplete="off" required disabled>
             </div>
           </div>
 
-          <div id="contato-seguranca"></div>
-          <p id="contato-seguranca-status" class="personal-note" role="status"></p>
-          <button class="secondary" type="button" id="request-code" disabled>Enviar código</button>
+          <button class="secondary" type="button" id="request-code">Gerar código de teste</button>
           <div class="verification-panel" id="verification-panel" hidden>
-            <label for="verification-code">Código que você recebeu</label>
+            <label for="verification-code">Código de apresentação</label>
+            <p id="demo-code" class="personal-note"></p>
             <input id="verification-code" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="Digite o código de 6 dígitos">
             <button class="secondary" type="button" id="verify-code">Confirmar código</button>
           </div>
+          <p class="personal-note">Use um contato fictício diferente do usado pelos colegas. Por exemplo, troque o final 23 pelo seu número na atividade.</p>
           <p id="contact-feedback" class="personal-note" role="status" aria-live="polite"></p>
         </div>
 
@@ -264,13 +261,17 @@
             <button class="text-button" type="button" data-edit="3">Editar contato</button>
           </div>
 
-          <p class="personal-note">O contato, a foto e a posição exata ficam restritos à equipe gestora. Se o relato for aprovado, o mapa público exibe categoria, situação e posição aproximada. Evite incluir informações pessoais no texto ou na foto.</p>
+          <div class="security-demo" title="Elemento visual; verificação antiabuso ainda não integrada">
+            <img src="assets/figma/revisao-imgIconeCheck.svg" alt="">
+            <span>Relato de apresentação com contato fictício</span>
+          </div>
+          <p class="personal-note">Use apenas dados de teste. A equipe gestora vê contato fictício, foto e posição exata. Depois da validação, o mapa mostra a posição aproximada e o ponto de referência.</p>
           <p id="submit-feedback" class="personal-note" role="status" aria-live="polite"></p>
         </div>
 
         <div class="step-actions">
           <button class="secondary" type="button" data-back>← Voltar</button>
-          <button class="primary" type="button" id="enviar-relato">Enviar relato</button>
+          <button class="primary" type="button" id="enviar-demo">Enviar relato</button>
         </div>
       </section>
 
@@ -278,7 +279,7 @@
   </main>
 
   <section id="confirmation" class="confirmation" hidden aria-live="polite">
-    <h2 tabindex="-1">Relato recebido</h2>
+    <h2 tabindex="-1">Relato fictício recebido</h2>
     <p>Protocolo: <strong id="confirmation-protocol"></strong></p>
     <p>Seu relato está em análise.</p>
     <button type="button" class="secondary" id="copiar-protocolo">Copiar protocolo</button>
@@ -289,7 +290,7 @@
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script type="module" src="js/base.mjs?v=10"></script>
-  <script type="module" src="js/report-ui.mjs?v=10"></script>
+  <script type="module" src="js/base.mjs"></script>
+  <script type="module" src="js/report-ui.mjs?v=9"></script>
 </body>
 </html>

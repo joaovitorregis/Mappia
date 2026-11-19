@@ -1,14 +1,12 @@
-import { cliente, conferir, meusRelatos, vincularRelatos } from './supabase.mjs?v=10';
+import { cliente, conferir, meusRelatos, vincularRelatos } from './supabase.mjs';
 import { etapas, dataLocal } from './etapas.mjs';
 import { nomeCategoria } from './categorias.mjs';
-import { linkProtocolo, protocolosSalvos } from './protocolos.mjs?v=10';
-import { erroAmigavel } from './erros.mjs?v=10';
-import { CONTAS_ATIVAS } from './config.js?v=10';
+import { linkProtocolo, protocolosSalvos } from './protocolos.mjs';
+import { erroAmigavel } from './erros.mjs';
 
 const status = document.querySelector('#meus-status');
 const lista = document.querySelector('#meus-lista');
 async function carregar() {
-  if (!CONTAS_ATIVAS) { location.replace('conta.html'); return; }
   const { session } = conferir(await cliente.auth.getSession());
   if (!session) { location.replace('conta.html'); return; }
   const tokens = protocolosSalvos().map(item => item.token).filter(token => typeof token === 'string');

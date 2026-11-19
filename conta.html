@@ -6,35 +6,19 @@
 </head><body class="mappia">
 <main class="app">
 <header class="topbar"><a class="logo" href="index.html" aria-label="Mappia, página inicial">mappia<span>.</span></a><a class="btn-entrar" href="index.html">Voltar ao mapa</a></header>
-<section class="workspace-panel"><h1>Sua conta</h1><p class="intro-copy">Guarde seus protocolos e acompanhe o andamento dos relatos.</p>
-<div class="account-modes" id="conta-modos" role="group" aria-label="Opções de conta" hidden>
+<p class="apresentacao" data-apresentacao hidden>Modo apresentação · dados de teste</p>
+<section class="workspace-panel"><h1>Sua conta</h1><p class="intro-copy">Guarde os protocolos de teste e acompanhe o andamento dos relatos.</p>
+<div class="account-modes" aria-label="Opções de conta">
 <button type="button" class="chip active" id="modo-entrar" aria-pressed="true">Entrar</button>
 <button type="button" class="chip" id="modo-cadastro" aria-pressed="false">Criar conta</button>
 </div>
-<div class="account-modes" id="conta-canais" role="group" aria-label="Método de acesso" hidden>
-<button type="button" class="chip active" id="canal-email" aria-pressed="true">E-mail e senha</button>
-<button type="button" class="chip" id="canal-sms" aria-pressed="false">Celular por SMS</button>
-</div>
-<form class="workspace-form" id="form-conta" hidden>
-<label for="conta-email">E-mail</label>
-<input type="email" id="conta-email" name="email" required autocomplete="username">
-<label for="conta-senha">Senha</label>
+<form class="workspace-form" id="form-conta">
+<label for="conta-email">E-mail fictício</label>
+<input type="email" id="conta-email" name="email" required autocomplete="username" placeholder="morador@example.com">
+<label for="conta-senha">Senha de teste</label>
 <input type="password" id="conta-senha" name="senha" minlength="6" required autocomplete="current-password">
-<button class="primary" type="submit" id="conta-enviar" disabled>Entrar</button>
-</form>
-<form class="workspace-form" id="form-sms" hidden>
-<label for="conta-celular">Celular brasileiro com DDD</label>
-<input type="tel" id="conta-celular" name="celular" autocomplete="tel" inputmode="tel" required>
-<button class="primary" type="submit" id="sms-enviar" disabled>Enviar código</button>
-</form>
-<form class="workspace-form" id="form-sms-confirmar" hidden>
-<label for="conta-codigo">Código do SMS</label>
-<input id="conta-codigo" name="codigo" inputmode="numeric" minlength="6" maxlength="6" pattern="[0-9]{6}" autocomplete="one-time-code" required>
-<button class="primary" type="submit" id="sms-confirmar" disabled>Confirmar código</button>
-</form>
-<div id="conta-seguranca"></div>
-<p id="conta-seguranca-status" role="status"></p>
-<p id="conta-status" role="status">O acesso à conta está indisponível no momento.</p>
-</section></main>
-<script type="module" src="js/base.mjs?v=10"></script><script type="module" src="js/conta.mjs?v=10"></script>
+<button class="primary" type="submit" id="conta-enviar">Entrar</button>
+<p id="conta-status" role="status"></p>
+</form></section></main>
+<script type="module" src="js/base.mjs"></script><script type="module" src="js/conta.mjs"></script>
 </body></html>

@@ -1,5 +1,4 @@
-import { SUPABASE_URL } from './config.js?v=10';
-const chave = 'mappia:' + SUPABASE_URL + ':real:meusRelatos';
+const chave = 'mappia.meusRelatos';
 export function protocolosSalvos() {
   try {
     const itens = JSON.parse(localStorage.getItem(chave) ?? '[]');
