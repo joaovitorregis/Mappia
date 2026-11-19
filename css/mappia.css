@@ -445,8 +445,10 @@
 .mappia .map-tools .chip:disabled { opacity: .5; }
 .mappia .mapa-interativo:focus-visible { outline: 3px solid var(--foco); outline-offset: -3px; }
 .mappia .map-navigation .map-help { margin: 8px 0 0; color: var(--suave); font-size: .82rem; }
-.mappia #map-gps:empty { display: none; }
-.mappia #map-gps:not(:empty) { margin: 6px 0 0; }
+.mappia .mapa-falha { display: grid; gap: 3px; max-width: min(230px, 65vw); padding: 6px 9px; border-radius: 8px; background: #fff; color: #27374a; font: 12px/1.35 Inter, sans-serif; box-shadow: 0 2px 7px #13274335; }
+.mappia .mapa-falha button { min-height: 32px; padding: 2px 0; border: 0; background: none; color: var(--azul); text-align: left; text-decoration: underline; }
+.mappia :is(#map-gps,#map-status):empty { display: none; }
+.mappia :is(#map-gps,#map-status):not(:empty) { margin: 6px 0 0; }
 .mappia .map-counts { display: flex; flex-wrap: wrap; gap: 6px 14px; list-style: none; padding: 0; margin: 12px 0 10px; font-size: .86rem; }
 .mappia .map-dialog { width: min(1100px, calc(100% - 16px)); max-width: none; max-height: calc(100dvh - 16px); padding: clamp(10px, 2vw, 20px); }
 .mappia .map-dialog-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 12px; }

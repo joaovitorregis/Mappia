@@ -9,7 +9,7 @@ import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 const gestor = '00000000-0000-4000-8000-000000000001';
 const morador = '00000000-0000-4000-8000-000000000002';
 const outroMorador = '00000000-0000-4000-8000-000000000003';
-const migration = new URL('../supabase/migrations/0001_mappia.sql', import.meta.url);
+const migrations = ['0001_mappia.sql', '0002_recuperar_token_envio.sql'];
 
 async function checkFlow({ anon, manager, direct }) {
   const id = randomUUID();
@@ -23,7 +23,8 @@ async function checkFlow({ anon, manager, direct }) {
   const created = await anon('criar_relato', args);
   assert.match(created.protocolo, /^MAP-\d{4}-[A-F0-9]{8}$/);
   assert.ok(created.token);
-  assert.deepEqual(await anon('criar_relato', args), { protocolo: created.protocolo });
+  const retry = await anon('criar_relato', args);
+  assert.deepEqual(retry, created, 'A repetição exata recupera o token se a resposta anterior se perder');
   await assert.rejects(anon('criar_relato', { ...args, descricao: 'Descrição modificada' }), /IDEMPOTENCIA_CONFLITO/);
   await assert.rejects(anon('criar_relato', { ...args, chave_idempotencia: randomUUID() }), /CONTATO_NAO_VERIFICADO/);
   const [lookup] = await anon('consultar_protocolo', { protocolo: created.protocolo });
@@ -43,7 +44,7 @@ async function checkFlow({ anon, manager, direct }) {
   assert.equal(publicRow.etapa, 'validada');
   assert.ok(!('contato' in publicRow) && !('foto_path' in publicRow));
   assert.ok(!JSON.stringify(await anon('consultar_protocolo', { protocolo: created.protocolo })).includes(update.observacao));
-  return { created, update };
+  return { created, args, update };
 }
 
 test('Postgres local aplica a migração e separa acesso anônimo, morador e gestor', async (t) => {
@@ -64,7 +65,9 @@ test('Postgres local aplica a migração e separa acesso anônimo, morador e ges
     grant usage on schema storage to anon, authenticated;
     grant select, insert on storage.objects to anon, authenticated;
   `);
-  await db.exec(await readFile(migration, 'utf8'));
+  for (const migration of migrations) {
+    await db.exec(await readFile(new URL('../supabase/migrations/' + migration, import.meta.url), 'utf8'));
+  }
   await db.query('insert into public.gestores values ($1)', [gestor]);
 
   function as(role, user) {
@@ -80,7 +83,7 @@ test('Postgres local aplica a migração e separa acesso anônimo, morador e ges
 
   const resident = as('authenticated', morador);
   assert.equal(await resident('sou_gestor'), false);
-  const { created, update } = await checkFlow({
+  const { created, args, update } = await checkFlow({
     anon: as('anon'),
     manager: as('authenticated', gestor),
     direct: () => assert.rejects(db.transaction(async tx => {
@@ -96,6 +99,7 @@ test('Postgres local aplica a migração e separa acesso anônimo, morador e ges
   assert.equal((await resident('meus_relatos'))[0].protocolo, created.protocolo);
   assert.equal(await resident('vincular_relatos', { tokens: [created.token] }), 0);
   assert.equal(await otherResident('vincular_relatos', { tokens: [created.token] }), 0);
+  assert.deepEqual(await as('anon')('criar_relato', args), { protocolo: created.protocolo });
   assert.deepEqual(await otherResident('meus_relatos'), []);
   assert.deepEqual(await as('anon')('indicadores_publicos'), { validada: 1, encaminhada: 0, resolvida: 0 });
   const anonymous = as('anon');

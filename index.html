@@ -12,7 +12,7 @@
 
   <!-- CSS único (inclui os ícones do Bootstrap) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="css/mappia.css?v=7">
+  <link rel="stylesheet" href="css/mappia.css?v=9">
 </head>
 
 <body class="mappia pagina-inicio">
@@ -55,6 +55,8 @@
           </div>
           <p id="map-help" class="map-help">Arraste para navegar. Use dois dedos, os botões + e − ou a roda do mouse com o mapa em foco para mudar o zoom.</p>
           <p id="map-gps" role="status"></p>
+          <p id="map-status" role="status"></p>
+          <button type="button" class="secondary" id="map-retry" hidden>Tentar de novo</button>
         </div>
       </div>
       <ul class="map-counts" aria-label="Contagem de ocorrências">
@@ -63,8 +65,6 @@
         <li><strong data-contagem="resolvida">—</strong> Resolvidas</li>
       </ul>
       <div class="filtros" id="map-filters" role="group" aria-label="Filtrar por categoria"></div>
-      <p id="map-status" role="status"></p>
-      <button type="button" class="secondary" id="map-retry" hidden>Tentar de novo</button>
     </section>
 
     <section class="hero">
@@ -98,6 +98,6 @@
   <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
   <script type="module" src="js/base.mjs"></script>
-  <script type="module" src="js/mapa-publico.mjs?v=8"></script>
+  <script type="module" src="js/mapa-publico.mjs?v=9"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 import { ocorrenciasPublicas } from './supabase.mjs';
 import { categorias, nomeCategoria } from './categorias.mjs';
 import { etapas, dataLocal } from './etapas.mjs';
-import { centro, criarMapa, localizar } from './mapa-base.mjs';
+import { centro, criarMapa, localizar } from './mapa-base.mjs?v=9';
 import { linkProtocolo } from './protocolos.mjs';
 
 const filtros = document.querySelector('#map-filters');
@@ -26,6 +26,7 @@ let selecionada = null;
 let consultando = false;
 let falha = false;
 let proximaConsulta;
+let pedidoGps = 0;
 for (const [id, nome] of [[null, 'Todas'], ...Object.entries(categorias).map(([id, cat]) => [id, cat.nome])]) {
   const botao = document.createElement('button');
   botao.type = 'button';
@@ -130,6 +131,8 @@ async function carregar() {
   consultando = true;
   retry.disabled = true;
   if (!ocorrencias) status.textContent = 'Carregando ocorrências…';
+  const controle = new AbortController();
+  const limite = setTimeout(() => controle.abort(), 10_000);
   try {
     if (!mapa) {
       mapa = criarMapa(mapaEl, { touchZoom: true, zoomControl: false });
@@ -142,7 +145,7 @@ async function carregar() {
       for (const botao of [abrir, recentrar, localizacao]) botao.disabled = false;
       pinos = window.L.layerGroup().addTo(mapa);
     }
-    ocorrencias = await ocorrenciasPublicas(null, AbortSignal.timeout(10_000));
+    ocorrencias = await ocorrenciasPublicas(null, controle.signal);
     falha = false;
     atualizarVista();
     retry.hidden = true;
@@ -153,6 +156,7 @@ async function carregar() {
       : 'Não foi possível carregar as ocorrências.';
     retry.hidden = false;
   } finally {
+    clearTimeout(limite);
     consultando = false;
     retry.disabled = false;
     if (!document.hidden) proximaConsulta = setTimeout(carregar, intervaloAtualizacao);
@@ -166,8 +170,12 @@ document.addEventListener('visibilitychange', () => {
 });
 zoomIn.addEventListener('click', () => mapa.zoomIn());
 zoomOut.addEventListener('click', () => mapa.zoomOut());
-localizacao.addEventListener('click', () => localizar(mapa, gps));
+localizacao.addEventListener('click', () => {
+  const pedido = ++pedidoGps;
+  localizar(mapa, gps, undefined, () => pedido === pedidoGps);
+});
 recentrar.addEventListener('click', () => {
+  pedidoGps++;
   mapa.stop().closePopup().setView(centro, 13, { animate: false });
   gps.textContent = 'Mapa centralizado em Campina Grande.';
 });

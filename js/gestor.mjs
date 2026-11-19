@@ -2,7 +2,7 @@ import { cliente, conferir, souGestor, gestorListar, gestorDetalhe, alterarEtapa
 import { preencherCategorias, nomeCategoria } from './categorias.mjs';
 import { etapas, transicoes, dataLocal } from './etapas.mjs';
 import { erroAmigavel } from './erros.mjs';
-import { criarMapa } from './mapa-base.mjs';
+import { criarMapa } from './mapa-base.mjs?v=9';
 
 const el = id => document.getElementById(id);
 const status = el('gestor-status');
@@ -15,6 +15,7 @@ const mapaEl = el('gestor-mapa');
 const etapaForm = el('gestor-etapa');
 let selecionado, listaAtual = [], mapa, pontos, local, localPino;
 let pedido = 0, pedidoDetalhe = 0;
+let consultaEmCurso = 0, ultimaLista;
 preencherCategorias(filtros.elements.categoria);
 
 function mostrarPainel() {
@@ -92,21 +93,35 @@ function renderMapa() {
     window.L.marker([row.lat, row.lng], { title: titulo, alt: titulo }).addTo(pontos).bindPopup(botao);
   }
 }
-async function carregar() {
+async function carregar(automatico = false) {
+  if (painel.hidden || (automatico && (document.hidden || consultaEmCurso))) return;
   const vez = ++pedido;
-  status.textContent = 'Carregando ocorrências…';
+  consultaEmCurso = vez;
+  if (!automatico) status.textContent = 'Carregando ocorrências…';
   try {
     const rows = await gestorListar(filtros.elements.periodo.value, filtros.elements.categoria.value || null);
     if (vez !== pedido) return;
-    listaAtual = rows;
-    renderLista();
-    renderMapa();
+    const assinatura = JSON.stringify(rows);
+    if (assinatura !== ultimaLista) {
+      const protocoloEmFoco = lista.contains(document.activeElement) ? document.activeElement.textContent : null;
+      listaAtual = rows;
+      renderLista();
+      renderMapa();
+      ultimaLista = assinatura;
+      if (protocoloEmFoco) [...lista.querySelectorAll('button')]
+        .find(button => button.textContent === protocoloEmFoco)?.focus({ preventScroll: true });
+    }
     status.textContent = rows.length ? '' : 'Nenhuma ocorrência para estes filtros.';
   } catch (error) {
     if (vez === pedido) status.textContent = erroAmigavel(error);
+  } finally {
+    if (consultaEmCurso === vez) consultaEmCurso = 0;
   }
 }
-filtros.addEventListener('change', carregar);
+filtros.addEventListener('change', () => carregar());
+setInterval(() => carregar(true), 15_000);
+document.addEventListener('visibilitychange', () => carregar(true));
+window.addEventListener('online', () => carregar(true));
 filtros.addEventListener('submit', event => event.preventDefault());
 function alternar(verMapa) {
   lista.hidden = verMapa;

@@ -1,5 +1,5 @@
 import { iniciarVerificacao, confirmarCodigo, criarRelato, subirFoto } from './supabase.mjs';
-import { criarMapa, localizar } from './mapa-base.mjs';
+import { criarMapa, localizar, temCartografia } from './mapa-base.mjs?v=9';
 import { prepararFoto } from './foto.mjs';
 import { nomeCategoria } from './categorias.mjs';
 import { erroAmigavel } from './erros.mjs';
@@ -15,6 +15,7 @@ let mapa, pino, mapaRevisao, pinoRevisao, ponto;
 let verificacao, prova, foto, fotoUrl, envio;
 let versaoContato = 0;
 let versaoFoto = 0;
+let pedidoGps = 0;
 let preparandoFoto = false;
 let enviando = false;
 const chaveRascunho = 'mappia.rascunho';
@@ -36,7 +37,11 @@ function marcar(posicao) {
   salvarRascunho();
   if (pino) return pino.setLatLng(ponto);
   pino = window.L.marker(ponto, { draggable: true, alt: 'Local do relato' }).addTo(mapa);
-  pino.on('dragend', () => marcar(pino.getLatLng()));
+  pino.on('dragend', () => {
+    pedidoGps++;
+    marcar(pino.getLatLng());
+    el('location-feedback').textContent = 'Ponto marcado.';
+  });
 }
 
 function abrirMapa() {
@@ -44,6 +49,8 @@ function abrirMapa() {
     if (!mapa) {
       mapa = criarMapa(el('mapa-relato'));
       mapa.on('click', evento => {
+        if (!podeMarcarNoMapa()) return;
+        pedidoGps++;
         marcar(evento.latlng);
         el('location-feedback').textContent = 'Ponto marcado.';
       });
@@ -58,11 +65,20 @@ function abrirMapa() {
   }
 }
 
+function podeMarcarNoMapa() {
+  if (temCartografia(mapa)) return true;
+  el('location-feedback').textContent = 'Aguarde o fundo do mapa ou clique em Usar minha localização.';
+  return false;
+}
+
 el('gps-relato').addEventListener('click', () => {
-  if (mapa) localizar(mapa, el('location-feedback'), marcar);
+  if (!mapa) return;
+  const pedido = ++pedidoGps;
+  localizar(mapa, el('location-feedback'), marcar, () => pedido === pedidoGps);
 });
 el('marcar-centro').addEventListener('click', () => {
-  if (!mapa) return;
+  if (!mapa || !podeMarcarNoMapa()) return;
+  pedidoGps++;
   marcar(mapa.getCenter());
   el('location-feedback').textContent = 'Centro do mapa marcado.';
 });
@@ -86,6 +102,7 @@ function review() {
 
 function show(next) {
   if (enviando) return;
+  if (step === 2 && next !== 2) pedidoGps++;
   step = next;
   steps.forEach((box, index) => { box.hidden = index !== step - 1; });
   if (step === 2) abrirMapa();

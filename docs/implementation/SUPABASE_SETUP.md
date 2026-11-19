@@ -26,6 +26,8 @@ Confira que a lista remota mostra as migrações locais como aplicadas. Para pre
 
 Como alternativa à CLI, use o **SQL Editor** para executar os arquivos de `supabase/migrations/` na ordem numérica, começando por `0001_mappia.sql`, e depois o `seed.sql`. Nesse caso, o histórico da CLI não é preenchido pelo editor. Antes de trocar de método, concilie o histórico com o banco para evitar reaplicar migrações.
 
+Em um projeto que já recebeu `0001_mappia.sql`, aplique somente `0002_recuperar_token_envio.sql`. A migração preserva os relatos existentes. Se a primeira resposta de um envio novo se perder, uma repetição exata recupera o protocolo e a chave de vínculo enquanto o relato estiver sem conta.
+
 ## 3. Criar o primeiro gestor
 
 1. Depois de aplicar as migrações, abra **Authentication → Users → Add user** e escolha a opção de criar um usuário. Use e-mail de teste e senha exclusiva para a apresentação. Marque a confirmação automática do usuário, se o painel oferecer essa opção. [Usuários do Supabase Auth](https://supabase.com/docs/guides/auth/users)
@@ -56,7 +58,7 @@ O teste hospedado cria e valida um relato fictício no projeto indicado. Sem `MA
 ### Contrato para a integração do site
 
 - `confirmar_codigo` devolve `{ prova }` em caso de sucesso ou `{ erro }` para código incorreto, expirado ou tentativas esgotadas. Esse formato permite gravar a tentativa sem abortar a transação.
-- `criar_relato` entrega o token secreto apenas na criação de um relato sem conta. Uma repetição com a mesma chave e os mesmos dados retorna o protocolo existente. Alterar os dados sob a mesma chave retorna `IDEMPOTENCIA_CONFLITO`.
+- `criar_relato` entrega a chave secreta ao criar um relato sem conta. Uma repetição exata recupera a chave de um relato criado após a migração 0002, enquanto ele estiver sem vínculo. Depois do vínculo, a repetição retorna só o protocolo. Alterar os dados sob a mesma chave retorna `IDEMPOTENCIA_CONFLITO`.
 - As RPCs de verificação e criação exigem modo apresentação ativo. O código aparece na tela de demonstração e esta fase não envia e-mail ou SMS.
 
 ## 4. Limpar os dados depois da apresentação
