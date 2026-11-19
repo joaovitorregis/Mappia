@@ -428,12 +428,6 @@
   .mappia .protocol-form { max-width: 520px; margin-top: 28px; }
   .mappia .tracking-details { margin-top: 0; max-width: 640px; }
 }
-.mappia .apresentacao {
-  grid-column: 1 / -1;
-  margin: 4px 0 10px;
-  color: #47596d;
-  font-size: .8rem;
-}
 .mappia a.btn-entrar { text-decoration: none; }
 .mappia .mapa-publico { min-width: 0; margin-top: 18px; }
 .mappia .mapa-publico h1 { font-size: clamp(1.25rem, 3vw, 1.65rem); line-height: 1.2; }
@@ -482,7 +476,6 @@
 .mappia .detail-list { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 8px; margin: 14px 0; overflow-wrap: anywhere; }
 .mappia .detail-list dt { font-weight: 700; }
 @media (min-width: 1024px) {
-  .pagina-inicio .app > :is(.topbar, .tabs, .apresentacao) { grid-column: 1 / -1; grid-row: auto; }
-  .pagina-inicio .app > .hero { grid-column: 1; grid-row: 4; }
-  .pagina-inicio .mapa-publico { grid-column: 2; grid-row: 4; align-self: start; margin-top: 18px; }
+  .pagina-inicio .app > .hero { grid-column: 1; grid-row: 3; }
+  .pagina-inicio .mapa-publico { grid-column: 2; grid-row: 3; align-self: start; margin-top: 18px; }
 }

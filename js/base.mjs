@@ -1,6 +1,3 @@
-import { MODO_APRESENTACAO } from './config.js';
-const faixa = document.querySelector('[data-apresentacao]');
-if (faixa) faixa.hidden = !MODO_APRESENTACAO;
 const botoes = document.querySelectorAll('[data-conta]');
 if (botoes.length) {
   import('./supabase.mjs').then(async ({ cliente }) => {
